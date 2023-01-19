@@ -23,7 +23,7 @@ namespace _pbi = _pb::internal;
 namespace cpu {
 PROTOBUF_CONSTEXPR CpuMoniterRequest::CpuMoniterRequest(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.client_order_of_cpu_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CpuMoniterRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CpuMoniterRequestDefaultTypeInternal()
@@ -36,7 +36,7 @@ struct CpuMoniterRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CpuMoniterRequestDefaultTypeInternal _CpuMoniterRequest_default_instance_;
 PROTOBUF_CONSTEXPR CpuMoniterReply::CpuMoniterReply(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.message_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.information_of_cpu_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CpuMoniterReplyDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CpuMoniterReplyDefaultTypeInternal()
@@ -59,14 +59,14 @@ const uint32_t TableStruct_cpu_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(prot
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::cpu::CpuMoniterRequest, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::cpu::CpuMoniterRequest, _impl_.client_order_of_cpu_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::cpu::CpuMoniterReply, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::cpu::CpuMoniterReply, _impl_.message_),
+  PROTOBUF_FIELD_OFFSET(::cpu::CpuMoniterReply, _impl_.information_of_cpu_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::cpu::CpuMoniterRequest)},
@@ -79,16 +79,16 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_cpu_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\tcpu.proto\022\003cpu\"!\n\021CpuMoniterRequest\022\014\n"
-  "\004name\030\001 \001(\t\"\"\n\017CpuMoniterReply\022\017\n\007messag"
-  "e\030\001 \001(\t2g\n\021CpuMoniterService\022R\n current_"
-  "cpu_usage_moniter_method\022\026.cpu.CpuMonite"
-  "rRequest\032\024.cpu.CpuMoniterReply\"\000B\n\n\010cpu."
-  "grpcb\006proto3"
+  "\n\tcpu.proto\022\003cpu\"0\n\021CpuMoniterRequest\022\033\n"
+  "\023client_order_of_cpu\030\001 \001(\t\"-\n\017CpuMoniter"
+  "Reply\022\032\n\022information_of_cpu\030\001 \001(\t2g\n\021Cpu"
+  "MoniterService\022R\n current_cpu_usage_moni"
+  "ter_method\022\026.cpu.CpuMoniterRequest\032\024.cpu"
+  ".CpuMoniterReply\"\000B\n\n\010cpu.grpcb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_cpu_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_cpu_2eproto = {
-    false, false, 212, descriptor_table_protodef_cpu_2eproto,
+    false, false, 238, descriptor_table_protodef_cpu_2eproto,
     "cpu.proto",
     &descriptor_table_cpu_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_cpu_2eproto::offsets,
@@ -119,16 +119,16 @@ CpuMoniterRequest::CpuMoniterRequest(const CpuMoniterRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   CpuMoniterRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_.client_order_of_cpu_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.name_.InitDefault();
+  _impl_.client_order_of_cpu_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
+    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_name().empty()) {
-    _this->_impl_.name_.Set(from._internal_name(), 
+  if (!from._internal_client_order_of_cpu().empty()) {
+    _this->_impl_.client_order_of_cpu_.Set(from._internal_client_order_of_cpu(), 
       _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:cpu.CpuMoniterRequest)
@@ -139,12 +139,12 @@ inline void CpuMoniterRequest::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_.client_order_of_cpu_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.name_.InitDefault();
+  _impl_.client_order_of_cpu_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
+    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -159,7 +159,7 @@ CpuMoniterRequest::~CpuMoniterRequest() {
 
 inline void CpuMoniterRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.name_.Destroy();
+  _impl_.client_order_of_cpu_.Destroy();
 }
 
 void CpuMoniterRequest::SetCachedSize(int size) const {
@@ -172,7 +172,7 @@ void CpuMoniterRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.name_.ClearToEmpty();
+  _impl_.client_order_of_cpu_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -182,13 +182,13 @@ const char* CpuMoniterRequest::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string name = 1;
+      // string client_order_of_cpu = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_name();
+          auto str = _internal_mutable_client_order_of_cpu();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "cpu.CpuMoniterRequest.name"));
+          CHK_(::_pbi::VerifyUTF8(str, "cpu.CpuMoniterRequest.client_order_of_cpu"));
         } else
           goto handle_unusual;
         continue;
@@ -221,14 +221,14 @@ uint8_t* CpuMoniterRequest::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
+  // string client_order_of_cpu = 1;
+  if (!this->_internal_client_order_of_cpu().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      this->_internal_client_order_of_cpu().data(), static_cast<int>(this->_internal_client_order_of_cpu().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "cpu.CpuMoniterRequest.name");
+      "cpu.CpuMoniterRequest.client_order_of_cpu");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_name(), target);
+        1, this->_internal_client_order_of_cpu(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -247,11 +247,11 @@ size_t CpuMoniterRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
+  // string client_order_of_cpu = 1;
+  if (!this->_internal_client_order_of_cpu().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
+        this->_internal_client_order_of_cpu());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -272,8 +272,8 @@ void CpuMoniterRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_name().empty()) {
-    _this->_internal_set_name(from._internal_name());
+  if (!from._internal_client_order_of_cpu().empty()) {
+    _this->_internal_set_client_order_of_cpu(from._internal_client_order_of_cpu());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -295,8 +295,8 @@ void CpuMoniterRequest::InternalSwap(CpuMoniterRequest* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.name_, lhs_arena,
-      &other->_impl_.name_, rhs_arena
+      &_impl_.client_order_of_cpu_, lhs_arena,
+      &other->_impl_.client_order_of_cpu_, rhs_arena
   );
 }
 
@@ -322,16 +322,16 @@ CpuMoniterReply::CpuMoniterReply(const CpuMoniterReply& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   CpuMoniterReply* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.message_){}
+      decltype(_impl_.information_of_cpu_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.message_.InitDefault();
+  _impl_.information_of_cpu_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.message_.Set("", GetArenaForAllocation());
+    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_message().empty()) {
-    _this->_impl_.message_.Set(from._internal_message(), 
+  if (!from._internal_information_of_cpu().empty()) {
+    _this->_impl_.information_of_cpu_.Set(from._internal_information_of_cpu(), 
       _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:cpu.CpuMoniterReply)
@@ -342,12 +342,12 @@ inline void CpuMoniterReply::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.message_){}
+      decltype(_impl_.information_of_cpu_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.message_.InitDefault();
+  _impl_.information_of_cpu_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.message_.Set("", GetArenaForAllocation());
+    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -362,7 +362,7 @@ CpuMoniterReply::~CpuMoniterReply() {
 
 inline void CpuMoniterReply::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.message_.Destroy();
+  _impl_.information_of_cpu_.Destroy();
 }
 
 void CpuMoniterReply::SetCachedSize(int size) const {
@@ -375,7 +375,7 @@ void CpuMoniterReply::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.message_.ClearToEmpty();
+  _impl_.information_of_cpu_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -385,13 +385,13 @@ const char* CpuMoniterReply::_InternalParse(const char* ptr, ::_pbi::ParseContex
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string message = 1;
+      // string information_of_cpu = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_message();
+          auto str = _internal_mutable_information_of_cpu();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "cpu.CpuMoniterReply.message"));
+          CHK_(::_pbi::VerifyUTF8(str, "cpu.CpuMoniterReply.information_of_cpu"));
         } else
           goto handle_unusual;
         continue;
@@ -424,14 +424,14 @@ uint8_t* CpuMoniterReply::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string message = 1;
-  if (!this->_internal_message().empty()) {
+  // string information_of_cpu = 1;
+  if (!this->_internal_information_of_cpu().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
+      this->_internal_information_of_cpu().data(), static_cast<int>(this->_internal_information_of_cpu().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "cpu.CpuMoniterReply.message");
+      "cpu.CpuMoniterReply.information_of_cpu");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_message(), target);
+        1, this->_internal_information_of_cpu(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -450,11 +450,11 @@ size_t CpuMoniterReply::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string message = 1;
-  if (!this->_internal_message().empty()) {
+  // string information_of_cpu = 1;
+  if (!this->_internal_information_of_cpu().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_message());
+        this->_internal_information_of_cpu());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -475,8 +475,8 @@ void CpuMoniterReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_message().empty()) {
-    _this->_internal_set_message(from._internal_message());
+  if (!from._internal_information_of_cpu().empty()) {
+    _this->_internal_set_information_of_cpu(from._internal_information_of_cpu());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -498,8 +498,8 @@ void CpuMoniterReply::InternalSwap(CpuMoniterReply* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.message_, lhs_arena,
-      &other->_impl_.message_, rhs_arena
+      &_impl_.information_of_cpu_, lhs_arena,
+      &other->_impl_.information_of_cpu_, rhs_arena
   );
 }
 

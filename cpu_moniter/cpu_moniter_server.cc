@@ -50,7 +50,10 @@ struct stJiffies
   int nice;
   int system;
   int idle;
+  double usage = 0.0;
 };
+stJiffies curJiffies;
+stJiffies prevJiffies;
 
 // Logic and data behind the server's behavior.
 class CpuMoniterServiceImpl final : public CpuMoniterService::Service
@@ -62,12 +65,9 @@ class CpuMoniterServiceImpl final : public CpuMoniterService::Service
     FILE *pStat = NULL;
     char cpuID[6] = {0};
 
-    stJiffies curJiffies;
-    stJiffies prevJiffies;
-
     pStat = fopen("/proc/stat", "r");
-    fscanf(pStat, "%s %d %d %d %d", cpuID, &curJiffies.user,
-           &curJiffies.nice, &curJiffies.system, &curJiffies.idle);
+    fscanf(pStat, "%s %d %d %d %d", cpuID, &curJiffies.user, &curJiffies.nice,
+           &curJiffies.system, &curJiffies.idle);
 
     stJiffies diffJiffies;
     diffJiffies.user = curJiffies.user - prevJiffies.user;
@@ -75,18 +75,19 @@ class CpuMoniterServiceImpl final : public CpuMoniterService::Service
     diffJiffies.system = curJiffies.system - prevJiffies.system;
     diffJiffies.idle = curJiffies.idle - prevJiffies.idle;
 
-    int totalJiffies = diffJiffies.user + diffJiffies.nice + diffJiffies.system + diffJiffies.idle;
+    int totalJiffies = diffJiffies.user + diffJiffies.nice +
+                       diffJiffies.system + diffJiffies.idle;
 
-    printf("Cpu usage : %.2f%%\n", 100.0f * (1.0 - (diffJiffies.idle / (double)totalJiffies)));
+    diffJiffies.usage = 100.0f * (1.0 - (diffJiffies.idle / (double)totalJiffies));
 
     prevJiffies = curJiffies;
     fclose(pStat);
     sleep(1);
 
+    reply->set_information_of_cpu(request->client_order_of_cpu() + std::to_string(diffJiffies.usage) + '%');
+
     return Status::OK;
   }
-
-  void Calculate_CPU_Usage()
 };
 
 void RunServer()
@@ -108,11 +109,13 @@ void RunServer()
 
   // Wait for the server to shutdown. Note that some other thread must be
   // responsible for shutting down the server for this call to ever return.
+
   server->Wait();
 }
 
 int main(int argc, char **argv)
 {
   RunServer();
+
   return 0;
 }

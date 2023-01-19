@@ -181,20 +181,20 @@ class CpuMoniterRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 1,
+    kClientOrderOfCpuFieldNumber = 1,
   };
-  // string name = 1;
-  void clear_name();
-  const std::string& name() const;
+  // string client_order_of_cpu = 1;
+  void clear_client_order_of_cpu();
+  const std::string& client_order_of_cpu() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_NODISCARD std::string* release_name();
-  void set_allocated_name(std::string* name);
+  void set_client_order_of_cpu(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_client_order_of_cpu();
+  PROTOBUF_NODISCARD std::string* release_client_order_of_cpu();
+  void set_allocated_client_order_of_cpu(std::string* client_order_of_cpu);
   private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
+  const std::string& _internal_client_order_of_cpu() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_order_of_cpu(const std::string& value);
+  std::string* _internal_mutable_client_order_of_cpu();
   public:
 
   // @@protoc_insertion_point(class_scope:cpu.CpuMoniterRequest)
@@ -205,7 +205,7 @@ class CpuMoniterRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr client_order_of_cpu_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -334,20 +334,20 @@ class CpuMoniterReply final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMessageFieldNumber = 1,
+    kInformationOfCpuFieldNumber = 1,
   };
-  // string message = 1;
-  void clear_message();
-  const std::string& message() const;
+  // string information_of_cpu = 1;
+  void clear_information_of_cpu();
+  const std::string& information_of_cpu() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_message(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_message();
-  PROTOBUF_NODISCARD std::string* release_message();
-  void set_allocated_message(std::string* message);
+  void set_information_of_cpu(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_information_of_cpu();
+  PROTOBUF_NODISCARD std::string* release_information_of_cpu();
+  void set_allocated_information_of_cpu(std::string* information_of_cpu);
   private:
-  const std::string& _internal_message() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message(const std::string& value);
-  std::string* _internal_mutable_message();
+  const std::string& _internal_information_of_cpu() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_information_of_cpu(const std::string& value);
+  std::string* _internal_mutable_information_of_cpu();
   public:
 
   // @@protoc_insertion_point(class_scope:cpu.CpuMoniterReply)
@@ -358,7 +358,7 @@ class CpuMoniterReply final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr information_of_cpu_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -375,108 +375,108 @@ class CpuMoniterReply final :
 #endif  // __GNUC__
 // CpuMoniterRequest
 
-// string name = 1;
-inline void CpuMoniterRequest::clear_name() {
-  _impl_.name_.ClearToEmpty();
+// string client_order_of_cpu = 1;
+inline void CpuMoniterRequest::clear_client_order_of_cpu() {
+  _impl_.client_order_of_cpu_.ClearToEmpty();
 }
-inline const std::string& CpuMoniterRequest::name() const {
-  // @@protoc_insertion_point(field_get:cpu.CpuMoniterRequest.name)
-  return _internal_name();
+inline const std::string& CpuMoniterRequest::client_order_of_cpu() const {
+  // @@protoc_insertion_point(field_get:cpu.CpuMoniterRequest.client_order_of_cpu)
+  return _internal_client_order_of_cpu();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void CpuMoniterRequest::set_name(ArgT0&& arg0, ArgT... args) {
+void CpuMoniterRequest::set_client_order_of_cpu(ArgT0&& arg0, ArgT... args) {
  
- _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:cpu.CpuMoniterRequest.name)
+ _impl_.client_order_of_cpu_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:cpu.CpuMoniterRequest.client_order_of_cpu)
 }
-inline std::string* CpuMoniterRequest::mutable_name() {
-  std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:cpu.CpuMoniterRequest.name)
+inline std::string* CpuMoniterRequest::mutable_client_order_of_cpu() {
+  std::string* _s = _internal_mutable_client_order_of_cpu();
+  // @@protoc_insertion_point(field_mutable:cpu.CpuMoniterRequest.client_order_of_cpu)
   return _s;
 }
-inline const std::string& CpuMoniterRequest::_internal_name() const {
-  return _impl_.name_.Get();
+inline const std::string& CpuMoniterRequest::_internal_client_order_of_cpu() const {
+  return _impl_.client_order_of_cpu_.Get();
 }
-inline void CpuMoniterRequest::_internal_set_name(const std::string& value) {
+inline void CpuMoniterRequest::_internal_set_client_order_of_cpu(const std::string& value) {
   
-  _impl_.name_.Set(value, GetArenaForAllocation());
+  _impl_.client_order_of_cpu_.Set(value, GetArenaForAllocation());
 }
-inline std::string* CpuMoniterRequest::_internal_mutable_name() {
+inline std::string* CpuMoniterRequest::_internal_mutable_client_order_of_cpu() {
   
-  return _impl_.name_.Mutable(GetArenaForAllocation());
+  return _impl_.client_order_of_cpu_.Mutable(GetArenaForAllocation());
 }
-inline std::string* CpuMoniterRequest::release_name() {
-  // @@protoc_insertion_point(field_release:cpu.CpuMoniterRequest.name)
-  return _impl_.name_.Release();
+inline std::string* CpuMoniterRequest::release_client_order_of_cpu() {
+  // @@protoc_insertion_point(field_release:cpu.CpuMoniterRequest.client_order_of_cpu)
+  return _impl_.client_order_of_cpu_.Release();
 }
-inline void CpuMoniterRequest::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
+inline void CpuMoniterRequest::set_allocated_client_order_of_cpu(std::string* client_order_of_cpu) {
+  if (client_order_of_cpu != nullptr) {
     
   } else {
     
   }
-  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+  _impl_.client_order_of_cpu_.SetAllocated(client_order_of_cpu, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.name_.IsDefault()) {
-    _impl_.name_.Set("", GetArenaForAllocation());
+  if (_impl_.client_order_of_cpu_.IsDefault()) {
+    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:cpu.CpuMoniterRequest.name)
+  // @@protoc_insertion_point(field_set_allocated:cpu.CpuMoniterRequest.client_order_of_cpu)
 }
 
 // -------------------------------------------------------------------
 
 // CpuMoniterReply
 
-// string message = 1;
-inline void CpuMoniterReply::clear_message() {
-  _impl_.message_.ClearToEmpty();
+// string information_of_cpu = 1;
+inline void CpuMoniterReply::clear_information_of_cpu() {
+  _impl_.information_of_cpu_.ClearToEmpty();
 }
-inline const std::string& CpuMoniterReply::message() const {
-  // @@protoc_insertion_point(field_get:cpu.CpuMoniterReply.message)
-  return _internal_message();
+inline const std::string& CpuMoniterReply::information_of_cpu() const {
+  // @@protoc_insertion_point(field_get:cpu.CpuMoniterReply.information_of_cpu)
+  return _internal_information_of_cpu();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void CpuMoniterReply::set_message(ArgT0&& arg0, ArgT... args) {
+void CpuMoniterReply::set_information_of_cpu(ArgT0&& arg0, ArgT... args) {
  
- _impl_.message_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:cpu.CpuMoniterReply.message)
+ _impl_.information_of_cpu_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:cpu.CpuMoniterReply.information_of_cpu)
 }
-inline std::string* CpuMoniterReply::mutable_message() {
-  std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:cpu.CpuMoniterReply.message)
+inline std::string* CpuMoniterReply::mutable_information_of_cpu() {
+  std::string* _s = _internal_mutable_information_of_cpu();
+  // @@protoc_insertion_point(field_mutable:cpu.CpuMoniterReply.information_of_cpu)
   return _s;
 }
-inline const std::string& CpuMoniterReply::_internal_message() const {
-  return _impl_.message_.Get();
+inline const std::string& CpuMoniterReply::_internal_information_of_cpu() const {
+  return _impl_.information_of_cpu_.Get();
 }
-inline void CpuMoniterReply::_internal_set_message(const std::string& value) {
+inline void CpuMoniterReply::_internal_set_information_of_cpu(const std::string& value) {
   
-  _impl_.message_.Set(value, GetArenaForAllocation());
+  _impl_.information_of_cpu_.Set(value, GetArenaForAllocation());
 }
-inline std::string* CpuMoniterReply::_internal_mutable_message() {
+inline std::string* CpuMoniterReply::_internal_mutable_information_of_cpu() {
   
-  return _impl_.message_.Mutable(GetArenaForAllocation());
+  return _impl_.information_of_cpu_.Mutable(GetArenaForAllocation());
 }
-inline std::string* CpuMoniterReply::release_message() {
-  // @@protoc_insertion_point(field_release:cpu.CpuMoniterReply.message)
-  return _impl_.message_.Release();
+inline std::string* CpuMoniterReply::release_information_of_cpu() {
+  // @@protoc_insertion_point(field_release:cpu.CpuMoniterReply.information_of_cpu)
+  return _impl_.information_of_cpu_.Release();
 }
-inline void CpuMoniterReply::set_allocated_message(std::string* message) {
-  if (message != nullptr) {
+inline void CpuMoniterReply::set_allocated_information_of_cpu(std::string* information_of_cpu) {
+  if (information_of_cpu != nullptr) {
     
   } else {
     
   }
-  _impl_.message_.SetAllocated(message, GetArenaForAllocation());
+  _impl_.information_of_cpu_.SetAllocated(information_of_cpu, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.message_.IsDefault()) {
-    _impl_.message_.Set("", GetArenaForAllocation());
+  if (_impl_.information_of_cpu_.IsDefault()) {
+    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:cpu.CpuMoniterReply.message)
+  // @@protoc_insertion_point(field_set_allocated:cpu.CpuMoniterReply.information_of_cpu)
 }
 
 #ifdef __GNUC__

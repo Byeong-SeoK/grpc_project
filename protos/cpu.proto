@@ -26,10 +26,10 @@ service CpuMoniterService {
 
 // The request message containing the client order of cpu volume
 message CpuMoniterRequest {
-  string name = 1;
+  string client_order_of_cpu = 1;
 }
 
 // The response message containing the information of cpu volume
 message CpuMoniterReply {
-  string message = 1;
+  string information_of_cpu = 1;
 }

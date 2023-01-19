@@ -38,7 +38,7 @@ using moniter::MemoryRequest;
 
 MemmoryRequest makeMemReqName(string vm_order, string pm_order, string avm_order, string apm_order)
 {
-  //
+  // Initialize message service variables defined in mointer.proto
   MemmoryRequest memReqPrefix;
   memReqPrefix.set_virtual_memory_request(vm_order);
   memReqPrefix.set_physical_memory_request(pm_order);
@@ -116,6 +116,7 @@ public:
 
 private:
   std::unique_ptr<MemoryMoniterService::Stub> stub_;
+  std::vector<string> client_memory_monitor_order;
 };
 
 int main(int argc, char **argv)

@@ -45,7 +45,7 @@ public:
   {
     // Data we are sending to the server.
     CpuMoniterRequest request;
-    request.set_name(sentence);
+    request.set_client_order_of_cpu(sentence);
 
     // Container for the data we expect from the server.
     CpuMoniterReply reply;
@@ -61,7 +61,7 @@ public:
     // Act upon its status.
     if (status.ok())
     {
-      return reply.message();
+      return reply.information_of_cpu();
     }
     else
     {
