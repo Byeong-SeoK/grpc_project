@@ -1,0 +1,5 @@
+/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles/hw_grpc_proto.dir
+/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles/memory_moniter_client.dir
+/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles/memory_moniter_server.dir
+/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles/rebuild_cache.dir
