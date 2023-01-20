@@ -23,7 +23,10 @@ namespace _pbi = _pb::internal;
 namespace moniter {
 PROTOBUF_CONSTEXPR MemoryRequest::MemoryRequest(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.virtual_memory_request_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.physical_memory_request_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.avail_virtual_memory_request_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.avail_physical_memory_request_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct MemoryRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR MemoryRequestDefaultTypeInternal()
@@ -36,7 +39,7 @@ struct MemoryRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MemoryRequestDefaultTypeInternal _MemoryRequest_default_instance_;
 PROTOBUF_CONSTEXPR MemoryReply::MemoryReply(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.message_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.memory_info_reply_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct MemoryReplyDefaultTypeInternal {
   PROTOBUF_CONSTEXPR MemoryReplyDefaultTypeInternal()
@@ -59,18 +62,21 @@ const uint32_t TableStruct_moniter_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::moniter::MemoryRequest, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::moniter::MemoryRequest, _impl_.virtual_memory_request_),
+  PROTOBUF_FIELD_OFFSET(::moniter::MemoryRequest, _impl_.physical_memory_request_),
+  PROTOBUF_FIELD_OFFSET(::moniter::MemoryRequest, _impl_.avail_virtual_memory_request_),
+  PROTOBUF_FIELD_OFFSET(::moniter::MemoryRequest, _impl_.avail_physical_memory_request_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::moniter::MemoryReply, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::moniter::MemoryReply, _impl_.message_),
+  PROTOBUF_FIELD_OFFSET(::moniter::MemoryReply, _impl_.memory_info_reply_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::moniter::MemoryRequest)},
-  { 7, -1, -1, sizeof(::moniter::MemoryReply)},
+  { 10, -1, -1, sizeof(::moniter::MemoryReply)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -79,17 +85,19 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_moniter_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\rmoniter.proto\022\007moniter\"\035\n\rMemoryReques"
-  "t\022\014\n\004name\030\001 \001(\t\"\036\n\013MemoryReply\022\017\n\007messag"
-  "e\030\001 \001(\t2\246\001\n\024MemoryMoniterService\022=\n\013test"
-  "_method\022\026.moniter.MemoryRequest\032\024.monite"
-  "r.MemoryReply\"\000\022O\n\035current_memory_monite"
-  "r_method\022\026.moniter.MemoryRequest\032\024.monit"
-  "er.MemoryReply\"\000B\016\n\014moniter.grpcb\006proto3"
+  "\n\rmoniter.proto\022\007moniter\"\235\001\n\rMemoryReque"
+  "st\022\036\n\026virtual_memory_request\030\001 \001(\t\022\037\n\027ph"
+  "ysical_memory_request\030\002 \001(\t\022$\n\034avail_vir"
+  "tual_memory_request\030\003 \001(\t\022%\n\035avail_physi"
+  "cal_memory_request\030\004 \001(\t\"(\n\013MemoryReply\022"
+  "\031\n\021memory_info_reply\030\001 \001(\t2a\n\016MoniterSer"
+  "vice\022O\n\035current_memory_moniter_method\022\026."
+  "moniter.MemoryRequest\032\024.moniter.MemoryRe"
+  "ply\"\000B\016\n\014moniter.grpcb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_moniter_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_moniter_2eproto = {
-    false, false, 280, descriptor_table_protodef_moniter_2eproto,
+    false, false, 349, descriptor_table_protodef_moniter_2eproto,
     "moniter.proto",
     &descriptor_table_moniter_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_moniter_2eproto::offsets,
@@ -120,16 +128,43 @@ MemoryRequest::MemoryRequest(const MemoryRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   MemoryRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_.virtual_memory_request_){}
+    , decltype(_impl_.physical_memory_request_){}
+    , decltype(_impl_.avail_virtual_memory_request_){}
+    , decltype(_impl_.avail_physical_memory_request_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.name_.InitDefault();
+  _impl_.virtual_memory_request_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
+    _impl_.virtual_memory_request_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_name().empty()) {
-    _this->_impl_.name_.Set(from._internal_name(), 
+  if (!from._internal_virtual_memory_request().empty()) {
+    _this->_impl_.virtual_memory_request_.Set(from._internal_virtual_memory_request(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.physical_memory_request_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.physical_memory_request_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_physical_memory_request().empty()) {
+    _this->_impl_.physical_memory_request_.Set(from._internal_physical_memory_request(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.avail_virtual_memory_request_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avail_virtual_memory_request_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_avail_virtual_memory_request().empty()) {
+    _this->_impl_.avail_virtual_memory_request_.Set(from._internal_avail_virtual_memory_request(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.avail_physical_memory_request_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avail_physical_memory_request_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_avail_physical_memory_request().empty()) {
+    _this->_impl_.avail_physical_memory_request_.Set(from._internal_avail_physical_memory_request(), 
       _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:moniter.MemoryRequest)
@@ -140,12 +175,27 @@ inline void MemoryRequest::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_.virtual_memory_request_){}
+    , decltype(_impl_.physical_memory_request_){}
+    , decltype(_impl_.avail_virtual_memory_request_){}
+    , decltype(_impl_.avail_physical_memory_request_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.name_.InitDefault();
+  _impl_.virtual_memory_request_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
+    _impl_.virtual_memory_request_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.physical_memory_request_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.physical_memory_request_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.avail_virtual_memory_request_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avail_virtual_memory_request_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.avail_physical_memory_request_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.avail_physical_memory_request_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -160,7 +210,10 @@ MemoryRequest::~MemoryRequest() {
 
 inline void MemoryRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.name_.Destroy();
+  _impl_.virtual_memory_request_.Destroy();
+  _impl_.physical_memory_request_.Destroy();
+  _impl_.avail_virtual_memory_request_.Destroy();
+  _impl_.avail_physical_memory_request_.Destroy();
 }
 
 void MemoryRequest::SetCachedSize(int size) const {
@@ -173,7 +226,10 @@ void MemoryRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.name_.ClearToEmpty();
+  _impl_.virtual_memory_request_.ClearToEmpty();
+  _impl_.physical_memory_request_.ClearToEmpty();
+  _impl_.avail_virtual_memory_request_.ClearToEmpty();
+  _impl_.avail_physical_memory_request_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -183,13 +239,43 @@ const char* MemoryRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string name = 1;
+      // string virtual_memory_request = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_name();
+          auto str = _internal_mutable_virtual_memory_request();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryRequest.name"));
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryRequest.virtual_memory_request"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string physical_memory_request = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_physical_memory_request();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryRequest.physical_memory_request"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string avail_virtual_memory_request = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_avail_virtual_memory_request();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryRequest.avail_virtual_memory_request"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string avail_physical_memory_request = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_avail_physical_memory_request();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryRequest.avail_physical_memory_request"));
         } else
           goto handle_unusual;
         continue;
@@ -222,14 +308,44 @@ uint8_t* MemoryRequest::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
+  // string virtual_memory_request = 1;
+  if (!this->_internal_virtual_memory_request().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      this->_internal_virtual_memory_request().data(), static_cast<int>(this->_internal_virtual_memory_request().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "moniter.MemoryRequest.name");
+      "moniter.MemoryRequest.virtual_memory_request");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_name(), target);
+        1, this->_internal_virtual_memory_request(), target);
+  }
+
+  // string physical_memory_request = 2;
+  if (!this->_internal_physical_memory_request().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_physical_memory_request().data(), static_cast<int>(this->_internal_physical_memory_request().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "moniter.MemoryRequest.physical_memory_request");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_physical_memory_request(), target);
+  }
+
+  // string avail_virtual_memory_request = 3;
+  if (!this->_internal_avail_virtual_memory_request().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_avail_virtual_memory_request().data(), static_cast<int>(this->_internal_avail_virtual_memory_request().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "moniter.MemoryRequest.avail_virtual_memory_request");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_avail_virtual_memory_request(), target);
+  }
+
+  // string avail_physical_memory_request = 4;
+  if (!this->_internal_avail_physical_memory_request().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_avail_physical_memory_request().data(), static_cast<int>(this->_internal_avail_physical_memory_request().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "moniter.MemoryRequest.avail_physical_memory_request");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_avail_physical_memory_request(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -248,11 +364,32 @@ size_t MemoryRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
+  // string virtual_memory_request = 1;
+  if (!this->_internal_virtual_memory_request().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
+        this->_internal_virtual_memory_request());
+  }
+
+  // string physical_memory_request = 2;
+  if (!this->_internal_physical_memory_request().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_physical_memory_request());
+  }
+
+  // string avail_virtual_memory_request = 3;
+  if (!this->_internal_avail_virtual_memory_request().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_avail_virtual_memory_request());
+  }
+
+  // string avail_physical_memory_request = 4;
+  if (!this->_internal_avail_physical_memory_request().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_avail_physical_memory_request());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -273,8 +410,17 @@ void MemoryRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_name().empty()) {
-    _this->_internal_set_name(from._internal_name());
+  if (!from._internal_virtual_memory_request().empty()) {
+    _this->_internal_set_virtual_memory_request(from._internal_virtual_memory_request());
+  }
+  if (!from._internal_physical_memory_request().empty()) {
+    _this->_internal_set_physical_memory_request(from._internal_physical_memory_request());
+  }
+  if (!from._internal_avail_virtual_memory_request().empty()) {
+    _this->_internal_set_avail_virtual_memory_request(from._internal_avail_virtual_memory_request());
+  }
+  if (!from._internal_avail_physical_memory_request().empty()) {
+    _this->_internal_set_avail_physical_memory_request(from._internal_avail_physical_memory_request());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -296,8 +442,20 @@ void MemoryRequest::InternalSwap(MemoryRequest* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.name_, lhs_arena,
-      &other->_impl_.name_, rhs_arena
+      &_impl_.virtual_memory_request_, lhs_arena,
+      &other->_impl_.virtual_memory_request_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.physical_memory_request_, lhs_arena,
+      &other->_impl_.physical_memory_request_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.avail_virtual_memory_request_, lhs_arena,
+      &other->_impl_.avail_virtual_memory_request_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.avail_physical_memory_request_, lhs_arena,
+      &other->_impl_.avail_physical_memory_request_, rhs_arena
   );
 }
 
@@ -323,16 +481,16 @@ MemoryReply::MemoryReply(const MemoryReply& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   MemoryReply* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.message_){}
+      decltype(_impl_.memory_info_reply_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.message_.InitDefault();
+  _impl_.memory_info_reply_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.message_.Set("", GetArenaForAllocation());
+    _impl_.memory_info_reply_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_message().empty()) {
-    _this->_impl_.message_.Set(from._internal_message(), 
+  if (!from._internal_memory_info_reply().empty()) {
+    _this->_impl_.memory_info_reply_.Set(from._internal_memory_info_reply(), 
       _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:moniter.MemoryReply)
@@ -343,12 +501,12 @@ inline void MemoryReply::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.message_){}
+      decltype(_impl_.memory_info_reply_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
-  _impl_.message_.InitDefault();
+  _impl_.memory_info_reply_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.message_.Set("", GetArenaForAllocation());
+    _impl_.memory_info_reply_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -363,7 +521,7 @@ MemoryReply::~MemoryReply() {
 
 inline void MemoryReply::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.message_.Destroy();
+  _impl_.memory_info_reply_.Destroy();
 }
 
 void MemoryReply::SetCachedSize(int size) const {
@@ -376,7 +534,7 @@ void MemoryReply::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.message_.ClearToEmpty();
+  _impl_.memory_info_reply_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -386,13 +544,13 @@ const char* MemoryReply::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string message = 1;
+      // string memory_info_reply = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_message();
+          auto str = _internal_mutable_memory_info_reply();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryReply.message"));
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.MemoryReply.memory_info_reply"));
         } else
           goto handle_unusual;
         continue;
@@ -425,14 +583,14 @@ uint8_t* MemoryReply::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string message = 1;
-  if (!this->_internal_message().empty()) {
+  // string memory_info_reply = 1;
+  if (!this->_internal_memory_info_reply().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
+      this->_internal_memory_info_reply().data(), static_cast<int>(this->_internal_memory_info_reply().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "moniter.MemoryReply.message");
+      "moniter.MemoryReply.memory_info_reply");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_message(), target);
+        1, this->_internal_memory_info_reply(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -451,11 +609,11 @@ size_t MemoryReply::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string message = 1;
-  if (!this->_internal_message().empty()) {
+  // string memory_info_reply = 1;
+  if (!this->_internal_memory_info_reply().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_message());
+        this->_internal_memory_info_reply());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -476,8 +634,8 @@ void MemoryReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_message().empty()) {
-    _this->_internal_set_message(from._internal_message());
+  if (!from._internal_memory_info_reply().empty()) {
+    _this->_internal_set_memory_info_reply(from._internal_memory_info_reply());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -499,8 +657,8 @@ void MemoryReply::InternalSwap(MemoryReply* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.message_, lhs_arena,
-      &other->_impl_.message_, rhs_arena
+      &_impl_.memory_info_reply_, lhs_arena,
+      &other->_impl_.memory_info_reply_, rhs_arena
   );
 }
 

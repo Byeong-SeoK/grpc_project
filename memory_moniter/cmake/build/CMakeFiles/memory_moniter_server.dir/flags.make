@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DCARES_STATICLIB
 
-CXX_INCLUDES = -I/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build -isystem /home/byeongseok/.local/include
+CXX_INCLUDES = -I/mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build -isystem /home/byeongseok/.local/include
 
 CXX_FLAGS = -std=gnu++14
 

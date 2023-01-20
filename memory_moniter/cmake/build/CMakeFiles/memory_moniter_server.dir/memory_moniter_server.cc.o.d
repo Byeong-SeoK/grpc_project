@@ -1,5 +1,5 @@
 CMakeFiles/memory_moniter_server.dir/memory_moniter_server.cc.o: \
- /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/memory_moniter_server.cc \
+ /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/memory_moniter_server.cc \
  /usr/include/stdc-predef.h /usr/include/c++/8/iostream \
  /usr/include/x86_64-linux-gnu/c++/8/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/8/bits/os_defines.h \
@@ -341,8 +341,8 @@ CMakeFiles/memory_moniter_server.dir/memory_moniter_server.cc.o: \
  /home/byeongseok/.local/include/grpcpp/security/authorization_policy_provider.h \
  /home/byeongseok/.local/include/grpcpp/server_context.h \
  /home/byeongseok/.local/include/grpcpp/server_posix.h \
- /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/moniter.grpc.pb.h \
- /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/moniter.pb.h \
+ /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/moniter.grpc.pb.h \
+ /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/moniter.pb.h \
  /home/byeongseok/.local/include/google/protobuf/port_def.inc \
  /home/byeongseok/.local/include/google/protobuf/port_undef.inc \
  /home/byeongseok/.local/include/google/protobuf/io/coded_stream.h \

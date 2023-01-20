@@ -42,23 +42,15 @@
 
 namespace moniter {
 
-// The greeting service definition.
-class MemoryMoniterService final {
+// Computer status monitering service
+class MoniterService final {
  public:
   static constexpr char const* service_full_name() {
-    return "moniter.MemoryMoniterService";
+    return "moniter.MoniterService";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    // Sends a greeting
-    virtual ::grpc::Status test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>> Asynctest_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>>(Asynctest_methodRaw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>> PrepareAsynctest_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>>(PrepareAsynctest_methodRaw(context, request, cq));
-    }
     virtual ::grpc::Status current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>> Asynccurrent_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>>(Asynccurrent_memory_moniter_methodRaw(context, request, cq));
@@ -69,9 +61,6 @@ class MemoryMoniterService final {
     class async_interface {
      public:
       virtual ~async_interface() {}
-      // Sends a greeting
-      virtual void test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
@@ -79,21 +68,12 @@ class MemoryMoniterService final {
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>* Asynctest_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>* PrepareAsynctest_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>* Asynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>* PrepareAsynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>> Asynctest_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>>(Asynctest_methodRaw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>> PrepareAsynctest_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>>(PrepareAsynctest_methodRaw(context, request, cq));
-    }
     ::grpc::Status current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>> Asynccurrent_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>>(Asynccurrent_memory_moniter_methodRaw(context, request, cq));
@@ -104,8 +84,6 @@ class MemoryMoniterService final {
     class async final :
       public StubInterface::async_interface {
      public:
-      void test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)>) override;
-      void test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)>) override;
       void current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
@@ -119,11 +97,8 @@ class MemoryMoniterService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* Asynctest_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* PrepareAsynctest_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* Asynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* PrepareAsynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_test_method_;
     const ::grpc::internal::RpcMethod rpcmethod_current_memory_moniter_method_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -132,29 +107,7 @@ class MemoryMoniterService final {
    public:
     Service();
     virtual ~Service();
-    // Sends a greeting
-    virtual ::grpc::Status test_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response);
     virtual ::grpc::Status current_memory_moniter_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response);
-  };
-  template <class BaseClass>
-  class WithAsyncMethod_test_method : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithAsyncMethod_test_method() {
-      ::grpc::Service::MarkMethodAsync(0);
-    }
-    ~WithAsyncMethod_test_method() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status test_method(::grpc::ServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void Requesttest_method(::grpc::ServerContext* context, ::moniter::MemoryRequest* request, ::grpc::ServerAsyncResponseWriter< ::moniter::MemoryReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
   };
   template <class BaseClass>
   class WithAsyncMethod_current_memory_moniter_method : public BaseClass {
@@ -162,7 +115,7 @@ class MemoryMoniterService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_current_memory_moniter_method() {
-      ::grpc::Service::MarkMethodAsync(1);
+      ::grpc::Service::MarkMethodAsync(0);
     }
     ~WithAsyncMethod_current_memory_moniter_method() override {
       BaseClassMustBeDerivedFromService(this);
@@ -173,50 +126,23 @@ class MemoryMoniterService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void Requestcurrent_memory_moniter_method(::grpc::ServerContext* context, ::moniter::MemoryRequest* request, ::grpc::ServerAsyncResponseWriter< ::moniter::MemoryReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_test_method<WithAsyncMethod_current_memory_moniter_method<Service > > AsyncService;
-  template <class BaseClass>
-  class WithCallbackMethod_test_method : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithCallbackMethod_test_method() {
-      ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::moniter::MemoryRequest, ::moniter::MemoryReply>(
-            [this](
-                   ::grpc::CallbackServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response) { return this->test_method(context, request, response); }));}
-    void SetMessageAllocatorFor_test_method(
-        ::grpc::MessageAllocator< ::moniter::MemoryRequest, ::moniter::MemoryReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::moniter::MemoryRequest, ::moniter::MemoryReply>*>(handler)
-              ->SetMessageAllocator(allocator);
-    }
-    ~WithCallbackMethod_test_method() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status test_method(::grpc::ServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    virtual ::grpc::ServerUnaryReactor* test_method(
-      ::grpc::CallbackServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/)  { return nullptr; }
-  };
+  typedef WithAsyncMethod_current_memory_moniter_method<Service > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_current_memory_moniter_method : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_current_memory_moniter_method() {
-      ::grpc::Service::MarkMethodCallback(1,
+      ::grpc::Service::MarkMethodCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::moniter::MemoryRequest, ::moniter::MemoryReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response) { return this->current_memory_moniter_method(context, request, response); }));}
     void SetMessageAllocatorFor_current_memory_moniter_method(
         ::grpc::MessageAllocator< ::moniter::MemoryRequest, ::moniter::MemoryReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::moniter::MemoryRequest, ::moniter::MemoryReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -231,32 +157,15 @@ class MemoryMoniterService final {
     virtual ::grpc::ServerUnaryReactor* current_memory_moniter_method(
       ::grpc::CallbackServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_test_method<WithCallbackMethod_current_memory_moniter_method<Service > > CallbackService;
+  typedef WithCallbackMethod_current_memory_moniter_method<Service > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
-  template <class BaseClass>
-  class WithGenericMethod_test_method : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithGenericMethod_test_method() {
-      ::grpc::Service::MarkMethodGeneric(0);
-    }
-    ~WithGenericMethod_test_method() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status test_method(::grpc::ServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
   template <class BaseClass>
   class WithGenericMethod_current_memory_moniter_method : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_current_memory_moniter_method() {
-      ::grpc::Service::MarkMethodGeneric(1);
+      ::grpc::Service::MarkMethodGeneric(0);
     }
     ~WithGenericMethod_current_memory_moniter_method() override {
       BaseClassMustBeDerivedFromService(this);
@@ -268,32 +177,12 @@ class MemoryMoniterService final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_test_method : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawMethod_test_method() {
-      ::grpc::Service::MarkMethodRaw(0);
-    }
-    ~WithRawMethod_test_method() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status test_method(::grpc::ServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void Requesttest_method(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithRawMethod_current_memory_moniter_method : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_current_memory_moniter_method() {
-      ::grpc::Service::MarkMethodRaw(1);
+      ::grpc::Service::MarkMethodRaw(0);
     }
     ~WithRawMethod_current_memory_moniter_method() override {
       BaseClassMustBeDerivedFromService(this);
@@ -304,30 +193,8 @@ class MemoryMoniterService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void Requestcurrent_memory_moniter_method(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
-  };
-  template <class BaseClass>
-  class WithRawCallbackMethod_test_method : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawCallbackMethod_test_method() {
-      ::grpc::Service::MarkMethodRawCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-            [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->test_method(context, request, response); }));
-    }
-    ~WithRawCallbackMethod_test_method() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status test_method(::grpc::ServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    virtual ::grpc::ServerUnaryReactor* test_method(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithRawCallbackMethod_current_memory_moniter_method : public BaseClass {
@@ -335,7 +202,7 @@ class MemoryMoniterService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_current_memory_moniter_method() {
-      ::grpc::Service::MarkMethodRawCallback(1,
+      ::grpc::Service::MarkMethodRawCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->current_memory_moniter_method(context, request, response); }));
@@ -352,39 +219,12 @@ class MemoryMoniterService final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_test_method : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithStreamedUnaryMethod_test_method() {
-      ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::moniter::MemoryRequest, ::moniter::MemoryReply>(
-            [this](::grpc::ServerContext* context,
-                   ::grpc::ServerUnaryStreamer<
-                     ::moniter::MemoryRequest, ::moniter::MemoryReply>* streamer) {
-                       return this->Streamedtest_method(context,
-                         streamer);
-                  }));
-    }
-    ~WithStreamedUnaryMethod_test_method() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable regular version of this method
-    ::grpc::Status test_method(::grpc::ServerContext* /*context*/, const ::moniter::MemoryRequest* /*request*/, ::moniter::MemoryReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status Streamedtest_method(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::moniter::MemoryRequest,::moniter::MemoryReply>* server_unary_streamer) = 0;
-  };
-  template <class BaseClass>
   class WithStreamedUnaryMethod_current_memory_moniter_method : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_current_memory_moniter_method() {
-      ::grpc::Service::MarkMethodStreamed(1,
+      ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
           ::moniter::MemoryRequest, ::moniter::MemoryReply>(
             [this](::grpc::ServerContext* context,
@@ -405,9 +245,9 @@ class MemoryMoniterService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status Streamedcurrent_memory_moniter_method(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::moniter::MemoryRequest,::moniter::MemoryReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_test_method<WithStreamedUnaryMethod_current_memory_moniter_method<Service > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_current_memory_moniter_method<Service > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_test_method<WithStreamedUnaryMethod_current_memory_moniter_method<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_current_memory_moniter_method<Service > StreamedService;
 };
 
 }  // namespace moniter

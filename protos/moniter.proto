@@ -18,22 +18,21 @@ option java_package = "moniter.grpc";
 
 package moniter;
 
-// The greeting service definition.
-service MemoryMoniterService {
-  // Sends a greeting
-  rpc test_method (MemoryRequest) returns (MemoryReply) {}
+// Computer status monitering service
+service MoniterService {
   rpc current_memory_moniter_method(MemoryRequest) returns (MemoryReply) {}
 }
+
 
 // The request message containing client order
 message MemoryRequest {
   string virtual_memory_request = 1;
-  string physical_memory_request = 1;
-  string avail_virtual_memory_request = 1;
-  string avail_physical_memory_request = 1;
+  string physical_memory_request = 2;
+  string avail_virtual_memory_request = 3;
+  string avail_physical_memory_request = 4;
 }
 
-// The response message containing the greetings
+// The response message containing the information of memory system
 message MemoryReply {
-  string message = 1;
+  string memory_info_reply = 1;
 }

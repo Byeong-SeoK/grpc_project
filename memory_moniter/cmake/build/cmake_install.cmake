@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter
+# Install script for directory: /mnt/c/users/inno-c-535/resource_moniter/memory_moniter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

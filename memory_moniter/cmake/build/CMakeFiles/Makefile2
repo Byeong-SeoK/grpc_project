@@ -54,10 +54,10 @@ RM = /home/byeongseok/.local/lib/python3.6/site-packages/cmake/data/bin/cmake -E
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter
+CMAKE_SOURCE_DIR = /mnt/c/users/inno-c-535/resource_moniter/memory_moniter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build
+CMAKE_BINARY_DIR = /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -85,14 +85,14 @@ clean: CMakeFiles/memory_moniter_server.dir/clean
 CMakeFiles/hw_grpc_proto.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles --progress-num=1,2,3,4 "Built target hw_grpc_proto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles --progress-num=1,2,3,4 "Built target hw_grpc_proto"
 .PHONY : CMakeFiles/hw_grpc_proto.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/hw_grpc_proto.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hw_grpc_proto.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles 0
 .PHONY : CMakeFiles/hw_grpc_proto.dir/rule
 
 # Convenience name for target.
@@ -111,14 +111,14 @@ CMakeFiles/hw_grpc_proto.dir/clean:
 CMakeFiles/memory_moniter_client.dir/all: CMakeFiles/hw_grpc_proto.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_client.dir/build.make CMakeFiles/memory_moniter_client.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_client.dir/build.make CMakeFiles/memory_moniter_client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles --progress-num=5,6 "Built target memory_moniter_client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles --progress-num=5,6 "Built target memory_moniter_client"
 .PHONY : CMakeFiles/memory_moniter_client.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/memory_moniter_client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/memory_moniter_client.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles 0
 .PHONY : CMakeFiles/memory_moniter_client.dir/rule
 
 # Convenience name for target.
@@ -137,14 +137,14 @@ CMakeFiles/memory_moniter_client.dir/clean:
 CMakeFiles/memory_moniter_server.dir/all: CMakeFiles/hw_grpc_proto.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_server.dir/build.make CMakeFiles/memory_moniter_server.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_server.dir/build.make CMakeFiles/memory_moniter_server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles --progress-num=7,8 "Built target memory_moniter_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles --progress-num=7,8 "Built target memory_moniter_server"
 .PHONY : CMakeFiles/memory_moniter_server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/memory_moniter_server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/memory_moniter_server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/CMakeFiles 0
 .PHONY : CMakeFiles/memory_moniter_server.dir/rule
 
 # Convenience name for target.

@@ -181,20 +181,65 @@ class MemoryRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNameFieldNumber = 1,
+    kVirtualMemoryRequestFieldNumber = 1,
+    kPhysicalMemoryRequestFieldNumber = 2,
+    kAvailVirtualMemoryRequestFieldNumber = 3,
+    kAvailPhysicalMemoryRequestFieldNumber = 4,
   };
-  // string name = 1;
-  void clear_name();
-  const std::string& name() const;
+  // string virtual_memory_request = 1;
+  void clear_virtual_memory_request();
+  const std::string& virtual_memory_request() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_NODISCARD std::string* release_name();
-  void set_allocated_name(std::string* name);
+  void set_virtual_memory_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_virtual_memory_request();
+  PROTOBUF_NODISCARD std::string* release_virtual_memory_request();
+  void set_allocated_virtual_memory_request(std::string* virtual_memory_request);
   private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
+  const std::string& _internal_virtual_memory_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_virtual_memory_request(const std::string& value);
+  std::string* _internal_mutable_virtual_memory_request();
+  public:
+
+  // string physical_memory_request = 2;
+  void clear_physical_memory_request();
+  const std::string& physical_memory_request() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_physical_memory_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_physical_memory_request();
+  PROTOBUF_NODISCARD std::string* release_physical_memory_request();
+  void set_allocated_physical_memory_request(std::string* physical_memory_request);
+  private:
+  const std::string& _internal_physical_memory_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_physical_memory_request(const std::string& value);
+  std::string* _internal_mutable_physical_memory_request();
+  public:
+
+  // string avail_virtual_memory_request = 3;
+  void clear_avail_virtual_memory_request();
+  const std::string& avail_virtual_memory_request() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_avail_virtual_memory_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_avail_virtual_memory_request();
+  PROTOBUF_NODISCARD std::string* release_avail_virtual_memory_request();
+  void set_allocated_avail_virtual_memory_request(std::string* avail_virtual_memory_request);
+  private:
+  const std::string& _internal_avail_virtual_memory_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_avail_virtual_memory_request(const std::string& value);
+  std::string* _internal_mutable_avail_virtual_memory_request();
+  public:
+
+  // string avail_physical_memory_request = 4;
+  void clear_avail_physical_memory_request();
+  const std::string& avail_physical_memory_request() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_avail_physical_memory_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_avail_physical_memory_request();
+  PROTOBUF_NODISCARD std::string* release_avail_physical_memory_request();
+  void set_allocated_avail_physical_memory_request(std::string* avail_physical_memory_request);
+  private:
+  const std::string& _internal_avail_physical_memory_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_avail_physical_memory_request(const std::string& value);
+  std::string* _internal_mutable_avail_physical_memory_request();
   public:
 
   // @@protoc_insertion_point(class_scope:moniter.MemoryRequest)
@@ -205,7 +250,10 @@ class MemoryRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr virtual_memory_request_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr physical_memory_request_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr avail_virtual_memory_request_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr avail_physical_memory_request_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -334,20 +382,20 @@ class MemoryReply final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMessageFieldNumber = 1,
+    kMemoryInfoReplyFieldNumber = 1,
   };
-  // string message = 1;
-  void clear_message();
-  const std::string& message() const;
+  // string memory_info_reply = 1;
+  void clear_memory_info_reply();
+  const std::string& memory_info_reply() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_message(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_message();
-  PROTOBUF_NODISCARD std::string* release_message();
-  void set_allocated_message(std::string* message);
+  void set_memory_info_reply(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_memory_info_reply();
+  PROTOBUF_NODISCARD std::string* release_memory_info_reply();
+  void set_allocated_memory_info_reply(std::string* memory_info_reply);
   private:
-  const std::string& _internal_message() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message(const std::string& value);
-  std::string* _internal_mutable_message();
+  const std::string& _internal_memory_info_reply() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_memory_info_reply(const std::string& value);
+  std::string* _internal_mutable_memory_info_reply();
   public:
 
   // @@protoc_insertion_point(class_scope:moniter.MemoryReply)
@@ -358,7 +406,7 @@ class MemoryReply final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr memory_info_reply_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -375,108 +423,258 @@ class MemoryReply final :
 #endif  // __GNUC__
 // MemoryRequest
 
-// string name = 1;
-inline void MemoryRequest::clear_name() {
-  _impl_.name_.ClearToEmpty();
+// string virtual_memory_request = 1;
+inline void MemoryRequest::clear_virtual_memory_request() {
+  _impl_.virtual_memory_request_.ClearToEmpty();
 }
-inline const std::string& MemoryRequest::name() const {
-  // @@protoc_insertion_point(field_get:moniter.MemoryRequest.name)
-  return _internal_name();
+inline const std::string& MemoryRequest::virtual_memory_request() const {
+  // @@protoc_insertion_point(field_get:moniter.MemoryRequest.virtual_memory_request)
+  return _internal_virtual_memory_request();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void MemoryRequest::set_name(ArgT0&& arg0, ArgT... args) {
+void MemoryRequest::set_virtual_memory_request(ArgT0&& arg0, ArgT... args) {
  
- _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:moniter.MemoryRequest.name)
+ _impl_.virtual_memory_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.MemoryRequest.virtual_memory_request)
 }
-inline std::string* MemoryRequest::mutable_name() {
-  std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:moniter.MemoryRequest.name)
+inline std::string* MemoryRequest::mutable_virtual_memory_request() {
+  std::string* _s = _internal_mutable_virtual_memory_request();
+  // @@protoc_insertion_point(field_mutable:moniter.MemoryRequest.virtual_memory_request)
   return _s;
 }
-inline const std::string& MemoryRequest::_internal_name() const {
-  return _impl_.name_.Get();
+inline const std::string& MemoryRequest::_internal_virtual_memory_request() const {
+  return _impl_.virtual_memory_request_.Get();
 }
-inline void MemoryRequest::_internal_set_name(const std::string& value) {
+inline void MemoryRequest::_internal_set_virtual_memory_request(const std::string& value) {
   
-  _impl_.name_.Set(value, GetArenaForAllocation());
+  _impl_.virtual_memory_request_.Set(value, GetArenaForAllocation());
 }
-inline std::string* MemoryRequest::_internal_mutable_name() {
+inline std::string* MemoryRequest::_internal_mutable_virtual_memory_request() {
   
-  return _impl_.name_.Mutable(GetArenaForAllocation());
+  return _impl_.virtual_memory_request_.Mutable(GetArenaForAllocation());
 }
-inline std::string* MemoryRequest::release_name() {
-  // @@protoc_insertion_point(field_release:moniter.MemoryRequest.name)
-  return _impl_.name_.Release();
+inline std::string* MemoryRequest::release_virtual_memory_request() {
+  // @@protoc_insertion_point(field_release:moniter.MemoryRequest.virtual_memory_request)
+  return _impl_.virtual_memory_request_.Release();
 }
-inline void MemoryRequest::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
+inline void MemoryRequest::set_allocated_virtual_memory_request(std::string* virtual_memory_request) {
+  if (virtual_memory_request != nullptr) {
     
   } else {
     
   }
-  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+  _impl_.virtual_memory_request_.SetAllocated(virtual_memory_request, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.name_.IsDefault()) {
-    _impl_.name_.Set("", GetArenaForAllocation());
+  if (_impl_.virtual_memory_request_.IsDefault()) {
+    _impl_.virtual_memory_request_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryRequest.name)
+  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryRequest.virtual_memory_request)
+}
+
+// string physical_memory_request = 2;
+inline void MemoryRequest::clear_physical_memory_request() {
+  _impl_.physical_memory_request_.ClearToEmpty();
+}
+inline const std::string& MemoryRequest::physical_memory_request() const {
+  // @@protoc_insertion_point(field_get:moniter.MemoryRequest.physical_memory_request)
+  return _internal_physical_memory_request();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void MemoryRequest::set_physical_memory_request(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.physical_memory_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.MemoryRequest.physical_memory_request)
+}
+inline std::string* MemoryRequest::mutable_physical_memory_request() {
+  std::string* _s = _internal_mutable_physical_memory_request();
+  // @@protoc_insertion_point(field_mutable:moniter.MemoryRequest.physical_memory_request)
+  return _s;
+}
+inline const std::string& MemoryRequest::_internal_physical_memory_request() const {
+  return _impl_.physical_memory_request_.Get();
+}
+inline void MemoryRequest::_internal_set_physical_memory_request(const std::string& value) {
+  
+  _impl_.physical_memory_request_.Set(value, GetArenaForAllocation());
+}
+inline std::string* MemoryRequest::_internal_mutable_physical_memory_request() {
+  
+  return _impl_.physical_memory_request_.Mutable(GetArenaForAllocation());
+}
+inline std::string* MemoryRequest::release_physical_memory_request() {
+  // @@protoc_insertion_point(field_release:moniter.MemoryRequest.physical_memory_request)
+  return _impl_.physical_memory_request_.Release();
+}
+inline void MemoryRequest::set_allocated_physical_memory_request(std::string* physical_memory_request) {
+  if (physical_memory_request != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.physical_memory_request_.SetAllocated(physical_memory_request, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.physical_memory_request_.IsDefault()) {
+    _impl_.physical_memory_request_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryRequest.physical_memory_request)
+}
+
+// string avail_virtual_memory_request = 3;
+inline void MemoryRequest::clear_avail_virtual_memory_request() {
+  _impl_.avail_virtual_memory_request_.ClearToEmpty();
+}
+inline const std::string& MemoryRequest::avail_virtual_memory_request() const {
+  // @@protoc_insertion_point(field_get:moniter.MemoryRequest.avail_virtual_memory_request)
+  return _internal_avail_virtual_memory_request();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void MemoryRequest::set_avail_virtual_memory_request(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.avail_virtual_memory_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.MemoryRequest.avail_virtual_memory_request)
+}
+inline std::string* MemoryRequest::mutable_avail_virtual_memory_request() {
+  std::string* _s = _internal_mutable_avail_virtual_memory_request();
+  // @@protoc_insertion_point(field_mutable:moniter.MemoryRequest.avail_virtual_memory_request)
+  return _s;
+}
+inline const std::string& MemoryRequest::_internal_avail_virtual_memory_request() const {
+  return _impl_.avail_virtual_memory_request_.Get();
+}
+inline void MemoryRequest::_internal_set_avail_virtual_memory_request(const std::string& value) {
+  
+  _impl_.avail_virtual_memory_request_.Set(value, GetArenaForAllocation());
+}
+inline std::string* MemoryRequest::_internal_mutable_avail_virtual_memory_request() {
+  
+  return _impl_.avail_virtual_memory_request_.Mutable(GetArenaForAllocation());
+}
+inline std::string* MemoryRequest::release_avail_virtual_memory_request() {
+  // @@protoc_insertion_point(field_release:moniter.MemoryRequest.avail_virtual_memory_request)
+  return _impl_.avail_virtual_memory_request_.Release();
+}
+inline void MemoryRequest::set_allocated_avail_virtual_memory_request(std::string* avail_virtual_memory_request) {
+  if (avail_virtual_memory_request != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.avail_virtual_memory_request_.SetAllocated(avail_virtual_memory_request, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.avail_virtual_memory_request_.IsDefault()) {
+    _impl_.avail_virtual_memory_request_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryRequest.avail_virtual_memory_request)
+}
+
+// string avail_physical_memory_request = 4;
+inline void MemoryRequest::clear_avail_physical_memory_request() {
+  _impl_.avail_physical_memory_request_.ClearToEmpty();
+}
+inline const std::string& MemoryRequest::avail_physical_memory_request() const {
+  // @@protoc_insertion_point(field_get:moniter.MemoryRequest.avail_physical_memory_request)
+  return _internal_avail_physical_memory_request();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void MemoryRequest::set_avail_physical_memory_request(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.avail_physical_memory_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.MemoryRequest.avail_physical_memory_request)
+}
+inline std::string* MemoryRequest::mutable_avail_physical_memory_request() {
+  std::string* _s = _internal_mutable_avail_physical_memory_request();
+  // @@protoc_insertion_point(field_mutable:moniter.MemoryRequest.avail_physical_memory_request)
+  return _s;
+}
+inline const std::string& MemoryRequest::_internal_avail_physical_memory_request() const {
+  return _impl_.avail_physical_memory_request_.Get();
+}
+inline void MemoryRequest::_internal_set_avail_physical_memory_request(const std::string& value) {
+  
+  _impl_.avail_physical_memory_request_.Set(value, GetArenaForAllocation());
+}
+inline std::string* MemoryRequest::_internal_mutable_avail_physical_memory_request() {
+  
+  return _impl_.avail_physical_memory_request_.Mutable(GetArenaForAllocation());
+}
+inline std::string* MemoryRequest::release_avail_physical_memory_request() {
+  // @@protoc_insertion_point(field_release:moniter.MemoryRequest.avail_physical_memory_request)
+  return _impl_.avail_physical_memory_request_.Release();
+}
+inline void MemoryRequest::set_allocated_avail_physical_memory_request(std::string* avail_physical_memory_request) {
+  if (avail_physical_memory_request != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.avail_physical_memory_request_.SetAllocated(avail_physical_memory_request, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.avail_physical_memory_request_.IsDefault()) {
+    _impl_.avail_physical_memory_request_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryRequest.avail_physical_memory_request)
 }
 
 // -------------------------------------------------------------------
 
 // MemoryReply
 
-// string message = 1;
-inline void MemoryReply::clear_message() {
-  _impl_.message_.ClearToEmpty();
+// string memory_info_reply = 1;
+inline void MemoryReply::clear_memory_info_reply() {
+  _impl_.memory_info_reply_.ClearToEmpty();
 }
-inline const std::string& MemoryReply::message() const {
-  // @@protoc_insertion_point(field_get:moniter.MemoryReply.message)
-  return _internal_message();
+inline const std::string& MemoryReply::memory_info_reply() const {
+  // @@protoc_insertion_point(field_get:moniter.MemoryReply.memory_info_reply)
+  return _internal_memory_info_reply();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void MemoryReply::set_message(ArgT0&& arg0, ArgT... args) {
+void MemoryReply::set_memory_info_reply(ArgT0&& arg0, ArgT... args) {
  
- _impl_.message_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:moniter.MemoryReply.message)
+ _impl_.memory_info_reply_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.MemoryReply.memory_info_reply)
 }
-inline std::string* MemoryReply::mutable_message() {
-  std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:moniter.MemoryReply.message)
+inline std::string* MemoryReply::mutable_memory_info_reply() {
+  std::string* _s = _internal_mutable_memory_info_reply();
+  // @@protoc_insertion_point(field_mutable:moniter.MemoryReply.memory_info_reply)
   return _s;
 }
-inline const std::string& MemoryReply::_internal_message() const {
-  return _impl_.message_.Get();
+inline const std::string& MemoryReply::_internal_memory_info_reply() const {
+  return _impl_.memory_info_reply_.Get();
 }
-inline void MemoryReply::_internal_set_message(const std::string& value) {
+inline void MemoryReply::_internal_set_memory_info_reply(const std::string& value) {
   
-  _impl_.message_.Set(value, GetArenaForAllocation());
+  _impl_.memory_info_reply_.Set(value, GetArenaForAllocation());
 }
-inline std::string* MemoryReply::_internal_mutable_message() {
+inline std::string* MemoryReply::_internal_mutable_memory_info_reply() {
   
-  return _impl_.message_.Mutable(GetArenaForAllocation());
+  return _impl_.memory_info_reply_.Mutable(GetArenaForAllocation());
 }
-inline std::string* MemoryReply::release_message() {
-  // @@protoc_insertion_point(field_release:moniter.MemoryReply.message)
-  return _impl_.message_.Release();
+inline std::string* MemoryReply::release_memory_info_reply() {
+  // @@protoc_insertion_point(field_release:moniter.MemoryReply.memory_info_reply)
+  return _impl_.memory_info_reply_.Release();
 }
-inline void MemoryReply::set_allocated_message(std::string* message) {
-  if (message != nullptr) {
+inline void MemoryReply::set_allocated_memory_info_reply(std::string* memory_info_reply) {
+  if (memory_info_reply != nullptr) {
     
   } else {
     
   }
-  _impl_.message_.SetAllocated(message, GetArenaForAllocation());
+  _impl_.memory_info_reply_.SetAllocated(memory_info_reply, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.message_.IsDefault()) {
-    _impl_.message_.Set("", GetArenaForAllocation());
+  if (_impl_.memory_info_reply_.IsDefault()) {
+    _impl_.memory_info_reply_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryReply.message)
+  // @@protoc_insertion_point(field_set_allocated:moniter.MemoryReply.memory_info_reply)
 }
 
 #ifdef __GNUC__

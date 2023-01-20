@@ -21,84 +21,49 @@
 #include <grpcpp/impl/codegen/sync_stream.h>
 namespace moniter {
 
-static const char* MemoryMoniterService_method_names[] = {
-  "/moniter.MemoryMoniterService/test_method",
-  "/moniter.MemoryMoniterService/current_memory_moniter_method",
+static const char* MoniterService_method_names[] = {
+  "/moniter.MoniterService/current_memory_moniter_method",
 };
 
-std::unique_ptr< MemoryMoniterService::Stub> MemoryMoniterService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< MoniterService::Stub> MoniterService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< MemoryMoniterService::Stub> stub(new MemoryMoniterService::Stub(channel, options));
+  std::unique_ptr< MoniterService::Stub> stub(new MoniterService::Stub(channel, options));
   return stub;
 }
 
-MemoryMoniterService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_test_method_(MemoryMoniterService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_current_memory_moniter_method_(MemoryMoniterService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+MoniterService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_current_memory_moniter_method_(MoniterService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status MemoryMoniterService::Stub::test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_test_method_, context, request, response);
-}
-
-void MemoryMoniterService::Stub::async::test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_test_method_, context, request, response, std::move(f));
-}
-
-void MemoryMoniterService::Stub::async::test_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_test_method_, context, request, response, reactor);
-}
-
-::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* MemoryMoniterService::Stub::PrepareAsynctest_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::moniter::MemoryReply, ::moniter::MemoryRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_test_method_, context, request);
-}
-
-::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* MemoryMoniterService::Stub::Asynctest_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
-  auto* result =
-    this->PrepareAsynctest_methodRaw(context, request, cq);
-  result->StartCall();
-  return result;
-}
-
-::grpc::Status MemoryMoniterService::Stub::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) {
+::grpc::Status MoniterService::Stub::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_current_memory_moniter_method_, context, request, response);
 }
 
-void MemoryMoniterService::Stub::async::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)> f) {
+void MoniterService::Stub::async::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_current_memory_moniter_method_, context, request, response, std::move(f));
 }
 
-void MemoryMoniterService::Stub::async::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void MoniterService::Stub::async::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_current_memory_moniter_method_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* MemoryMoniterService::Stub::PrepareAsynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* MoniterService::Stub::PrepareAsynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::moniter::MemoryReply, ::moniter::MemoryRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_current_memory_moniter_method_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* MemoryMoniterService::Stub::Asynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* MoniterService::Stub::Asynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsynccurrent_memory_moniter_methodRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-MemoryMoniterService::Service::Service() {
+MoniterService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      MemoryMoniterService_method_names[0],
+      MoniterService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MemoryMoniterService::Service, ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](MemoryMoniterService::Service* service,
-             ::grpc::ServerContext* ctx,
-             const ::moniter::MemoryRequest* req,
-             ::moniter::MemoryReply* resp) {
-               return service->test_method(ctx, req, resp);
-             }, this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
-      MemoryMoniterService_method_names[1],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MemoryMoniterService::Service, ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](MemoryMoniterService::Service* service,
+      new ::grpc::internal::RpcMethodHandler< MoniterService::Service, ::moniter::MemoryRequest, ::moniter::MemoryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](MoniterService::Service* service,
              ::grpc::ServerContext* ctx,
              const ::moniter::MemoryRequest* req,
              ::moniter::MemoryReply* resp) {
@@ -106,17 +71,10 @@ MemoryMoniterService::Service::Service() {
              }, this)));
 }
 
-MemoryMoniterService::Service::~Service() {
+MoniterService::Service::~Service() {
 }
 
-::grpc::Status MemoryMoniterService::Service::test_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status MemoryMoniterService::Service::current_memory_moniter_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response) {
+::grpc::Status MoniterService::Service::current_memory_moniter_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response) {
   (void) context;
   (void) request;
   (void) response;

@@ -1,7 +1,7 @@
 CMakeFiles/hw_grpc_proto.dir/moniter.pb.cc.o: \
- /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/moniter.pb.cc \
+ /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/moniter.pb.cc \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/INNO-C-535/grpc/examples/cpp/memory_moniter/cmake/build/moniter.pb.h \
+ /mnt/c/users/inno-c-535/resource_moniter/memory_moniter/cmake/build/moniter.pb.h \
  /usr/include/c++/8/limits \
  /usr/include/x86_64-linux-gnu/c++/8/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/8/bits/os_defines.h \
