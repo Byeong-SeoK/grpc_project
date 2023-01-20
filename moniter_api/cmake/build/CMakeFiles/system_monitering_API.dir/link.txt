@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsystem_monitering_API.a 
+/usr/bin/ranlib libsystem_monitering_API.a
