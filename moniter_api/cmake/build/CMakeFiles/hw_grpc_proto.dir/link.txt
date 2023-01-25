@@ -1,2 +1,0 @@
-/usr/bin/ar qc libhw_grpc_proto.a CMakeFiles/hw_grpc_proto.dir/moniter.grpc.pb.cc.o CMakeFiles/hw_grpc_proto.dir/moniter.pb.cc.o
-/usr/bin/ranlib libhw_grpc_proto.a
