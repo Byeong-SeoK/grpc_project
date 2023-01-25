@@ -93,13 +93,11 @@ client_EXTERNAL_OBJECTS =
 client: CMakeFiles/client.dir/client.cc.o
 client: CMakeFiles/client.dir/build.make
 client: libmm_grpc_proto.a
-client: libcpu_grpc_proto.a
 client: libsystem_monitering_API.a
 client: /home/byeongseok/.local/lib/libgrpc++_reflection.a
 client: /home/byeongseok/.local/lib/libgrpc++.a
 client: /home/byeongseok/.local/lib/libprotobuf.a
 client: libmm_grpc_proto.a
-client: libcpu_grpc_proto.a
 client: /home/byeongseok/.local/lib/libgrpc++_reflection.a
 client: /home/byeongseok/.local/lib/libgrpc++.a
 client: /home/byeongseok/.local/lib/libgrpc.a

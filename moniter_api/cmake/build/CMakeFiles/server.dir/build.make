@@ -93,13 +93,11 @@ server_EXTERNAL_OBJECTS =
 server: CMakeFiles/server.dir/server.cc.o
 server: CMakeFiles/server.dir/build.make
 server: libmm_grpc_proto.a
-server: libcpu_grpc_proto.a
 server: libsystem_monitering_API.a
 server: /home/byeongseok/.local/lib/libgrpc++_reflection.a
 server: /home/byeongseok/.local/lib/libgrpc++.a
 server: /home/byeongseok/.local/lib/libprotobuf.a
 server: libmm_grpc_proto.a
-server: libcpu_grpc_proto.a
 server: /home/byeongseok/.local/lib/libgrpc++_reflection.a
 server: /home/byeongseok/.local/lib/libgrpc++.a
 server: /home/byeongseok/.local/lib/libgrpc.a

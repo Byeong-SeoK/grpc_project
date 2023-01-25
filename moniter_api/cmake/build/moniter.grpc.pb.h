@@ -65,6 +65,13 @@ class MoniterService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::CpuMoniterReply>> PrepareAsynccurrent_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::CpuMoniterReply>>(PrepareAsynccurrent_cpu_usage_moniter_methodRaw(context, request, cq));
     }
+    virtual ::grpc::Status current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::moniter::DiskMoniterReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::DiskMoniterReply>> Asynccurrent_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::DiskMoniterReply>>(Asynccurrent_disk_usage_moniter_methodRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::DiskMoniterReply>> PrepareAsynccurrent_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::moniter::DiskMoniterReply>>(PrepareAsynccurrent_disk_usage_moniter_methodRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
@@ -72,6 +79,8 @@ class MoniterService final {
       virtual void current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -81,6 +90,8 @@ class MoniterService final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::MemoryReply>* PrepareAsynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::CpuMoniterReply>* Asynccurrent_cpu_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::CpuMoniterReply>* PrepareAsynccurrent_cpu_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::DiskMoniterReply>* Asynccurrent_disk_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::moniter::DiskMoniterReply>* PrepareAsynccurrent_disk_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -99,6 +110,13 @@ class MoniterService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::CpuMoniterReply>> PrepareAsynccurrent_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::CpuMoniterReply>>(PrepareAsynccurrent_cpu_usage_moniter_methodRaw(context, request, cq));
     }
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::moniter::DiskMoniterReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>> Asynccurrent_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>>(Asynccurrent_disk_usage_moniter_methodRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>> PrepareAsynccurrent_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>>(PrepareAsynccurrent_disk_usage_moniter_methodRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
@@ -106,6 +124,8 @@ class MoniterService final {
       void current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response, std::function<void(::grpc::Status)>) override;
       void current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response, std::function<void(::grpc::Status)>) override;
+      void current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -121,8 +141,11 @@ class MoniterService final {
     ::grpc::ClientAsyncResponseReader< ::moniter::MemoryReply>* PrepareAsynccurrent_memory_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::moniter::CpuMoniterReply>* Asynccurrent_cpu_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::moniter::CpuMoniterReply>* PrepareAsynccurrent_cpu_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>* Asynccurrent_disk_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>* PrepareAsynccurrent_disk_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_current_memory_moniter_method_;
     const ::grpc::internal::RpcMethod rpcmethod_current_cpu_usage_moniter_method_;
+    const ::grpc::internal::RpcMethod rpcmethod_current_disk_usage_moniter_method_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -132,6 +155,7 @@ class MoniterService final {
     virtual ~Service();
     virtual ::grpc::Status current_memory_moniter_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response);
     virtual ::grpc::Status current_cpu_usage_moniter_method(::grpc::ServerContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response);
+    virtual ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_current_memory_moniter_method : public BaseClass {
@@ -173,7 +197,27 @@ class MoniterService final {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_current_memory_moniter_method<WithAsyncMethod_current_cpu_usage_moniter_method<Service > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_current_disk_usage_moniter_method : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_current_disk_usage_moniter_method() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_current_disk_usage_moniter_method() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestcurrent_disk_usage_moniter_method(::grpc::ServerContext* context, ::moniter::DiskMoniterRequest* request, ::grpc::ServerAsyncResponseWriter< ::moniter::DiskMoniterReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_current_memory_moniter_method<WithAsyncMethod_current_cpu_usage_moniter_method<WithAsyncMethod_current_disk_usage_moniter_method<Service > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_current_memory_moniter_method : public BaseClass {
    private:
@@ -228,7 +272,34 @@ class MoniterService final {
     virtual ::grpc::ServerUnaryReactor* current_cpu_usage_moniter_method(
       ::grpc::CallbackServerContext* /*context*/, const ::moniter::CpuMoniterRequest* /*request*/, ::moniter::CpuMoniterReply* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_current_memory_moniter_method<WithCallbackMethod_current_cpu_usage_moniter_method<Service > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_current_disk_usage_moniter_method : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_current_disk_usage_moniter_method() {
+      ::grpc::Service::MarkMethodCallback(2,
+          new ::grpc::internal::CallbackUnaryHandler< ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response) { return this->current_disk_usage_moniter_method(context, request, response); }));}
+    void SetMessageAllocatorFor_current_disk_usage_moniter_method(
+        ::grpc::MessageAllocator< ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_current_disk_usage_moniter_method() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* current_disk_usage_moniter_method(
+      ::grpc::CallbackServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_current_memory_moniter_method<WithCallbackMethod_current_cpu_usage_moniter_method<WithCallbackMethod_current_disk_usage_moniter_method<Service > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_current_memory_moniter_method : public BaseClass {
@@ -260,6 +331,23 @@ class MoniterService final {
     }
     // disable synchronous version of this method
     ::grpc::Status current_cpu_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::CpuMoniterRequest* /*request*/, ::moniter::CpuMoniterReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_current_disk_usage_moniter_method : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_current_disk_usage_moniter_method() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_current_disk_usage_moniter_method() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -305,6 +393,26 @@ class MoniterService final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_current_disk_usage_moniter_method : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_current_disk_usage_moniter_method() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_current_disk_usage_moniter_method() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestcurrent_disk_usage_moniter_method(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawCallbackMethod_current_memory_moniter_method : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -346,6 +454,28 @@ class MoniterService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* current_cpu_usage_moniter_method(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_current_disk_usage_moniter_method : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_current_disk_usage_moniter_method() {
+      ::grpc::Service::MarkMethodRawCallback(2,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->current_disk_usage_moniter_method(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_current_disk_usage_moniter_method() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* current_disk_usage_moniter_method(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -402,9 +532,36 @@ class MoniterService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status Streamedcurrent_cpu_usage_moniter_method(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::moniter::CpuMoniterRequest,::moniter::CpuMoniterReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_current_memory_moniter_method<WithStreamedUnaryMethod_current_cpu_usage_moniter_method<Service > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_current_disk_usage_moniter_method : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_current_disk_usage_moniter_method() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply>* streamer) {
+                       return this->Streamedcurrent_disk_usage_moniter_method(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_current_disk_usage_moniter_method() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status current_disk_usage_moniter_method(::grpc::ServerContext* /*context*/, const ::moniter::DiskMoniterRequest* /*request*/, ::moniter::DiskMoniterReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status Streamedcurrent_disk_usage_moniter_method(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::moniter::DiskMoniterRequest,::moniter::DiskMoniterReply>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_current_memory_moniter_method<WithStreamedUnaryMethod_current_cpu_usage_moniter_method<WithStreamedUnaryMethod_current_disk_usage_moniter_method<Service > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_current_memory_moniter_method<WithStreamedUnaryMethod_current_cpu_usage_moniter_method<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_current_memory_moniter_method<WithStreamedUnaryMethod_current_cpu_usage_moniter_method<WithStreamedUnaryMethod_current_disk_usage_moniter_method<Service > > > StreamedService;
 };
 
 }  // namespace moniter

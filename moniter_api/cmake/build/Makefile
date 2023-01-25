@@ -130,19 +130,6 @@ mm_grpc_proto/fast:
 .PHONY : mm_grpc_proto/fast
 
 #=============================================================================
-# Target rules for targets named cpu_grpc_proto
-
-# Build rule for target.
-cpu_grpc_proto: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu_grpc_proto
-.PHONY : cpu_grpc_proto
-
-# fast build rule for target.
-cpu_grpc_proto/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/build
-.PHONY : cpu_grpc_proto/fast
-
-#=============================================================================
 # Target rules for targets named system_monitering_API
 
 # Build rule for target.
@@ -204,54 +191,6 @@ client.s: client.cc.s
 client.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cc.s
 .PHONY : client.cc.s
-
-cpu.grpc.pb.o: cpu.grpc.pb.cc.o
-.PHONY : cpu.grpc.pb.o
-
-# target to build an object file
-cpu.grpc.pb.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.o
-.PHONY : cpu.grpc.pb.cc.o
-
-cpu.grpc.pb.i: cpu.grpc.pb.cc.i
-.PHONY : cpu.grpc.pb.i
-
-# target to preprocess a source file
-cpu.grpc.pb.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.i
-.PHONY : cpu.grpc.pb.cc.i
-
-cpu.grpc.pb.s: cpu.grpc.pb.cc.s
-.PHONY : cpu.grpc.pb.s
-
-# target to generate assembly for a file
-cpu.grpc.pb.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.s
-.PHONY : cpu.grpc.pb.cc.s
-
-cpu.pb.o: cpu.pb.cc.o
-.PHONY : cpu.pb.o
-
-# target to build an object file
-cpu.pb.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.o
-.PHONY : cpu.pb.cc.o
-
-cpu.pb.i: cpu.pb.cc.i
-.PHONY : cpu.pb.i
-
-# target to preprocess a source file
-cpu.pb.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.i
-.PHONY : cpu.pb.cc.i
-
-cpu.pb.s: cpu.pb.cc.s
-.PHONY : cpu.pb.s
-
-# target to generate assembly for a file
-cpu.pb.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.s
-.PHONY : cpu.pb.cc.s
 
 moniter.grpc.pb.o: moniter.grpc.pb.cc.o
 .PHONY : moniter.grpc.pb.o
@@ -334,19 +273,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
-	@echo "... cpu_grpc_proto"
 	@echo "... mm_grpc_proto"
 	@echo "... server"
 	@echo "... system_monitering_API"
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"
-	@echo "... cpu.grpc.pb.o"
-	@echo "... cpu.grpc.pb.i"
-	@echo "... cpu.grpc.pb.s"
-	@echo "... cpu.pb.o"
-	@echo "... cpu.pb.i"
-	@echo "... cpu.pb.s"
 	@echo "... moniter.grpc.pb.o"
 	@echo "... moniter.grpc.pb.i"
 	@echo "... moniter.grpc.pb.s"

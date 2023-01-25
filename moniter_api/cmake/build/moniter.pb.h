@@ -51,6 +51,12 @@ extern CpuMoniterReplyDefaultTypeInternal _CpuMoniterReply_default_instance_;
 class CpuMoniterRequest;
 struct CpuMoniterRequestDefaultTypeInternal;
 extern CpuMoniterRequestDefaultTypeInternal _CpuMoniterRequest_default_instance_;
+class DiskMoniterReply;
+struct DiskMoniterReplyDefaultTypeInternal;
+extern DiskMoniterReplyDefaultTypeInternal _DiskMoniterReply_default_instance_;
+class DiskMoniterRequest;
+struct DiskMoniterRequestDefaultTypeInternal;
+extern DiskMoniterRequestDefaultTypeInternal _DiskMoniterRequest_default_instance_;
 class MemoryReply;
 struct MemoryReplyDefaultTypeInternal;
 extern MemoryReplyDefaultTypeInternal _MemoryReply_default_instance_;
@@ -61,6 +67,8 @@ extern MemoryRequestDefaultTypeInternal _MemoryRequest_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::moniter::CpuMoniterReply* Arena::CreateMaybeMessage<::moniter::CpuMoniterReply>(Arena*);
 template<> ::moniter::CpuMoniterRequest* Arena::CreateMaybeMessage<::moniter::CpuMoniterRequest>(Arena*);
+template<> ::moniter::DiskMoniterReply* Arena::CreateMaybeMessage<::moniter::DiskMoniterReply>(Arena*);
+template<> ::moniter::DiskMoniterRequest* Arena::CreateMaybeMessage<::moniter::DiskMoniterRequest>(Arena*);
 template<> ::moniter::MemoryReply* Arena::CreateMaybeMessage<::moniter::MemoryReply>(Arena*);
 template<> ::moniter::MemoryRequest* Arena::CreateMaybeMessage<::moniter::MemoryRequest>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -543,20 +551,20 @@ class CpuMoniterRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kClientOrderOfCpuFieldNumber = 1,
+    kCpuRequestFieldNumber = 1,
   };
-  // string client_order_of_cpu = 1;
-  void clear_client_order_of_cpu();
-  const std::string& client_order_of_cpu() const;
+  // string cpu_request = 1;
+  void clear_cpu_request();
+  const std::string& cpu_request() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_client_order_of_cpu(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_client_order_of_cpu();
-  PROTOBUF_NODISCARD std::string* release_client_order_of_cpu();
-  void set_allocated_client_order_of_cpu(std::string* client_order_of_cpu);
+  void set_cpu_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_cpu_request();
+  PROTOBUF_NODISCARD std::string* release_cpu_request();
+  void set_allocated_cpu_request(std::string* cpu_request);
   private:
-  const std::string& _internal_client_order_of_cpu() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_order_of_cpu(const std::string& value);
-  std::string* _internal_mutable_client_order_of_cpu();
+  const std::string& _internal_cpu_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_cpu_request(const std::string& value);
+  std::string* _internal_mutable_cpu_request();
   public:
 
   // @@protoc_insertion_point(class_scope:moniter.CpuMoniterRequest)
@@ -567,7 +575,7 @@ class CpuMoniterRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr client_order_of_cpu_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cpu_request_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -696,20 +704,20 @@ class CpuMoniterReply final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInformationOfCpuFieldNumber = 1,
+    kCpuReplyFieldNumber = 1,
   };
-  // string information_of_cpu = 1;
-  void clear_information_of_cpu();
-  const std::string& information_of_cpu() const;
+  // string cpu_reply = 1;
+  void clear_cpu_reply();
+  const std::string& cpu_reply() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_information_of_cpu(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_information_of_cpu();
-  PROTOBUF_NODISCARD std::string* release_information_of_cpu();
-  void set_allocated_information_of_cpu(std::string* information_of_cpu);
+  void set_cpu_reply(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_cpu_reply();
+  PROTOBUF_NODISCARD std::string* release_cpu_reply();
+  void set_allocated_cpu_reply(std::string* cpu_reply);
   private:
-  const std::string& _internal_information_of_cpu() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_information_of_cpu(const std::string& value);
-  std::string* _internal_mutable_information_of_cpu();
+  const std::string& _internal_cpu_reply() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_cpu_reply(const std::string& value);
+  std::string* _internal_mutable_cpu_reply();
   public:
 
   // @@protoc_insertion_point(class_scope:moniter.CpuMoniterReply)
@@ -720,7 +728,345 @@ class CpuMoniterReply final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr information_of_cpu_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cpu_reply_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_moniter_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DiskMoniterRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:moniter.DiskMoniterRequest) */ {
+ public:
+  inline DiskMoniterRequest() : DiskMoniterRequest(nullptr) {}
+  ~DiskMoniterRequest() override;
+  explicit PROTOBUF_CONSTEXPR DiskMoniterRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DiskMoniterRequest(const DiskMoniterRequest& from);
+  DiskMoniterRequest(DiskMoniterRequest&& from) noexcept
+    : DiskMoniterRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline DiskMoniterRequest& operator=(const DiskMoniterRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DiskMoniterRequest& operator=(DiskMoniterRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DiskMoniterRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DiskMoniterRequest* internal_default_instance() {
+    return reinterpret_cast<const DiskMoniterRequest*>(
+               &_DiskMoniterRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(DiskMoniterRequest& a, DiskMoniterRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DiskMoniterRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DiskMoniterRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DiskMoniterRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DiskMoniterRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DiskMoniterRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DiskMoniterRequest& from) {
+    DiskMoniterRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DiskMoniterRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "moniter.DiskMoniterRequest";
+  }
+  protected:
+  explicit DiskMoniterRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTotalDiskVolumeRequestFieldNumber = 1,
+    kDiskUsageRequestFieldNumber = 2,
+    kAvailDiskVolumeRequestFieldNumber = 3,
+  };
+  // string total_disk_volume_request = 1;
+  void clear_total_disk_volume_request();
+  const std::string& total_disk_volume_request() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_total_disk_volume_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_total_disk_volume_request();
+  PROTOBUF_NODISCARD std::string* release_total_disk_volume_request();
+  void set_allocated_total_disk_volume_request(std::string* total_disk_volume_request);
+  private:
+  const std::string& _internal_total_disk_volume_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_total_disk_volume_request(const std::string& value);
+  std::string* _internal_mutable_total_disk_volume_request();
+  public:
+
+  // string disk_usage_request = 2;
+  void clear_disk_usage_request();
+  const std::string& disk_usage_request() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_disk_usage_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_disk_usage_request();
+  PROTOBUF_NODISCARD std::string* release_disk_usage_request();
+  void set_allocated_disk_usage_request(std::string* disk_usage_request);
+  private:
+  const std::string& _internal_disk_usage_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_disk_usage_request(const std::string& value);
+  std::string* _internal_mutable_disk_usage_request();
+  public:
+
+  // string avail_disk_volume_request = 3;
+  void clear_avail_disk_volume_request();
+  const std::string& avail_disk_volume_request() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_avail_disk_volume_request(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_avail_disk_volume_request();
+  PROTOBUF_NODISCARD std::string* release_avail_disk_volume_request();
+  void set_allocated_avail_disk_volume_request(std::string* avail_disk_volume_request);
+  private:
+  const std::string& _internal_avail_disk_volume_request() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_avail_disk_volume_request(const std::string& value);
+  std::string* _internal_mutable_avail_disk_volume_request();
+  public:
+
+  // @@protoc_insertion_point(class_scope:moniter.DiskMoniterRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr total_disk_volume_request_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr disk_usage_request_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr avail_disk_volume_request_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_moniter_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DiskMoniterReply final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:moniter.DiskMoniterReply) */ {
+ public:
+  inline DiskMoniterReply() : DiskMoniterReply(nullptr) {}
+  ~DiskMoniterReply() override;
+  explicit PROTOBUF_CONSTEXPR DiskMoniterReply(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DiskMoniterReply(const DiskMoniterReply& from);
+  DiskMoniterReply(DiskMoniterReply&& from) noexcept
+    : DiskMoniterReply() {
+    *this = ::std::move(from);
+  }
+
+  inline DiskMoniterReply& operator=(const DiskMoniterReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DiskMoniterReply& operator=(DiskMoniterReply&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DiskMoniterReply& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DiskMoniterReply* internal_default_instance() {
+    return reinterpret_cast<const DiskMoniterReply*>(
+               &_DiskMoniterReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(DiskMoniterReply& a, DiskMoniterReply& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DiskMoniterReply* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DiskMoniterReply* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DiskMoniterReply* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DiskMoniterReply>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DiskMoniterReply& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DiskMoniterReply& from) {
+    DiskMoniterReply::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DiskMoniterReply* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "moniter.DiskMoniterReply";
+  }
+  protected:
+  explicit DiskMoniterReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDiskInfoReplyFieldNumber = 1,
+  };
+  // string disk_info_reply = 1;
+  void clear_disk_info_reply();
+  const std::string& disk_info_reply() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_disk_info_reply(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_disk_info_reply();
+  PROTOBUF_NODISCARD std::string* release_disk_info_reply();
+  void set_allocated_disk_info_reply(std::string* disk_info_reply);
+  private:
+  const std::string& _internal_disk_info_reply() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_disk_info_reply(const std::string& value);
+  std::string* _internal_mutable_disk_info_reply();
+  public:
+
+  // @@protoc_insertion_point(class_scope:moniter.DiskMoniterReply)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr disk_info_reply_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -995,113 +1341,325 @@ inline void MemoryReply::set_allocated_memory_info_reply(std::string* memory_inf
 
 // CpuMoniterRequest
 
-// string client_order_of_cpu = 1;
-inline void CpuMoniterRequest::clear_client_order_of_cpu() {
-  _impl_.client_order_of_cpu_.ClearToEmpty();
+// string cpu_request = 1;
+inline void CpuMoniterRequest::clear_cpu_request() {
+  _impl_.cpu_request_.ClearToEmpty();
 }
-inline const std::string& CpuMoniterRequest::client_order_of_cpu() const {
-  // @@protoc_insertion_point(field_get:moniter.CpuMoniterRequest.client_order_of_cpu)
-  return _internal_client_order_of_cpu();
+inline const std::string& CpuMoniterRequest::cpu_request() const {
+  // @@protoc_insertion_point(field_get:moniter.CpuMoniterRequest.cpu_request)
+  return _internal_cpu_request();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void CpuMoniterRequest::set_client_order_of_cpu(ArgT0&& arg0, ArgT... args) {
+void CpuMoniterRequest::set_cpu_request(ArgT0&& arg0, ArgT... args) {
  
- _impl_.client_order_of_cpu_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:moniter.CpuMoniterRequest.client_order_of_cpu)
+ _impl_.cpu_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.CpuMoniterRequest.cpu_request)
 }
-inline std::string* CpuMoniterRequest::mutable_client_order_of_cpu() {
-  std::string* _s = _internal_mutable_client_order_of_cpu();
-  // @@protoc_insertion_point(field_mutable:moniter.CpuMoniterRequest.client_order_of_cpu)
+inline std::string* CpuMoniterRequest::mutable_cpu_request() {
+  std::string* _s = _internal_mutable_cpu_request();
+  // @@protoc_insertion_point(field_mutable:moniter.CpuMoniterRequest.cpu_request)
   return _s;
 }
-inline const std::string& CpuMoniterRequest::_internal_client_order_of_cpu() const {
-  return _impl_.client_order_of_cpu_.Get();
+inline const std::string& CpuMoniterRequest::_internal_cpu_request() const {
+  return _impl_.cpu_request_.Get();
 }
-inline void CpuMoniterRequest::_internal_set_client_order_of_cpu(const std::string& value) {
+inline void CpuMoniterRequest::_internal_set_cpu_request(const std::string& value) {
   
-  _impl_.client_order_of_cpu_.Set(value, GetArenaForAllocation());
+  _impl_.cpu_request_.Set(value, GetArenaForAllocation());
 }
-inline std::string* CpuMoniterRequest::_internal_mutable_client_order_of_cpu() {
+inline std::string* CpuMoniterRequest::_internal_mutable_cpu_request() {
   
-  return _impl_.client_order_of_cpu_.Mutable(GetArenaForAllocation());
+  return _impl_.cpu_request_.Mutable(GetArenaForAllocation());
 }
-inline std::string* CpuMoniterRequest::release_client_order_of_cpu() {
-  // @@protoc_insertion_point(field_release:moniter.CpuMoniterRequest.client_order_of_cpu)
-  return _impl_.client_order_of_cpu_.Release();
+inline std::string* CpuMoniterRequest::release_cpu_request() {
+  // @@protoc_insertion_point(field_release:moniter.CpuMoniterRequest.cpu_request)
+  return _impl_.cpu_request_.Release();
 }
-inline void CpuMoniterRequest::set_allocated_client_order_of_cpu(std::string* client_order_of_cpu) {
-  if (client_order_of_cpu != nullptr) {
+inline void CpuMoniterRequest::set_allocated_cpu_request(std::string* cpu_request) {
+  if (cpu_request != nullptr) {
     
   } else {
     
   }
-  _impl_.client_order_of_cpu_.SetAllocated(client_order_of_cpu, GetArenaForAllocation());
+  _impl_.cpu_request_.SetAllocated(cpu_request, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.client_order_of_cpu_.IsDefault()) {
-    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
+  if (_impl_.cpu_request_.IsDefault()) {
+    _impl_.cpu_request_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:moniter.CpuMoniterRequest.client_order_of_cpu)
+  // @@protoc_insertion_point(field_set_allocated:moniter.CpuMoniterRequest.cpu_request)
 }
 
 // -------------------------------------------------------------------
 
 // CpuMoniterReply
 
-// string information_of_cpu = 1;
-inline void CpuMoniterReply::clear_information_of_cpu() {
-  _impl_.information_of_cpu_.ClearToEmpty();
+// string cpu_reply = 1;
+inline void CpuMoniterReply::clear_cpu_reply() {
+  _impl_.cpu_reply_.ClearToEmpty();
 }
-inline const std::string& CpuMoniterReply::information_of_cpu() const {
-  // @@protoc_insertion_point(field_get:moniter.CpuMoniterReply.information_of_cpu)
-  return _internal_information_of_cpu();
+inline const std::string& CpuMoniterReply::cpu_reply() const {
+  // @@protoc_insertion_point(field_get:moniter.CpuMoniterReply.cpu_reply)
+  return _internal_cpu_reply();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void CpuMoniterReply::set_information_of_cpu(ArgT0&& arg0, ArgT... args) {
+void CpuMoniterReply::set_cpu_reply(ArgT0&& arg0, ArgT... args) {
  
- _impl_.information_of_cpu_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:moniter.CpuMoniterReply.information_of_cpu)
+ _impl_.cpu_reply_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.CpuMoniterReply.cpu_reply)
 }
-inline std::string* CpuMoniterReply::mutable_information_of_cpu() {
-  std::string* _s = _internal_mutable_information_of_cpu();
-  // @@protoc_insertion_point(field_mutable:moniter.CpuMoniterReply.information_of_cpu)
+inline std::string* CpuMoniterReply::mutable_cpu_reply() {
+  std::string* _s = _internal_mutable_cpu_reply();
+  // @@protoc_insertion_point(field_mutable:moniter.CpuMoniterReply.cpu_reply)
   return _s;
 }
-inline const std::string& CpuMoniterReply::_internal_information_of_cpu() const {
-  return _impl_.information_of_cpu_.Get();
+inline const std::string& CpuMoniterReply::_internal_cpu_reply() const {
+  return _impl_.cpu_reply_.Get();
 }
-inline void CpuMoniterReply::_internal_set_information_of_cpu(const std::string& value) {
+inline void CpuMoniterReply::_internal_set_cpu_reply(const std::string& value) {
   
-  _impl_.information_of_cpu_.Set(value, GetArenaForAllocation());
+  _impl_.cpu_reply_.Set(value, GetArenaForAllocation());
 }
-inline std::string* CpuMoniterReply::_internal_mutable_information_of_cpu() {
+inline std::string* CpuMoniterReply::_internal_mutable_cpu_reply() {
   
-  return _impl_.information_of_cpu_.Mutable(GetArenaForAllocation());
+  return _impl_.cpu_reply_.Mutable(GetArenaForAllocation());
 }
-inline std::string* CpuMoniterReply::release_information_of_cpu() {
-  // @@protoc_insertion_point(field_release:moniter.CpuMoniterReply.information_of_cpu)
-  return _impl_.information_of_cpu_.Release();
+inline std::string* CpuMoniterReply::release_cpu_reply() {
+  // @@protoc_insertion_point(field_release:moniter.CpuMoniterReply.cpu_reply)
+  return _impl_.cpu_reply_.Release();
 }
-inline void CpuMoniterReply::set_allocated_information_of_cpu(std::string* information_of_cpu) {
-  if (information_of_cpu != nullptr) {
+inline void CpuMoniterReply::set_allocated_cpu_reply(std::string* cpu_reply) {
+  if (cpu_reply != nullptr) {
     
   } else {
     
   }
-  _impl_.information_of_cpu_.SetAllocated(information_of_cpu, GetArenaForAllocation());
+  _impl_.cpu_reply_.SetAllocated(cpu_reply, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.information_of_cpu_.IsDefault()) {
-    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
+  if (_impl_.cpu_reply_.IsDefault()) {
+    _impl_.cpu_reply_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:moniter.CpuMoniterReply.information_of_cpu)
+  // @@protoc_insertion_point(field_set_allocated:moniter.CpuMoniterReply.cpu_reply)
+}
+
+// -------------------------------------------------------------------
+
+// DiskMoniterRequest
+
+// string total_disk_volume_request = 1;
+inline void DiskMoniterRequest::clear_total_disk_volume_request() {
+  _impl_.total_disk_volume_request_.ClearToEmpty();
+}
+inline const std::string& DiskMoniterRequest::total_disk_volume_request() const {
+  // @@protoc_insertion_point(field_get:moniter.DiskMoniterRequest.total_disk_volume_request)
+  return _internal_total_disk_volume_request();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DiskMoniterRequest::set_total_disk_volume_request(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.total_disk_volume_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.DiskMoniterRequest.total_disk_volume_request)
+}
+inline std::string* DiskMoniterRequest::mutable_total_disk_volume_request() {
+  std::string* _s = _internal_mutable_total_disk_volume_request();
+  // @@protoc_insertion_point(field_mutable:moniter.DiskMoniterRequest.total_disk_volume_request)
+  return _s;
+}
+inline const std::string& DiskMoniterRequest::_internal_total_disk_volume_request() const {
+  return _impl_.total_disk_volume_request_.Get();
+}
+inline void DiskMoniterRequest::_internal_set_total_disk_volume_request(const std::string& value) {
+  
+  _impl_.total_disk_volume_request_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DiskMoniterRequest::_internal_mutable_total_disk_volume_request() {
+  
+  return _impl_.total_disk_volume_request_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DiskMoniterRequest::release_total_disk_volume_request() {
+  // @@protoc_insertion_point(field_release:moniter.DiskMoniterRequest.total_disk_volume_request)
+  return _impl_.total_disk_volume_request_.Release();
+}
+inline void DiskMoniterRequest::set_allocated_total_disk_volume_request(std::string* total_disk_volume_request) {
+  if (total_disk_volume_request != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.total_disk_volume_request_.SetAllocated(total_disk_volume_request, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.total_disk_volume_request_.IsDefault()) {
+    _impl_.total_disk_volume_request_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.DiskMoniterRequest.total_disk_volume_request)
+}
+
+// string disk_usage_request = 2;
+inline void DiskMoniterRequest::clear_disk_usage_request() {
+  _impl_.disk_usage_request_.ClearToEmpty();
+}
+inline const std::string& DiskMoniterRequest::disk_usage_request() const {
+  // @@protoc_insertion_point(field_get:moniter.DiskMoniterRequest.disk_usage_request)
+  return _internal_disk_usage_request();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DiskMoniterRequest::set_disk_usage_request(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.disk_usage_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.DiskMoniterRequest.disk_usage_request)
+}
+inline std::string* DiskMoniterRequest::mutable_disk_usage_request() {
+  std::string* _s = _internal_mutable_disk_usage_request();
+  // @@protoc_insertion_point(field_mutable:moniter.DiskMoniterRequest.disk_usage_request)
+  return _s;
+}
+inline const std::string& DiskMoniterRequest::_internal_disk_usage_request() const {
+  return _impl_.disk_usage_request_.Get();
+}
+inline void DiskMoniterRequest::_internal_set_disk_usage_request(const std::string& value) {
+  
+  _impl_.disk_usage_request_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DiskMoniterRequest::_internal_mutable_disk_usage_request() {
+  
+  return _impl_.disk_usage_request_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DiskMoniterRequest::release_disk_usage_request() {
+  // @@protoc_insertion_point(field_release:moniter.DiskMoniterRequest.disk_usage_request)
+  return _impl_.disk_usage_request_.Release();
+}
+inline void DiskMoniterRequest::set_allocated_disk_usage_request(std::string* disk_usage_request) {
+  if (disk_usage_request != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.disk_usage_request_.SetAllocated(disk_usage_request, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.disk_usage_request_.IsDefault()) {
+    _impl_.disk_usage_request_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.DiskMoniterRequest.disk_usage_request)
+}
+
+// string avail_disk_volume_request = 3;
+inline void DiskMoniterRequest::clear_avail_disk_volume_request() {
+  _impl_.avail_disk_volume_request_.ClearToEmpty();
+}
+inline const std::string& DiskMoniterRequest::avail_disk_volume_request() const {
+  // @@protoc_insertion_point(field_get:moniter.DiskMoniterRequest.avail_disk_volume_request)
+  return _internal_avail_disk_volume_request();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DiskMoniterRequest::set_avail_disk_volume_request(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.avail_disk_volume_request_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.DiskMoniterRequest.avail_disk_volume_request)
+}
+inline std::string* DiskMoniterRequest::mutable_avail_disk_volume_request() {
+  std::string* _s = _internal_mutable_avail_disk_volume_request();
+  // @@protoc_insertion_point(field_mutable:moniter.DiskMoniterRequest.avail_disk_volume_request)
+  return _s;
+}
+inline const std::string& DiskMoniterRequest::_internal_avail_disk_volume_request() const {
+  return _impl_.avail_disk_volume_request_.Get();
+}
+inline void DiskMoniterRequest::_internal_set_avail_disk_volume_request(const std::string& value) {
+  
+  _impl_.avail_disk_volume_request_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DiskMoniterRequest::_internal_mutable_avail_disk_volume_request() {
+  
+  return _impl_.avail_disk_volume_request_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DiskMoniterRequest::release_avail_disk_volume_request() {
+  // @@protoc_insertion_point(field_release:moniter.DiskMoniterRequest.avail_disk_volume_request)
+  return _impl_.avail_disk_volume_request_.Release();
+}
+inline void DiskMoniterRequest::set_allocated_avail_disk_volume_request(std::string* avail_disk_volume_request) {
+  if (avail_disk_volume_request != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.avail_disk_volume_request_.SetAllocated(avail_disk_volume_request, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.avail_disk_volume_request_.IsDefault()) {
+    _impl_.avail_disk_volume_request_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.DiskMoniterRequest.avail_disk_volume_request)
+}
+
+// -------------------------------------------------------------------
+
+// DiskMoniterReply
+
+// string disk_info_reply = 1;
+inline void DiskMoniterReply::clear_disk_info_reply() {
+  _impl_.disk_info_reply_.ClearToEmpty();
+}
+inline const std::string& DiskMoniterReply::disk_info_reply() const {
+  // @@protoc_insertion_point(field_get:moniter.DiskMoniterReply.disk_info_reply)
+  return _internal_disk_info_reply();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void DiskMoniterReply::set_disk_info_reply(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.disk_info_reply_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.DiskMoniterReply.disk_info_reply)
+}
+inline std::string* DiskMoniterReply::mutable_disk_info_reply() {
+  std::string* _s = _internal_mutable_disk_info_reply();
+  // @@protoc_insertion_point(field_mutable:moniter.DiskMoniterReply.disk_info_reply)
+  return _s;
+}
+inline const std::string& DiskMoniterReply::_internal_disk_info_reply() const {
+  return _impl_.disk_info_reply_.Get();
+}
+inline void DiskMoniterReply::_internal_set_disk_info_reply(const std::string& value) {
+  
+  _impl_.disk_info_reply_.Set(value, GetArenaForAllocation());
+}
+inline std::string* DiskMoniterReply::_internal_mutable_disk_info_reply() {
+  
+  return _impl_.disk_info_reply_.Mutable(GetArenaForAllocation());
+}
+inline std::string* DiskMoniterReply::release_disk_info_reply() {
+  // @@protoc_insertion_point(field_release:moniter.DiskMoniterReply.disk_info_reply)
+  return _impl_.disk_info_reply_.Release();
+}
+inline void DiskMoniterReply::set_allocated_disk_info_reply(std::string* disk_info_reply) {
+  if (disk_info_reply != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.disk_info_reply_.SetAllocated(disk_info_reply, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.disk_info_reply_.IsDefault()) {
+    _impl_.disk_info_reply_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.DiskMoniterReply.disk_info_reply)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

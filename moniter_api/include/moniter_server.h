@@ -4,6 +4,7 @@
 
 #include "sys/sysinfo.h"
 #include "sys/types.h"
+#include "./fileapi.h"
 
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
@@ -26,9 +27,12 @@ using moniter::MemoryRequest;
 using moniter::CpuMoniterReply;
 using moniter::CpuMoniterRequest;
 
+using moniter::DiskMoniterReply;
+using moniter::DiskMoniterRequest;
+
 using moniter::MoniterService;
 
-struct stJiffies
+struct stJiffies // 실시간 cpu 사용량 측정을 위한 구조체
 {
     int user;
     int nice;
@@ -38,6 +42,13 @@ struct stJiffies
 };
 stJiffies curJiffies;
 stJiffies prevJiffies;
+
+// typedef struct _drive_info // disk 이용율 측정을 위한 구조체
+// {
+//     unsigned __int64 usedBytes;
+//     unsigned __int64 totoalFreeBytes;
+//     unsigned __int64 freeBytes;
+// } DRIVE_INFO;
 
 // Logic and data behind the server's behavior.
 class MoniterServiceImpl final : public MoniterService::Service
@@ -107,8 +118,45 @@ class MoniterServiceImpl final : public MoniterService::Service
         fclose(pStat);
         sleep(1);
 
-        reply->set_information_of_cpu(request->client_order_of_cpu() + std::to_string(diffJiffies.usage) + '%');
+        reply->set_cpu_reply(request->cpu_request() + std::to_string(diffJiffies.usage) + '%');
 
+        return Status::OK;
+    }
+
+    Status current_disk_usage_moniter_method(ServerContext *context,
+                                             const DiskMoniterRequest *request,
+                                             DiskMoniterReply *reply) override
+    {
+
+        long long avail, total, free;
+        avail.QuadPart = 0L;
+        total.QuadPart = 0L;
+        free.QuadPart = 0L;
+
+        int m_avail, m_total, m_free, m_used;
+
+        ////////// Drive C
+        // C:\의 하드디스크 용량 정보를 받아 옴
+        GetDiskFreeSpaceEx(TEXT("c:\\"), &avail, &total, &free);
+
+        // GByte 로 표현을 하기 위한 부분
+        m_total = (int)(total.QuadPart >> 30);
+        m_free = (int)(free.QuadPart >> 30);
+
+        ////////// Drive D
+        // D:\의 하드디스크 용량 정보를 받아 옴
+        GetDiskFreeSpaceEx(TEXT("d:\\"), &avail, &total, &free);
+
+        // GByte 로 표현을 하기 위한 부분
+        m_total = (int)(total.QuadPart >> 30);
+        m_free = (int)(free.QuadPart >> 30);
+        m_used = m_total - m_free;
+
+        std::string totalDisk_suffix(std::to_string(m_total)); // total disk volume을 받는 변수
+        std::string usedDisk_suffix(std::to_string(m_used));   // used disk volume을 받는 변수
+        std::string availDisk_suffix(std::to_string(m_free));  // available disk volume을 받는 변수
+
+        reply->set_disk_info_reply(request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() + usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
         return Status::OK;
     }
 };

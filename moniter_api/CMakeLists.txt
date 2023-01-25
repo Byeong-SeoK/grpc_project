@@ -23,12 +23,12 @@ project(Moniter C CXX)
 
 include(../cmake/common.cmake)
 
-# Memory Proto file
+# Moniter Proto file
 get_filename_component(mm_proto "../protos/moniter.proto" ABSOLUTE)
 get_filename_component(mm_proto_path "${mm_proto}" PATH)
 
 
-# Generated memory moniter api sources
+# Generated moniter api sources
 set(mm_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.cc")
 set(mm_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.h")
 set(mm_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.grpc.pb.cc")
@@ -42,29 +42,6 @@ add_custom_command(
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
         "${mm_proto}"
       DEPENDS "${mm_proto}")
-
-
-
-
-# CPU Proto file
-get_filename_component(cpu_proto "../protos/cpu.proto" ABSOLUTE)
-get_filename_component(cpu_proto_path "${cpu_proto}" PATH)
-
-# Generated CPU moniter monitering api sources
-set(cpu_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/cpu.pb.cc")
-set(cpu_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/cpu.pb.h")
-set(cpu_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/cpu.grpc.pb.cc")
-set(cpu_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/cpu.grpc.pb.h")
-add_custom_command(
-      OUTPUT "${cpu_proto_srcs}" "${cpu_proto_hdrs}" "${cpu_grpc_srcs}" "${cpu_grpc_hdrs}"
-      COMMAND ${_PROTOBUF_PROTOC}
-      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-        -I "${cpu_proto_path}"
-        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-        "${cpu_proto}"
-      DEPENDS "${cpu_proto}")
-
 
 
 # Include generated *.pb.h files
@@ -83,28 +60,13 @@ target_link_libraries(mm_grpc_proto
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
 
-# cpu_grpc_proto
-add_library(cpu_grpc_proto
-  ${cpu_grpc_srcs}
-  ${cpu_grpc_hdrs}
-  ${cpu_proto_srcs}
-  ${cpu_proto_hdrs})
-target_link_libraries(cpu_grpc_proto
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF})
-
-
 
 # include monitering API header
 add_library(system_monitering_API
-"./include/memory_moniter_server.h"
-"./include/memory_moniter_client.h"
-"./include/cpu_moniter_server.h"
-"./include/cpu_moniter_client.h")
+"./include/moniter_server.h"
+"./include/moniter_client.h")
 target_link_libraries(system_monitering_API
   mm_grpc_proto
-  cpu_grpc_proto
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
@@ -116,7 +78,6 @@ foreach(_target
   add_executable(${_target} "${_target}.cc")
   target_link_libraries(${_target}
     mm_grpc_proto
-    cpu_grpc_proto
     system_monitering_API
     ${_REFLECTION}
     ${_GRPC_GRPCPP}

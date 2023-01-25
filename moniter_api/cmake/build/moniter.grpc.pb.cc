@@ -24,6 +24,7 @@ namespace moniter {
 static const char* MoniterService_method_names[] = {
   "/moniter.MoniterService/current_memory_moniter_method",
   "/moniter.MoniterService/current_cpu_usage_moniter_method",
+  "/moniter.MoniterService/current_disk_usage_moniter_method",
 };
 
 std::unique_ptr< MoniterService::Stub> MoniterService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -35,6 +36,7 @@ std::unique_ptr< MoniterService::Stub> MoniterService::NewStub(const std::shared
 MoniterService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_current_memory_moniter_method_(MoniterService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_current_cpu_usage_moniter_method_(MoniterService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_current_disk_usage_moniter_method_(MoniterService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status MoniterService::Stub::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) {
@@ -83,6 +85,29 @@ void MoniterService::Stub::async::current_cpu_usage_moniter_method(::grpc::Clien
   return result;
 }
 
+::grpc::Status MoniterService::Stub::current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::moniter::DiskMoniterReply* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_current_disk_usage_moniter_method_, context, request, response);
+}
+
+void MoniterService::Stub::async::current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_current_disk_usage_moniter_method_, context, request, response, std::move(f));
+}
+
+void MoniterService::Stub::async::current_disk_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_current_disk_usage_moniter_method_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>* MoniterService::Stub::PrepareAsynccurrent_disk_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::moniter::DiskMoniterReply, ::moniter::DiskMoniterRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_current_disk_usage_moniter_method_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::moniter::DiskMoniterReply>* MoniterService::Stub::Asynccurrent_disk_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::DiskMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsynccurrent_disk_usage_moniter_methodRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 MoniterService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       MoniterService_method_names[0],
@@ -104,6 +129,16 @@ MoniterService::Service::Service() {
              ::moniter::CpuMoniterReply* resp) {
                return service->current_cpu_usage_moniter_method(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      MoniterService_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< MoniterService::Service, ::moniter::DiskMoniterRequest, ::moniter::DiskMoniterReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](MoniterService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::moniter::DiskMoniterRequest* req,
+             ::moniter::DiskMoniterReply* resp) {
+               return service->current_disk_usage_moniter_method(ctx, req, resp);
+             }, this)));
 }
 
 MoniterService::Service::~Service() {
@@ -117,6 +152,13 @@ MoniterService::Service::~Service() {
 }
 
 ::grpc::Status MoniterService::Service::current_cpu_usage_moniter_method(::grpc::ServerContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status MoniterService::Service::current_disk_usage_moniter_method(::grpc::ServerContext* context, const ::moniter::DiskMoniterRequest* request, ::moniter::DiskMoniterReply* response) {
   (void) context;
   (void) request;
   (void) response;

@@ -73,6 +73,7 @@ int main(int argc, char **argv)
     std::cout << "========= Choose monitering service that you want =========" << std::endl;
     std::cout << "1. Memory usage monitering service" << std::endl;
     std::cout << "2. CPU usage monitering service" << std::endl;
+    std::cout << "3. Disk usage monitering service" << std::endl;
     std::cout << "0. Exit the monitering" << std::endl;
 
     int number = -1;
@@ -115,6 +116,21 @@ int main(int argc, char **argv)
         std::string reply = cpu_client.current_cpu_usage_moniter_method(sentence);
         std::cout << reply << std::endl;
       }
+    }
+    else if (number == 3)
+    {
+      DiskMoniterClient disk_client(grpc::CreateChannel(
+          target_str,
+          grpc::InsecureChannelCredentials()));
+
+      std::string totalDisk_prefix("Current total volume of disk: ");
+      std::string usedDisk_prefix("Current usage volume of disk: ");
+      std::string availDisk_prefix("Current available volume of disk: ");
+
+      std::cout << "========= The current information of disk =========" << std::endl;
+      std::string DiskMoniterReply = disk_client.current_disk_usage_moniter_method(totalDisk_prefix, usedDisk_prefix, availDisk_prefix);
+
+      std::cout << DiskMoniterReply << std::endl;
     }
     std::cout << std::endl;
   }

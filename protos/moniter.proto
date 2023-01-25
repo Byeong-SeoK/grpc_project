@@ -22,6 +22,7 @@ package moniter;
 service MoniterService {
   rpc current_memory_moniter_method(MemoryRequest) returns (MemoryReply) {}
   rpc current_cpu_usage_moniter_method(CpuMoniterRequest) returns (CpuMoniterReply) {}
+  rpc current_disk_usage_moniter_method(DiskMoniterRequest) returns (DiskMoniterReply) {}
 }
 
 
@@ -40,10 +41,20 @@ message MemoryReply {
 
 // The request message containing the client order of cpu volume
 message CpuMoniterRequest {
-  string client_order_of_cpu = 1;
+  string cpu_request = 1;
 }
 
 // The response message containing the information of cpu volume
 message CpuMoniterReply {
-  string information_of_cpu = 1;
+  string cpu_reply = 1;
+}
+
+message DiskMoniterRequest{
+  string total_disk_volume_request = 1;
+  string disk_usage_request = 2;
+  string avail_disk_volume_request = 3;
+}
+
+message DiskMoniterReply{
+  string disk_info_reply = 1;
 }

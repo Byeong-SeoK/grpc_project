@@ -68,7 +68,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/mm_grpc_proto.dir/DependInfo.cmake"
-  "CMakeFiles/cpu_grpc_proto.dir/DependInfo.cmake"
   "CMakeFiles/system_monitering_API.dir/DependInfo.cmake"
   "CMakeFiles/client.dir/DependInfo.cmake"
   "CMakeFiles/server.dir/DependInfo.cmake"
