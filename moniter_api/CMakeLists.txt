@@ -19,49 +19,92 @@
 
 cmake_minimum_required(VERSION 3.5.1)
 
-project(MemoryMoniter C CXX)
+project(Moniter C CXX)
 
 include(../cmake/common.cmake)
 
-# Proto file
-get_filename_component(hw_proto "../protos/moniter.proto" ABSOLUTE)
-get_filename_component(hw_proto_path "${hw_proto}" PATH)
+# Memory Proto file
+get_filename_component(mm_proto "../protos/moniter.proto" ABSOLUTE)
+get_filename_component(mm_proto_path "${mm_proto}" PATH)
 
-# Generated sources
-set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.cc")
-set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.h")
-set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.grpc.pb.cc")
-set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/moniter.grpc.pb.h")
+
+# Generated memory moniter api sources
+set(mm_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.cc")
+set(mm_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.h")
+set(mm_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.grpc.pb.cc")
+set(mm_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/moniter.grpc.pb.h")
 add_custom_command(
-      OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
+      OUTPUT "${mm_proto_srcs}" "${mm_proto_hdrs}" "${mm_grpc_srcs}" "${mm_grpc_hdrs}"
       COMMAND ${_PROTOBUF_PROTOC}
       ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
         --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-        -I "${hw_proto_path}"
+        -I "${mm_proto_path}"
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-        "${hw_proto}"
-      DEPENDS "${hw_proto}")
+        "${mm_proto}"
+      DEPENDS "${mm_proto}")
+
+
+
+
+# CPU Proto file
+get_filename_component(cpu_proto "../protos/cpu.proto" ABSOLUTE)
+get_filename_component(cpu_proto_path "${cpu_proto}" PATH)
+
+# Generated CPU moniter monitering api sources
+set(cpu_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/cpu.pb.cc")
+set(cpu_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/cpu.pb.h")
+set(cpu_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/cpu.grpc.pb.cc")
+set(cpu_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/cpu.grpc.pb.h")
+add_custom_command(
+      OUTPUT "${cpu_proto_srcs}" "${cpu_proto_hdrs}" "${cpu_grpc_srcs}" "${cpu_grpc_hdrs}"
+      COMMAND ${_PROTOBUF_PROTOC}
+      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
+        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
+        -I "${cpu_proto_path}"
+        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+        "${cpu_proto}"
+      DEPENDS "${cpu_proto}")
+
+
 
 # Include generated *.pb.h files
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-# hw_grpc_proto
-add_library(hw_grpc_proto
-  ${hw_grpc_srcs}
-  ${hw_grpc_hdrs}
-  ${hw_proto_srcs}
-  ${hw_proto_hdrs})
-target_link_libraries(hw_grpc_proto
+
+
+# mm_grpc_proto
+add_library(mm_grpc_proto
+  ${mm_grpc_srcs}
+  ${mm_grpc_hdrs}
+  ${mm_proto_srcs}
+  ${mm_proto_hdrs})
+target_link_libraries(mm_grpc_proto
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
 
+# cpu_grpc_proto
+add_library(cpu_grpc_proto
+  ${cpu_grpc_srcs}
+  ${cpu_grpc_hdrs}
+  ${cpu_proto_srcs}
+  ${cpu_proto_hdrs})
+target_link_libraries(cpu_grpc_proto
+  ${_REFLECTION}
+  ${_GRPC_GRPCPP}
+  ${_PROTOBUF_LIBPROTOBUF})
+
+
+
 # include monitering API header
 add_library(system_monitering_API
 "./include/memory_moniter_server.h"
-"./include/memory_moniter_client.h")
+"./include/memory_moniter_client.h"
+"./include/cpu_moniter_server.h"
+"./include/cpu_moniter_client.h")
 target_link_libraries(system_monitering_API
-  hw_grpc_proto
+  mm_grpc_proto
+  cpu_grpc_proto
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
@@ -69,10 +112,11 @@ target_link_libraries(system_monitering_API
 
 # Targets [async_](client|server)
 foreach(_target
-  memory_moniter_server client_main)
+  client server )
   add_executable(${_target} "${_target}.cc")
   target_link_libraries(${_target}
-    hw_grpc_proto
+    mm_grpc_proto
+    cpu_grpc_proto
     system_monitering_API
     ${_REFLECTION}
     ${_GRPC_GRPCPP}

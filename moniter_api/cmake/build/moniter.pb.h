@@ -45,6 +45,12 @@ struct TableStruct_moniter_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_moniter_2eproto;
 namespace moniter {
+class CpuMoniterReply;
+struct CpuMoniterReplyDefaultTypeInternal;
+extern CpuMoniterReplyDefaultTypeInternal _CpuMoniterReply_default_instance_;
+class CpuMoniterRequest;
+struct CpuMoniterRequestDefaultTypeInternal;
+extern CpuMoniterRequestDefaultTypeInternal _CpuMoniterRequest_default_instance_;
 class MemoryReply;
 struct MemoryReplyDefaultTypeInternal;
 extern MemoryReplyDefaultTypeInternal _MemoryReply_default_instance_;
@@ -53,6 +59,8 @@ struct MemoryRequestDefaultTypeInternal;
 extern MemoryRequestDefaultTypeInternal _MemoryRequest_default_instance_;
 }  // namespace moniter
 PROTOBUF_NAMESPACE_OPEN
+template<> ::moniter::CpuMoniterReply* Arena::CreateMaybeMessage<::moniter::CpuMoniterReply>(Arena*);
+template<> ::moniter::CpuMoniterRequest* Arena::CreateMaybeMessage<::moniter::CpuMoniterRequest>(Arena*);
 template<> ::moniter::MemoryReply* Arena::CreateMaybeMessage<::moniter::MemoryReply>(Arena*);
 template<> ::moniter::MemoryRequest* Arena::CreateMaybeMessage<::moniter::MemoryRequest>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -412,6 +420,312 @@ class MemoryReply final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_moniter_2eproto;
 };
+// -------------------------------------------------------------------
+
+class CpuMoniterRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:moniter.CpuMoniterRequest) */ {
+ public:
+  inline CpuMoniterRequest() : CpuMoniterRequest(nullptr) {}
+  ~CpuMoniterRequest() override;
+  explicit PROTOBUF_CONSTEXPR CpuMoniterRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CpuMoniterRequest(const CpuMoniterRequest& from);
+  CpuMoniterRequest(CpuMoniterRequest&& from) noexcept
+    : CpuMoniterRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline CpuMoniterRequest& operator=(const CpuMoniterRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CpuMoniterRequest& operator=(CpuMoniterRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CpuMoniterRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CpuMoniterRequest* internal_default_instance() {
+    return reinterpret_cast<const CpuMoniterRequest*>(
+               &_CpuMoniterRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(CpuMoniterRequest& a, CpuMoniterRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CpuMoniterRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CpuMoniterRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  CpuMoniterRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<CpuMoniterRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const CpuMoniterRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const CpuMoniterRequest& from) {
+    CpuMoniterRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CpuMoniterRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "moniter.CpuMoniterRequest";
+  }
+  protected:
+  explicit CpuMoniterRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kClientOrderOfCpuFieldNumber = 1,
+  };
+  // string client_order_of_cpu = 1;
+  void clear_client_order_of_cpu();
+  const std::string& client_order_of_cpu() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_client_order_of_cpu(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_client_order_of_cpu();
+  PROTOBUF_NODISCARD std::string* release_client_order_of_cpu();
+  void set_allocated_client_order_of_cpu(std::string* client_order_of_cpu);
+  private:
+  const std::string& _internal_client_order_of_cpu() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_order_of_cpu(const std::string& value);
+  std::string* _internal_mutable_client_order_of_cpu();
+  public:
+
+  // @@protoc_insertion_point(class_scope:moniter.CpuMoniterRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr client_order_of_cpu_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_moniter_2eproto;
+};
+// -------------------------------------------------------------------
+
+class CpuMoniterReply final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:moniter.CpuMoniterReply) */ {
+ public:
+  inline CpuMoniterReply() : CpuMoniterReply(nullptr) {}
+  ~CpuMoniterReply() override;
+  explicit PROTOBUF_CONSTEXPR CpuMoniterReply(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CpuMoniterReply(const CpuMoniterReply& from);
+  CpuMoniterReply(CpuMoniterReply&& from) noexcept
+    : CpuMoniterReply() {
+    *this = ::std::move(from);
+  }
+
+  inline CpuMoniterReply& operator=(const CpuMoniterReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CpuMoniterReply& operator=(CpuMoniterReply&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CpuMoniterReply& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CpuMoniterReply* internal_default_instance() {
+    return reinterpret_cast<const CpuMoniterReply*>(
+               &_CpuMoniterReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(CpuMoniterReply& a, CpuMoniterReply& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CpuMoniterReply* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CpuMoniterReply* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  CpuMoniterReply* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<CpuMoniterReply>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const CpuMoniterReply& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const CpuMoniterReply& from) {
+    CpuMoniterReply::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CpuMoniterReply* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "moniter.CpuMoniterReply";
+  }
+  protected:
+  explicit CpuMoniterReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInformationOfCpuFieldNumber = 1,
+  };
+  // string information_of_cpu = 1;
+  void clear_information_of_cpu();
+  const std::string& information_of_cpu() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_information_of_cpu(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_information_of_cpu();
+  PROTOBUF_NODISCARD std::string* release_information_of_cpu();
+  void set_allocated_information_of_cpu(std::string* information_of_cpu);
+  private:
+  const std::string& _internal_information_of_cpu() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_information_of_cpu(const std::string& value);
+  std::string* _internal_mutable_information_of_cpu();
+  public:
+
+  // @@protoc_insertion_point(class_scope:moniter.CpuMoniterReply)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr information_of_cpu_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_moniter_2eproto;
+};
 // ===================================================================
 
 
@@ -677,9 +991,121 @@ inline void MemoryReply::set_allocated_memory_info_reply(std::string* memory_inf
   // @@protoc_insertion_point(field_set_allocated:moniter.MemoryReply.memory_info_reply)
 }
 
+// -------------------------------------------------------------------
+
+// CpuMoniterRequest
+
+// string client_order_of_cpu = 1;
+inline void CpuMoniterRequest::clear_client_order_of_cpu() {
+  _impl_.client_order_of_cpu_.ClearToEmpty();
+}
+inline const std::string& CpuMoniterRequest::client_order_of_cpu() const {
+  // @@protoc_insertion_point(field_get:moniter.CpuMoniterRequest.client_order_of_cpu)
+  return _internal_client_order_of_cpu();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CpuMoniterRequest::set_client_order_of_cpu(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.client_order_of_cpu_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.CpuMoniterRequest.client_order_of_cpu)
+}
+inline std::string* CpuMoniterRequest::mutable_client_order_of_cpu() {
+  std::string* _s = _internal_mutable_client_order_of_cpu();
+  // @@protoc_insertion_point(field_mutable:moniter.CpuMoniterRequest.client_order_of_cpu)
+  return _s;
+}
+inline const std::string& CpuMoniterRequest::_internal_client_order_of_cpu() const {
+  return _impl_.client_order_of_cpu_.Get();
+}
+inline void CpuMoniterRequest::_internal_set_client_order_of_cpu(const std::string& value) {
+  
+  _impl_.client_order_of_cpu_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CpuMoniterRequest::_internal_mutable_client_order_of_cpu() {
+  
+  return _impl_.client_order_of_cpu_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CpuMoniterRequest::release_client_order_of_cpu() {
+  // @@protoc_insertion_point(field_release:moniter.CpuMoniterRequest.client_order_of_cpu)
+  return _impl_.client_order_of_cpu_.Release();
+}
+inline void CpuMoniterRequest::set_allocated_client_order_of_cpu(std::string* client_order_of_cpu) {
+  if (client_order_of_cpu != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.client_order_of_cpu_.SetAllocated(client_order_of_cpu, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.client_order_of_cpu_.IsDefault()) {
+    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.CpuMoniterRequest.client_order_of_cpu)
+}
+
+// -------------------------------------------------------------------
+
+// CpuMoniterReply
+
+// string information_of_cpu = 1;
+inline void CpuMoniterReply::clear_information_of_cpu() {
+  _impl_.information_of_cpu_.ClearToEmpty();
+}
+inline const std::string& CpuMoniterReply::information_of_cpu() const {
+  // @@protoc_insertion_point(field_get:moniter.CpuMoniterReply.information_of_cpu)
+  return _internal_information_of_cpu();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CpuMoniterReply::set_information_of_cpu(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.information_of_cpu_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:moniter.CpuMoniterReply.information_of_cpu)
+}
+inline std::string* CpuMoniterReply::mutable_information_of_cpu() {
+  std::string* _s = _internal_mutable_information_of_cpu();
+  // @@protoc_insertion_point(field_mutable:moniter.CpuMoniterReply.information_of_cpu)
+  return _s;
+}
+inline const std::string& CpuMoniterReply::_internal_information_of_cpu() const {
+  return _impl_.information_of_cpu_.Get();
+}
+inline void CpuMoniterReply::_internal_set_information_of_cpu(const std::string& value) {
+  
+  _impl_.information_of_cpu_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CpuMoniterReply::_internal_mutable_information_of_cpu() {
+  
+  return _impl_.information_of_cpu_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CpuMoniterReply::release_information_of_cpu() {
+  // @@protoc_insertion_point(field_release:moniter.CpuMoniterReply.information_of_cpu)
+  return _impl_.information_of_cpu_.Release();
+}
+inline void CpuMoniterReply::set_allocated_information_of_cpu(std::string* information_of_cpu) {
+  if (information_of_cpu != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.information_of_cpu_.SetAllocated(information_of_cpu, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.information_of_cpu_.IsDefault()) {
+    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:moniter.CpuMoniterReply.information_of_cpu)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

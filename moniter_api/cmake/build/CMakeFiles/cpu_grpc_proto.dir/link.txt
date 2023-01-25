@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcpu_grpc_proto.a CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.o CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.o
+/usr/bin/ranlib libcpu_grpc_proto.a

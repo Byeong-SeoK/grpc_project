@@ -23,6 +23,7 @@ namespace moniter {
 
 static const char* MoniterService_method_names[] = {
   "/moniter.MoniterService/current_memory_moniter_method",
+  "/moniter.MoniterService/current_cpu_usage_moniter_method",
 };
 
 std::unique_ptr< MoniterService::Stub> MoniterService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -33,6 +34,7 @@ std::unique_ptr< MoniterService::Stub> MoniterService::NewStub(const std::shared
 
 MoniterService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_current_memory_moniter_method_(MoniterService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_current_cpu_usage_moniter_method_(MoniterService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status MoniterService::Stub::current_memory_moniter_method(::grpc::ClientContext* context, const ::moniter::MemoryRequest& request, ::moniter::MemoryReply* response) {
@@ -58,6 +60,29 @@ void MoniterService::Stub::async::current_memory_moniter_method(::grpc::ClientCo
   return result;
 }
 
+::grpc::Status MoniterService::Stub::current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::moniter::CpuMoniterReply* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::moniter::CpuMoniterRequest, ::moniter::CpuMoniterReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_current_cpu_usage_moniter_method_, context, request, response);
+}
+
+void MoniterService::Stub::async::current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::moniter::CpuMoniterRequest, ::moniter::CpuMoniterReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_current_cpu_usage_moniter_method_, context, request, response, std::move(f));
+}
+
+void MoniterService::Stub::async::current_cpu_usage_moniter_method(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_current_cpu_usage_moniter_method_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::moniter::CpuMoniterReply>* MoniterService::Stub::PrepareAsynccurrent_cpu_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::moniter::CpuMoniterReply, ::moniter::CpuMoniterRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_current_cpu_usage_moniter_method_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::moniter::CpuMoniterReply>* MoniterService::Stub::Asynccurrent_cpu_usage_moniter_methodRaw(::grpc::ClientContext* context, const ::moniter::CpuMoniterRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsynccurrent_cpu_usage_moniter_methodRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 MoniterService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       MoniterService_method_names[0],
@@ -69,12 +94,29 @@ MoniterService::Service::Service() {
              ::moniter::MemoryReply* resp) {
                return service->current_memory_moniter_method(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      MoniterService_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< MoniterService::Service, ::moniter::CpuMoniterRequest, ::moniter::CpuMoniterReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](MoniterService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::moniter::CpuMoniterRequest* req,
+             ::moniter::CpuMoniterReply* resp) {
+               return service->current_cpu_usage_moniter_method(ctx, req, resp);
+             }, this)));
 }
 
 MoniterService::Service::~Service() {
 }
 
 ::grpc::Status MoniterService::Service::current_memory_moniter_method(::grpc::ServerContext* context, const ::moniter::MemoryRequest* request, ::moniter::MemoryReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status MoniterService::Service::current_cpu_usage_moniter_method(::grpc::ServerContext* context, const ::moniter::CpuMoniterRequest* request, ::moniter::CpuMoniterReply* response) {
   (void) context;
   (void) request;
   (void) response;

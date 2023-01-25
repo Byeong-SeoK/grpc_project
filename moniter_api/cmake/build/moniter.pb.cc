@@ -50,8 +50,34 @@ struct MemoryReplyDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MemoryReplyDefaultTypeInternal _MemoryReply_default_instance_;
+PROTOBUF_CONSTEXPR CpuMoniterRequest::CpuMoniterRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.client_order_of_cpu_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CpuMoniterRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CpuMoniterRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CpuMoniterRequestDefaultTypeInternal() {}
+  union {
+    CpuMoniterRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CpuMoniterRequestDefaultTypeInternal _CpuMoniterRequest_default_instance_;
+PROTOBUF_CONSTEXPR CpuMoniterReply::CpuMoniterReply(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.information_of_cpu_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CpuMoniterReplyDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CpuMoniterReplyDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CpuMoniterReplyDefaultTypeInternal() {}
+  union {
+    CpuMoniterReply _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CpuMoniterReplyDefaultTypeInternal _CpuMoniterReply_default_instance_;
 }  // namespace moniter
-static ::_pb::Metadata file_level_metadata_moniter_2eproto[2];
+static ::_pb::Metadata file_level_metadata_moniter_2eproto[4];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_moniter_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_moniter_2eproto = nullptr;
 
@@ -73,15 +99,33 @@ const uint32_t TableStruct_moniter_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::moniter::MemoryReply, _impl_.memory_info_reply_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::moniter::CpuMoniterRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::moniter::CpuMoniterRequest, _impl_.client_order_of_cpu_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::moniter::CpuMoniterReply, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::moniter::CpuMoniterReply, _impl_.information_of_cpu_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::moniter::MemoryRequest)},
   { 10, -1, -1, sizeof(::moniter::MemoryReply)},
+  { 17, -1, -1, sizeof(::moniter::CpuMoniterRequest)},
+  { 24, -1, -1, sizeof(::moniter::CpuMoniterReply)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::moniter::_MemoryRequest_default_instance_._instance,
   &::moniter::_MemoryReply_default_instance_._instance,
+  &::moniter::_CpuMoniterRequest_default_instance_._instance,
+  &::moniter::_CpuMoniterReply_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_moniter_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -90,16 +134,21 @@ const char descriptor_table_protodef_moniter_2eproto[] PROTOBUF_SECTION_VARIABLE
   "ysical_memory_request\030\002 \001(\t\022$\n\034avail_vir"
   "tual_memory_request\030\003 \001(\t\022%\n\035avail_physi"
   "cal_memory_request\030\004 \001(\t\"(\n\013MemoryReply\022"
-  "\031\n\021memory_info_reply\030\001 \001(\t2a\n\016MoniterSer"
-  "vice\022O\n\035current_memory_moniter_method\022\026."
-  "moniter.MemoryRequest\032\024.moniter.MemoryRe"
-  "ply\"\000B\016\n\014moniter.grpcb\006proto3"
+  "\031\n\021memory_info_reply\030\001 \001(\t\"0\n\021CpuMoniter"
+  "Request\022\033\n\023client_order_of_cpu\030\001 \001(\t\"-\n\017"
+  "CpuMoniterReply\022\032\n\022information_of_cpu\030\001 "
+  "\001(\t2\275\001\n\016MoniterService\022O\n\035current_memory"
+  "_moniter_method\022\026.moniter.MemoryRequest\032"
+  "\024.moniter.MemoryReply\"\000\022Z\n current_cpu_u"
+  "sage_moniter_method\022\032.moniter.CpuMoniter"
+  "Request\032\030.moniter.CpuMoniterReply\"\000B\016\n\014m"
+  "oniter.grpcb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_moniter_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_moniter_2eproto = {
-    false, false, 349, descriptor_table_protodef_moniter_2eproto,
+    false, false, 539, descriptor_table_protodef_moniter_2eproto,
     "moniter.proto",
-    &descriptor_table_moniter_2eproto_once, nullptr, 0, 2,
+    &descriptor_table_moniter_2eproto_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_moniter_2eproto::offsets,
     file_level_metadata_moniter_2eproto, file_level_enum_descriptors_moniter_2eproto,
     file_level_service_descriptors_moniter_2eproto,
@@ -668,6 +717,412 @@ void MemoryReply::InternalSwap(MemoryReply* other) {
       file_level_metadata_moniter_2eproto[1]);
 }
 
+// ===================================================================
+
+class CpuMoniterRequest::_Internal {
+ public:
+};
+
+CpuMoniterRequest::CpuMoniterRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:moniter.CpuMoniterRequest)
+}
+CpuMoniterRequest::CpuMoniterRequest(const CpuMoniterRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CpuMoniterRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.client_order_of_cpu_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.client_order_of_cpu_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_client_order_of_cpu().empty()) {
+    _this->_impl_.client_order_of_cpu_.Set(from._internal_client_order_of_cpu(), 
+      _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:moniter.CpuMoniterRequest)
+}
+
+inline void CpuMoniterRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.client_order_of_cpu_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.client_order_of_cpu_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.client_order_of_cpu_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+CpuMoniterRequest::~CpuMoniterRequest() {
+  // @@protoc_insertion_point(destructor:moniter.CpuMoniterRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CpuMoniterRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.client_order_of_cpu_.Destroy();
+}
+
+void CpuMoniterRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CpuMoniterRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:moniter.CpuMoniterRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.client_order_of_cpu_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CpuMoniterRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string client_order_of_cpu = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_client_order_of_cpu();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.CpuMoniterRequest.client_order_of_cpu"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CpuMoniterRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:moniter.CpuMoniterRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string client_order_of_cpu = 1;
+  if (!this->_internal_client_order_of_cpu().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_client_order_of_cpu().data(), static_cast<int>(this->_internal_client_order_of_cpu().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "moniter.CpuMoniterRequest.client_order_of_cpu");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_client_order_of_cpu(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:moniter.CpuMoniterRequest)
+  return target;
+}
+
+size_t CpuMoniterRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:moniter.CpuMoniterRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string client_order_of_cpu = 1;
+  if (!this->_internal_client_order_of_cpu().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_client_order_of_cpu());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CpuMoniterRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CpuMoniterRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CpuMoniterRequest::GetClassData() const { return &_class_data_; }
+
+
+void CpuMoniterRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CpuMoniterRequest*>(&to_msg);
+  auto& from = static_cast<const CpuMoniterRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:moniter.CpuMoniterRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_client_order_of_cpu().empty()) {
+    _this->_internal_set_client_order_of_cpu(from._internal_client_order_of_cpu());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CpuMoniterRequest::CopyFrom(const CpuMoniterRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:moniter.CpuMoniterRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CpuMoniterRequest::IsInitialized() const {
+  return true;
+}
+
+void CpuMoniterRequest::InternalSwap(CpuMoniterRequest* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.client_order_of_cpu_, lhs_arena,
+      &other->_impl_.client_order_of_cpu_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CpuMoniterRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_moniter_2eproto_getter, &descriptor_table_moniter_2eproto_once,
+      file_level_metadata_moniter_2eproto[2]);
+}
+
+// ===================================================================
+
+class CpuMoniterReply::_Internal {
+ public:
+};
+
+CpuMoniterReply::CpuMoniterReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:moniter.CpuMoniterReply)
+}
+CpuMoniterReply::CpuMoniterReply(const CpuMoniterReply& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CpuMoniterReply* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.information_of_cpu_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.information_of_cpu_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_information_of_cpu().empty()) {
+    _this->_impl_.information_of_cpu_.Set(from._internal_information_of_cpu(), 
+      _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:moniter.CpuMoniterReply)
+}
+
+inline void CpuMoniterReply::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.information_of_cpu_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.information_of_cpu_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.information_of_cpu_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+CpuMoniterReply::~CpuMoniterReply() {
+  // @@protoc_insertion_point(destructor:moniter.CpuMoniterReply)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CpuMoniterReply::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.information_of_cpu_.Destroy();
+}
+
+void CpuMoniterReply::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CpuMoniterReply::Clear() {
+// @@protoc_insertion_point(message_clear_start:moniter.CpuMoniterReply)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.information_of_cpu_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CpuMoniterReply::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string information_of_cpu = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_information_of_cpu();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "moniter.CpuMoniterReply.information_of_cpu"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CpuMoniterReply::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:moniter.CpuMoniterReply)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string information_of_cpu = 1;
+  if (!this->_internal_information_of_cpu().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_information_of_cpu().data(), static_cast<int>(this->_internal_information_of_cpu().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "moniter.CpuMoniterReply.information_of_cpu");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_information_of_cpu(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:moniter.CpuMoniterReply)
+  return target;
+}
+
+size_t CpuMoniterReply::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:moniter.CpuMoniterReply)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string information_of_cpu = 1;
+  if (!this->_internal_information_of_cpu().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_information_of_cpu());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CpuMoniterReply::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CpuMoniterReply::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CpuMoniterReply::GetClassData() const { return &_class_data_; }
+
+
+void CpuMoniterReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CpuMoniterReply*>(&to_msg);
+  auto& from = static_cast<const CpuMoniterReply&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:moniter.CpuMoniterReply)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_information_of_cpu().empty()) {
+    _this->_internal_set_information_of_cpu(from._internal_information_of_cpu());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CpuMoniterReply::CopyFrom(const CpuMoniterReply& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:moniter.CpuMoniterReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CpuMoniterReply::IsInitialized() const {
+  return true;
+}
+
+void CpuMoniterReply::InternalSwap(CpuMoniterReply* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.information_of_cpu_, lhs_arena,
+      &other->_impl_.information_of_cpu_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CpuMoniterReply::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_moniter_2eproto_getter, &descriptor_table_moniter_2eproto_once,
+      file_level_metadata_moniter_2eproto[3]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace moniter
 PROTOBUF_NAMESPACE_OPEN
@@ -678,6 +1133,14 @@ Arena::CreateMaybeMessage< ::moniter::MemoryRequest >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::moniter::MemoryReply*
 Arena::CreateMaybeMessage< ::moniter::MemoryReply >(Arena* arena) {
   return Arena::CreateMessageInternal< ::moniter::MemoryReply >(arena);
+}
+template<> PROTOBUF_NOINLINE ::moniter::CpuMoniterRequest*
+Arena::CreateMaybeMessage< ::moniter::CpuMoniterRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::moniter::CpuMoniterRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::moniter::CpuMoniterReply*
+Arena::CreateMaybeMessage< ::moniter::CpuMoniterReply >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::moniter::CpuMoniterReply >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

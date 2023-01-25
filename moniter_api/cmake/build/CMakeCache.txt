@@ -151,7 +151,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=MemoryMoniter
+CMAKE_PROJECT_NAME:STATIC=Moniter
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -224,17 +224,32 @@ MemoryMoniter_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 MemoryMoniter_SOURCE_DIR:STATIC=/mnt/c/Users/INNO-C-535/resource_moniter/moniter_api
 
+//Value Computed by CMake
+Moniter_BINARY_DIR:STATIC=/mnt/c/Users/INNO-C-535/resource_moniter/moniter_api/cmake/build
+
+//Value Computed by CMake
+Moniter_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Moniter_SOURCE_DIR:STATIC=/mnt/c/Users/INNO-C-535/resource_moniter/moniter_api
+
 //The directory containing a CMake configuration file for Protobuf.
 Protobuf_DIR:PATH=/home/byeongseok/.local/lib/cmake/protobuf
 
 //The directory containing a CMake configuration file for absl.
 absl_DIR:PATH=/home/byeongseok/.local/lib/cmake/absl
 
+//Dependencies for the target
+cpu_grpc_proto_LIB_DEPENDS:STATIC=general;gRPC::grpc++_reflection;general;gRPC::grpc++;general;protobuf::libprotobuf;
+
 //The directory containing a CMake configuration file for gRPC.
 gRPC_DIR:PATH=/home/byeongseok/.local/lib/cmake/grpc
 
 //Dependencies for the target
 hw_grpc_proto_LIB_DEPENDS:STATIC=general;gRPC::grpc++_reflection;general;gRPC::grpc++;general;protobuf::libprotobuf;
+
+//Dependencies for the target
+mm_grpc_proto_LIB_DEPENDS:STATIC=general;gRPC::grpc++_reflection;general;gRPC::grpc++;general;protobuf::libprotobuf;
 
 //CMake built-in FindProtobuf.cmake module compatible
 protobuf_MODULE_COMPATIBLE:BOOL=OFF
@@ -243,7 +258,7 @@ protobuf_MODULE_COMPATIBLE:BOOL=OFF
 protobuf_VERBOSE:BOOL=OFF
 
 //Dependencies for the target
-system_monitering_API_LIB_DEPENDS:STATIC=general;hw_grpc_proto;general;gRPC::grpc++_reflection;general;gRPC::grpc++;general;protobuf::libprotobuf;
+system_monitering_API_LIB_DEPENDS:STATIC=general;mm_grpc_proto;general;cpu_grpc_proto;general;gRPC::grpc++_reflection;general;gRPC::grpc++;general;protobuf::libprotobuf;
 
 
 ########################

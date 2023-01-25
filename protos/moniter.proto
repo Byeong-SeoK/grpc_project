@@ -21,6 +21,7 @@ package moniter;
 // Computer status monitering service
 service MoniterService {
   rpc current_memory_moniter_method(MemoryRequest) returns (MemoryReply) {}
+  rpc current_cpu_usage_moniter_method(CpuMoniterRequest) returns (CpuMoniterReply) {}
 }
 
 
@@ -35,4 +36,14 @@ message MemoryRequest {
 // The response message containing the information of memory system
 message MemoryReply {
   string memory_info_reply = 1;
+}
+
+// The request message containing the client order of cpu volume
+message CpuMoniterRequest {
+  string client_order_of_cpu = 1;
+}
+
+// The response message containing the information of cpu volume
+message CpuMoniterReply {
+  string information_of_cpu = 1;
 }

@@ -12,7 +12,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/mnt/c/Users/INNO-C-535/resource_moniter/moniter_api/cmake/build/CMakeFiles/hw_grpc_proto.dir/DependInfo.cmake"
+  "/mnt/c/Users/INNO-C-535/resource_moniter/moniter_api/cmake/build/CMakeFiles/mm_grpc_proto.dir/DependInfo.cmake"
+  "/mnt/c/Users/INNO-C-535/resource_moniter/moniter_api/cmake/build/CMakeFiles/cpu_grpc_proto.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -117,17 +117,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named hw_grpc_proto
+# Target rules for targets named mm_grpc_proto
 
 # Build rule for target.
-hw_grpc_proto: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hw_grpc_proto
-.PHONY : hw_grpc_proto
+mm_grpc_proto: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mm_grpc_proto
+.PHONY : mm_grpc_proto
 
 # fast build rule for target.
-hw_grpc_proto/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/build
-.PHONY : hw_grpc_proto/fast
+mm_grpc_proto/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/build
+.PHONY : mm_grpc_proto/fast
+
+#=============================================================================
+# Target rules for targets named cpu_grpc_proto
+
+# Build rule for target.
+cpu_grpc_proto: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu_grpc_proto
+.PHONY : cpu_grpc_proto
+
+# fast build rule for target.
+cpu_grpc_proto/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/build
+.PHONY : cpu_grpc_proto/fast
 
 #=============================================================================
 # Target rules for targets named system_monitering_API
@@ -143,122 +156,109 @@ system_monitering_API/fast:
 .PHONY : system_monitering_API/fast
 
 #=============================================================================
-# Target rules for targets named memory_moniter_client
+# Target rules for targets named client
 
 # Build rule for target.
-memory_moniter_client: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 memory_moniter_client
-.PHONY : memory_moniter_client
+client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 client
+.PHONY : client
 
 # fast build rule for target.
-memory_moniter_client/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_client.dir/build.make CMakeFiles/memory_moniter_client.dir/build
-.PHONY : memory_moniter_client/fast
+client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+.PHONY : client/fast
 
 #=============================================================================
-# Target rules for targets named memory_moniter_server
+# Target rules for targets named server
 
 # Build rule for target.
-memory_moniter_server: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 memory_moniter_server
-.PHONY : memory_moniter_server
+server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-memory_moniter_server/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_server.dir/build.make CMakeFiles/memory_moniter_server.dir/build
-.PHONY : memory_moniter_server/fast
+server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
 
-#=============================================================================
-# Target rules for targets named main
-
-# Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
-.PHONY : main
-
-# fast build rule for target.
-main/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
-
-main.o: main.cc.o
-.PHONY : main.o
+client.o: client.cc.o
+.PHONY : client.o
 
 # target to build an object file
-main.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cc.o
-.PHONY : main.cc.o
+client.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cc.o
+.PHONY : client.cc.o
 
-main.i: main.cc.i
-.PHONY : main.i
+client.i: client.cc.i
+.PHONY : client.i
 
 # target to preprocess a source file
-main.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cc.i
-.PHONY : main.cc.i
+client.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cc.i
+.PHONY : client.cc.i
 
-main.s: main.cc.s
-.PHONY : main.s
+client.s: client.cc.s
+.PHONY : client.s
 
 # target to generate assembly for a file
-main.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cc.s
-.PHONY : main.cc.s
+client.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cc.s
+.PHONY : client.cc.s
 
-memory_moniter_client.o: memory_moniter_client.cc.o
-.PHONY : memory_moniter_client.o
+cpu.grpc.pb.o: cpu.grpc.pb.cc.o
+.PHONY : cpu.grpc.pb.o
 
 # target to build an object file
-memory_moniter_client.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_client.dir/build.make CMakeFiles/memory_moniter_client.dir/memory_moniter_client.cc.o
-.PHONY : memory_moniter_client.cc.o
+cpu.grpc.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.o
+.PHONY : cpu.grpc.pb.cc.o
 
-memory_moniter_client.i: memory_moniter_client.cc.i
-.PHONY : memory_moniter_client.i
+cpu.grpc.pb.i: cpu.grpc.pb.cc.i
+.PHONY : cpu.grpc.pb.i
 
 # target to preprocess a source file
-memory_moniter_client.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_client.dir/build.make CMakeFiles/memory_moniter_client.dir/memory_moniter_client.cc.i
-.PHONY : memory_moniter_client.cc.i
+cpu.grpc.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.i
+.PHONY : cpu.grpc.pb.cc.i
 
-memory_moniter_client.s: memory_moniter_client.cc.s
-.PHONY : memory_moniter_client.s
+cpu.grpc.pb.s: cpu.grpc.pb.cc.s
+.PHONY : cpu.grpc.pb.s
 
 # target to generate assembly for a file
-memory_moniter_client.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_client.dir/build.make CMakeFiles/memory_moniter_client.dir/memory_moniter_client.cc.s
-.PHONY : memory_moniter_client.cc.s
+cpu.grpc.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.grpc.pb.cc.s
+.PHONY : cpu.grpc.pb.cc.s
 
-memory_moniter_server.o: memory_moniter_server.cc.o
-.PHONY : memory_moniter_server.o
+cpu.pb.o: cpu.pb.cc.o
+.PHONY : cpu.pb.o
 
 # target to build an object file
-memory_moniter_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_server.dir/build.make CMakeFiles/memory_moniter_server.dir/memory_moniter_server.cc.o
-.PHONY : memory_moniter_server.cc.o
+cpu.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.o
+.PHONY : cpu.pb.cc.o
 
-memory_moniter_server.i: memory_moniter_server.cc.i
-.PHONY : memory_moniter_server.i
+cpu.pb.i: cpu.pb.cc.i
+.PHONY : cpu.pb.i
 
 # target to preprocess a source file
-memory_moniter_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_server.dir/build.make CMakeFiles/memory_moniter_server.dir/memory_moniter_server.cc.i
-.PHONY : memory_moniter_server.cc.i
+cpu.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.i
+.PHONY : cpu.pb.cc.i
 
-memory_moniter_server.s: memory_moniter_server.cc.s
-.PHONY : memory_moniter_server.s
+cpu.pb.s: cpu.pb.cc.s
+.PHONY : cpu.pb.s
 
 # target to generate assembly for a file
-memory_moniter_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/memory_moniter_server.dir/build.make CMakeFiles/memory_moniter_server.dir/memory_moniter_server.cc.s
-.PHONY : memory_moniter_server.cc.s
+cpu.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_grpc_proto.dir/build.make CMakeFiles/cpu_grpc_proto.dir/cpu.pb.cc.s
+.PHONY : cpu.pb.cc.s
 
 moniter.grpc.pb.o: moniter.grpc.pb.cc.o
 .PHONY : moniter.grpc.pb.o
 
 # target to build an object file
 moniter.grpc.pb.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/moniter.grpc.pb.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/moniter.grpc.pb.cc.o
 .PHONY : moniter.grpc.pb.cc.o
 
 moniter.grpc.pb.i: moniter.grpc.pb.cc.i
@@ -266,7 +266,7 @@ moniter.grpc.pb.i: moniter.grpc.pb.cc.i
 
 # target to preprocess a source file
 moniter.grpc.pb.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/moniter.grpc.pb.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/moniter.grpc.pb.cc.i
 .PHONY : moniter.grpc.pb.cc.i
 
 moniter.grpc.pb.s: moniter.grpc.pb.cc.s
@@ -274,7 +274,7 @@ moniter.grpc.pb.s: moniter.grpc.pb.cc.s
 
 # target to generate assembly for a file
 moniter.grpc.pb.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/moniter.grpc.pb.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/moniter.grpc.pb.cc.s
 .PHONY : moniter.grpc.pb.cc.s
 
 moniter.pb.o: moniter.pb.cc.o
@@ -282,7 +282,7 @@ moniter.pb.o: moniter.pb.cc.o
 
 # target to build an object file
 moniter.pb.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/moniter.pb.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/moniter.pb.cc.o
 .PHONY : moniter.pb.cc.o
 
 moniter.pb.i: moniter.pb.cc.i
@@ -290,7 +290,7 @@ moniter.pb.i: moniter.pb.cc.i
 
 # target to preprocess a source file
 moniter.pb.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/moniter.pb.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/moniter.pb.cc.i
 .PHONY : moniter.pb.cc.i
 
 moniter.pb.s: moniter.pb.cc.s
@@ -298,8 +298,32 @@ moniter.pb.s: moniter.pb.cc.s
 
 # target to generate assembly for a file
 moniter.pb.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw_grpc_proto.dir/build.make CMakeFiles/hw_grpc_proto.dir/moniter.pb.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mm_grpc_proto.dir/build.make CMakeFiles/mm_grpc_proto.dir/moniter.pb.cc.s
 .PHONY : moniter.pb.cc.s
+
+server.o: server.cc.o
+.PHONY : server.o
+
+# target to build an object file
+server.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cc.o
+.PHONY : server.cc.o
+
+server.i: server.cc.i
+.PHONY : server.i
+
+# target to preprocess a source file
+server.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cc.i
+.PHONY : server.cc.i
+
+server.s: server.cc.s
+.PHONY : server.s
+
+# target to generate assembly for a file
+server.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cc.s
+.PHONY : server.cc.s
 
 # Help Target
 help:
@@ -309,26 +333,29 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... hw_grpc_proto"
-	@echo "... main"
-	@echo "... memory_moniter_client"
-	@echo "... memory_moniter_server"
+	@echo "... client"
+	@echo "... cpu_grpc_proto"
+	@echo "... mm_grpc_proto"
+	@echo "... server"
 	@echo "... system_monitering_API"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... memory_moniter_client.o"
-	@echo "... memory_moniter_client.i"
-	@echo "... memory_moniter_client.s"
-	@echo "... memory_moniter_server.o"
-	@echo "... memory_moniter_server.i"
-	@echo "... memory_moniter_server.s"
+	@echo "... client.o"
+	@echo "... client.i"
+	@echo "... client.s"
+	@echo "... cpu.grpc.pb.o"
+	@echo "... cpu.grpc.pb.i"
+	@echo "... cpu.grpc.pb.s"
+	@echo "... cpu.pb.o"
+	@echo "... cpu.pb.i"
+	@echo "... cpu.pb.s"
 	@echo "... moniter.grpc.pb.o"
 	@echo "... moniter.grpc.pb.i"
 	@echo "... moniter.grpc.pb.s"
 	@echo "... moniter.pb.o"
 	@echo "... moniter.pb.i"
 	@echo "... moniter.pb.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 .PHONY : help
 
 
