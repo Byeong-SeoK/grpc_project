@@ -4,14 +4,14 @@
 
 #include "sys/sysinfo.h"
 #include "sys/types.h"
-#include "./fileapi.h"
+#include "sys/statvfs.h"
 
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
 
 #ifdef BAZEL_BUILD
-#include "examples/protos/moniter.grpc.pb.h"
+#include "resource_moniter/protos/moniter.grpc.pb.h"
 #else
 #include "moniter.grpc.pb.h"
 #endif
@@ -99,22 +99,22 @@ class MoniterServiceImpl final : public MoniterService::Service
         FILE *pStat = NULL;
         char cpuID[6] = {0};
 
-        pStat = fopen("/proc/stat", "r");
+        pStat = fopen("/proc/stat", "r"); // proc/stat을 read 모드로 열어서 cpu 상태를 읽어와 pStat에 저장한다.
         fscanf(pStat, "%s %d %d %d %d", cpuID, &curJiffies.user, &curJiffies.nice,
                &curJiffies.system, &curJiffies.idle);
 
-        stJiffies diffJiffies;
-        diffJiffies.user = curJiffies.user - prevJiffies.user;
-        diffJiffies.nice = curJiffies.nice - prevJiffies.nice;
-        diffJiffies.system = curJiffies.system - prevJiffies.system;
-        diffJiffies.idle = curJiffies.idle - prevJiffies.idle;
+        stJiffies diffJiffies;                                       // 리눅스에서는 내부적으로 jiffy라는 단위 시간을 사용한다. 결국 이 수치 값은 부팅 후 지금까지 소모된 jiffies의 #이다.
+        diffJiffies.user = curJiffies.user - prevJiffies.user;       // user :사용자모드에서 CPU가 소비된 시간의 비율
+        diffJiffies.nice = curJiffies.nice - prevJiffies.nice;       // nice: nice로 스케줄링의 우선도를 변경한 프로세스가 사용자 모드에서 CPU를 소비한 시간의 비율
+        diffJiffies.system = curJiffies.system - prevJiffies.system; // system: 시스템 모드에서 CPU가 소비된 시간의 비율
+        diffJiffies.idle = curJiffies.idle - prevJiffies.idle;       // CPU가 디스크I/O 대기등으로 대기되지 않고, Idle상태로 소비한 시간의 비율
 
         int totalJiffies = diffJiffies.user + diffJiffies.nice +
-                           diffJiffies.system + diffJiffies.idle;
+                           diffJiffies.system + diffJiffies.idle; // cpu 전체 크기
 
-        diffJiffies.usage = 100.0f * (1.0 - (diffJiffies.idle / (double)totalJiffies));
+        diffJiffies.usage = 100.0f * (1.0 - (diffJiffies.idle / (double)totalJiffies)); // 현재 사용 중인 cpu 크기
 
-        prevJiffies = curJiffies;
+        prevJiffies = curJiffies; // 시간의 비율로 cpu 이용량을 계산하므로 이전 시간의 비욜울 현재 측정한 시간의 비율로 바꿔야 실시간 측정이 가능하다.
         fclose(pStat);
         sleep(1);
 
@@ -127,34 +127,17 @@ class MoniterServiceImpl final : public MoniterService::Service
                                              const DiskMoniterRequest *request,
                                              DiskMoniterReply *reply) override
     {
+        const unsigned int GB = (1024 * 1024) * 1024;
+        struct statvfs buffer; // buffer라는 statvfs type 객체를 만든다. stavfs를 통해서 linux에 mount된 disk의 크기를 읽을 수 있다.
+        statvfs("/", &buffer); // buffer에 root 하위 directory에 mount된 disk의 크기를 읽어오고 이 값은 statvfs type이다.
 
-        long long avail, total, free;
-        avail.QuadPart = 0L;
-        total.QuadPart = 0L;
-        free.QuadPart = 0L;
+        const long total = (double)(buffer.f_blocks * buffer.f_bsize) / GB;     // f_frsize 단위의 fs 크기 * 파일 시스템 블록 크기 = 전체 disk 크기
+        const long available = (double)(buffer.f_bavail * buffer.f_bsize) / GB; // 비특권 사용자를 위한 유휴 블록 수 * 파일 시스템 블록 크기 = 사용 가능한 disk 크기
+        const long used = total - available;                                    // 전체 - 사용 가능 = 현재 사용중인 disk 크기
 
-        int m_avail, m_total, m_free, m_used;
-
-        ////////// Drive C
-        // C:\의 하드디스크 용량 정보를 받아 옴
-        GetDiskFreeSpaceEx(TEXT("c:\\"), &avail, &total, &free);
-
-        // GByte 로 표현을 하기 위한 부분
-        m_total = (int)(total.QuadPart >> 30);
-        m_free = (int)(free.QuadPart >> 30);
-
-        ////////// Drive D
-        // D:\의 하드디스크 용량 정보를 받아 옴
-        GetDiskFreeSpaceEx(TEXT("d:\\"), &avail, &total, &free);
-
-        // GByte 로 표현을 하기 위한 부분
-        m_total = (int)(total.QuadPart >> 30);
-        m_free = (int)(free.QuadPart >> 30);
-        m_used = m_total - m_free;
-
-        std::string totalDisk_suffix(std::to_string(m_total)); // total disk volume을 받는 변수
-        std::string usedDisk_suffix(std::to_string(m_used));   // used disk volume을 받는 변수
-        std::string availDisk_suffix(std::to_string(m_free));  // available disk volume을 받는 변수
+        std::string totalDisk_suffix(std::to_string(total));     // total disk volume을 받는 변수
+        std::string usedDisk_suffix(std::to_string(used));       // used disk volume을 받는 변수
+        std::string availDisk_suffix(std::to_string(available)); // available disk volume을 받는 변수
 
         reply->set_disk_info_reply(request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() + usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
         return Status::OK;
