@@ -1,6 +1,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <typeinfo>
+#include <unistd.h>
 
 #include "sys/sysinfo.h"
 #include "sys/types.h"
@@ -29,6 +31,9 @@ using moniter::CpuMoniterRequest;
 
 using moniter::DiskMoniterReply;
 using moniter::DiskMoniterRequest;
+
+using moniter::ProcessMoniterReply;
+using moniter::ProcessMoniterRequest;
 
 using moniter::MoniterService;
 
@@ -140,6 +145,37 @@ class MoniterServiceImpl final : public MoniterService::Service
         std::string availDisk_suffix(std::to_string(available)); // available disk volume을 받는 변수
 
         reply->set_disk_info_reply(request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() + usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
+        return Status::OK;
+    }
+
+    Status current_process_moniter_method(ServerContext *context,
+                                          const ProcessMoniterRequest *request,
+                                          ProcessMoniterReply *reply) override
+    {
+        char buffer[128];
+        std::string all_process_info = "";
+        FILE *pipe = popen("ps", "r");
+        static int i = 1;
+        if (!pipe)
+            throw std::runtime_error("popen() failed!");
+        try
+        {
+            while (fgets(buffer, sizeof buffer, pipe) != NULL)
+            {
+                all_process_info += buffer;
+            }
+        }
+        catch (...)
+        {
+            pclose(pipe);
+            throw;
+        }
+
+        std::string process_pid(std::to_string(getpid()));
+        std::string parent_process_pid(std::to_string(getppid()));
+
+        reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() + parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info);
+
         return Status::OK;
     }
 };

@@ -23,6 +23,7 @@ service MoniterService {
   rpc current_memory_moniter_method(MemoryRequest) returns (MemoryReply) {}
   rpc current_cpu_usage_moniter_method(CpuMoniterRequest) returns (CpuMoniterReply) {}
   rpc current_disk_usage_moniter_method(DiskMoniterRequest) returns (DiskMoniterReply) {}
+  rpc current_process_moniter_method(ProcessMoniterRequest) returns (ProcessMoniterReply) {}
 }
 
 
@@ -39,7 +40,7 @@ message MemoryReply {
   string memory_info_reply = 1;
 }
 
-// The request message containing the client order of cpu volume
+// The request message containing the client cpu order
 message CpuMoniterRequest {
   string cpu_request = 1;
 }
@@ -49,12 +50,27 @@ message CpuMoniterReply {
   string cpu_reply = 1;
 }
 
+// The response message containing the information of disk
 message DiskMoniterRequest{
   string total_disk_volume_request = 1;
   string disk_usage_request = 2;
   string avail_disk_volume_request = 3;
 }
 
+// The response message containing the information of disk
 message DiskMoniterReply{
   string disk_info_reply = 1;
+}
+
+
+// The request message containing the information of process
+message ProcessMoniterRequest{
+  string process_info_request = 1;
+  string parent_process_info_request = 2;
+  string all_process_info_request = 3;
+}
+
+// The request message containing the information of process
+message ProcessMoniterReply {
+  string process_info_reply = 1;
 }

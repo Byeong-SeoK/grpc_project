@@ -23,6 +23,9 @@ using moniter::CpuMoniterRequest;
 using moniter::DiskMoniterReply;
 using moniter::DiskMoniterRequest;
 
+using moniter::ProcessMoniterReply;
+using moniter::ProcessMoniterRequest;
+
 using moniter::MoniterService;
 
 class MemoryClient
@@ -142,6 +145,45 @@ public:
         if (status.ok())
         {
             return reply.disk_info_reply();
+        }
+        else
+        {
+            std::cout << status.error_code() << ": " << status.error_message()
+                      << std::endl;
+            return "RPC failed";
+        }
+    }
+
+private:
+    std::unique_ptr<MoniterService::Stub> stub_;
+};
+
+class ProcessMoniterClient
+{
+public:
+    ProcessMoniterClient(std::shared_ptr<Channel> channel)
+        : stub_(MoniterService::NewStub(channel)) {}
+    std::string current_process_moniter_method(const std::string &process_info_request,
+                                               const std::string &parent_process_info_request,
+                                               const std::string &all_process_info_request)
+    {
+        ProcessMoniterRequest request;
+        request.set_process_info_request(process_info_request);
+        request.set_parent_process_info_request(parent_process_info_request);
+        request.set_all_process_info_request(all_process_info_request);
+
+        ProcessMoniterReply reply;
+
+        ClientContext context;
+
+        // The actual RPC.
+        Status status =
+            stub_->current_process_moniter_method(&context, request, &reply);
+
+        // Act upon its status.
+        if (status.ok())
+        {
+            return reply.process_info_reply();
         }
         else
         {

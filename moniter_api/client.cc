@@ -74,6 +74,7 @@ int main(int argc, char **argv)
     std::cout << "1. Memory usage monitering service" << std::endl;
     std::cout << "2. CPU usage monitering service" << std::endl;
     std::cout << "3. Disk usage monitering service" << std::endl;
+    std::cout << "4. Process monitering service" << std::endl;
     std::cout << "0. Exit the monitering" << std::endl;
 
     int number = -1;
@@ -132,7 +133,23 @@ int main(int argc, char **argv)
 
       std::cout << DiskMoniterReply << std::endl;
     }
-    std::cout << std::endl;
+    else if (number == 4)
+    {
+      ProcessMoniterClient process_client(grpc::CreateChannel(
+          target_str,
+          grpc::InsecureChannelCredentials()));
+
+      std::string proc_prefix("Current process PID: ");
+      std::string pproc_prefix("Current parent process PID: ");
+      std::string aproc_prefix("All current process info: ");
+
+      std::cout << "========= The current information of process =========" << std::endl;
+      std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix);
+
+      std::cout << ProcessMoniterReply << std::endl;
+    }
+    std::cout << "\n"
+              << std::endl;
   }
 
   return 0;
