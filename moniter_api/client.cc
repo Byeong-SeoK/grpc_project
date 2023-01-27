@@ -22,7 +22,10 @@
 
 #include <grpcpp/grpcpp.h>
 #include "./include/moniter_server.h"
-#include "./include/moniter_client.h"
+#include "./include/memory_client.h"
+#include "./include/cpu_client.h"
+#include "./include/disk_client.h"
+#include "./include/process_client.h"
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -89,7 +92,7 @@ int main(int argc, char **argv)
     }
     else if (number == 1)
     {
-      MemoryClient memory_client(grpc::CreateChannel(
+      MemoryClient memory(grpc::CreateChannel(
           target_str,
           grpc::InsecureChannelCredentials()));                                                  // MemoryMoniter type class 생성
                                                                                                  // client order of memory object define
@@ -99,10 +102,10 @@ int main(int argc, char **argv)
       std::string avail_physical_memory_prefix("Current available of physical memory volume: "); // 현재 가용한 물리적 메모리 용량
 
       std::cout << "========= The current usage of memory system =========" << std::endl;
-      std::string memory_reply = memory_client.current_memory_moniter_method(virtual_memory_prefix,
-                                                                             physical_memory_prefix,
-                                                                             avail_virtual_memory_prefix,
-                                                                             avail_physical_memory_prefix);
+      std::string memory_reply = memory.current_memory_moniter_method(virtual_memory_prefix,
+                                                                      physical_memory_prefix,
+                                                                      avail_virtual_memory_prefix,
+                                                                      avail_physical_memory_prefix);
       std::cout << memory_reply << std::endl;
     }
     else if (number == 2)
@@ -151,7 +154,7 @@ int main(int argc, char **argv)
           target_str,
           grpc::InsecureChannelCredentials()));
 
-      std::cout << "Input PID: ";
+      std::cout << "Input Process name: ";
       std::string PID_number;
       std::cin >> PID_number;
       std::cout << std::endl;
