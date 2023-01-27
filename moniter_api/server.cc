@@ -39,15 +39,6 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
 
-using moniter::MemoryReply;
-using moniter::MemoryRequest;
-
-using moniter::CpuMoniterReply;
-using moniter::CpuMoniterRequest;
-
-using moniter::DiskMoniterReply;
-using moniter::DiskMoniterRequest;
-
 using moniter::MoniterService;
 
 void RunServer()

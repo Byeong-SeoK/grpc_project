@@ -23,12 +23,12 @@ project(Moniter C CXX)
 
 include(../cmake/common.cmake)
 
-# Moniter Proto file
+# Monitering API Proto file
 get_filename_component(mm_proto "../protos/moniter.proto" ABSOLUTE)
 get_filename_component(mm_proto_path "${mm_proto}" PATH)
 
 
-# Generated moniter api sources
+# Generated monitering api sources
 set(mm_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.cc")
 set(mm_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/moniter.pb.h")
 set(mm_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/moniter.grpc.pb.cc")

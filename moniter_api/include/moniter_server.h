@@ -2,7 +2,6 @@
 #include <memory>
 #include <string>
 #include <typeinfo>
-#include <unistd.h>
 
 #include "sys/sysinfo.h"
 #include "sys/types.h"
@@ -47,13 +46,6 @@ struct stJiffies // 실시간 cpu 사용량 측정을 위한 구조체
 };
 stJiffies curJiffies;
 stJiffies prevJiffies;
-
-// typedef struct _drive_info // disk 이용율 측정을 위한 구조체
-// {
-//     unsigned __int64 usedBytes;
-//     unsigned __int64 totoalFreeBytes;
-//     unsigned __int64 freeBytes;
-// } DRIVE_INFO;
 
 // Logic and data behind the server's behavior.
 class MoniterServiceImpl final : public MoniterService::Service
@@ -152,15 +144,14 @@ class MoniterServiceImpl final : public MoniterService::Service
                                           const ProcessMoniterRequest *request,
                                           ProcessMoniterReply *reply) override
     {
-        char buffer[128];
-        std::string all_process_info = "";
-        FILE *pipe = popen("ps", "r");
-        static int i = 1;
+        char buffer[128];                  // pipe를 통해서 shell창의 출력 결과를 임시적으로 저장하는 buffer이다.
+        std::string all_process_info = ""; // shell창의 출력 결과를 받는 변수
+        FILE *pipe = popen("ps", "r");     // shell창에 ps라는 명령어를 내리고 그 결과를 read mode로 읽어온다.
         if (!pipe)
             throw std::runtime_error("popen() failed!");
         try
         {
-            while (fgets(buffer, sizeof buffer, pipe) != NULL)
+            while (fgets(buffer, sizeof(buffer), pipe) != NULL) // buffer에 저장된 것 끝까지 하나씩 읽어서 all_process_info에 저장한다.
             {
                 all_process_info += buffer;
             }
@@ -171,10 +162,30 @@ class MoniterServiceImpl final : public MoniterService::Service
             throw;
         }
 
-        std::string process_pid(std::to_string(getpid()));
-        std::string parent_process_pid(std::to_string(getppid()));
+        char pid_buffer[128];
+        std::string pid_process_info = "";
+        std::string temp = "ps " + request->pid_number();
+        const char *command = temp.c_str();
+        FILE *pipe2 = popen(command, "r");
+        if (!pipe2)
+            throw std::runtime_error("popen() failed!");
+        try
+        {
+            while (fgets(pid_buffer, sizeof(pid_buffer), pipe2) != NULL)
+            {
+                pid_process_info = pid_process_info + pid_buffer;
+            }
+        }
+        catch (...)
+        {
+            pclose(pipe2);
+            throw;
+        }
 
-        reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() + parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info);
+        std::string process_pid(std::to_string(getpid()));         // 현재 process의 PID를 받는다.
+        std::string parent_process_pid(std::to_string(getppid())); // 현재 process의 parent process의 PID를 받는다.
+
+        reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() + parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info + "\n" + request->pid_process_info_request() + pid_process_info);
 
         return Status::OK;
     }

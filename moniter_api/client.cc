@@ -142,9 +142,15 @@ int main(int argc, char **argv)
       std::string proc_prefix("Current process PID: ");
       std::string pproc_prefix("Current parent process PID: ");
       std::string aproc_prefix("All current process info: ");
+      std::string pid_pro_prefix("Selected PID process info: ");
+
+      std::cout << "Input PID: ";
+      std::string PID_number;
+      std::cin >> PID_number;
+      std::cout << std::endl;
 
       std::cout << "========= The current information of process =========" << std::endl;
-      std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix);
+      std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix, pid_pro_prefix, PID_number);
 
       std::cout << ProcessMoniterReply << std::endl;
     }

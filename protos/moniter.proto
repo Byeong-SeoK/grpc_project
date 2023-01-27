@@ -27,7 +27,8 @@ service MoniterService {
 }
 
 
-// The request message containing client order
+// The request message contains virtual memory request, physical memory request
+// available virtual memory request and available physical memory request
 message MemoryRequest {
   string virtual_memory_request = 1;
   string physical_memory_request = 2;
@@ -50,7 +51,8 @@ message CpuMoniterReply {
   string cpu_reply = 1;
 }
 
-// The response message containing the information of disk
+// The request contains total disk volume request, used disk volume request
+// and available disk volume request
 message DiskMoniterRequest{
   string total_disk_volume_request = 1;
   string disk_usage_request = 2;
@@ -63,11 +65,16 @@ message DiskMoniterReply{
 }
 
 
-// The request message containing the information of process
+// The request message contains current process information reequest,
+// current process's parent process information request, total process information request,
+// process information request that selected by client's input PID and
+// client's input PID number
 message ProcessMoniterRequest{
   string process_info_request = 1;
   string parent_process_info_request = 2;
   string all_process_info_request = 3;
+  string pid_process_info_request = 4;
+  string pid_number = 5;
 }
 
 // The request message containing the information of process

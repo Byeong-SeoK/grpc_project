@@ -165,12 +165,16 @@ public:
         : stub_(MoniterService::NewStub(channel)) {}
     std::string current_process_moniter_method(const std::string &process_info_request,
                                                const std::string &parent_process_info_request,
-                                               const std::string &all_process_info_request)
+                                               const std::string &all_process_info_request,
+                                               const std::string &pid_process_info_request,
+                                               const std::string &PID_number)
     {
         ProcessMoniterRequest request;
         request.set_process_info_request(process_info_request);
         request.set_parent_process_info_request(parent_process_info_request);
         request.set_all_process_info_request(all_process_info_request);
+        request.set_pid_process_info_request(pid_process_info_request);
+        request.set_pid_number(PID_number);
 
         ProcessMoniterReply reply;
 
