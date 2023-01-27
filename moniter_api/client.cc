@@ -142,17 +142,27 @@ int main(int argc, char **argv)
       std::string proc_prefix("Current process PID: ");
       std::string pproc_prefix("Current parent process PID: ");
       std::string aproc_prefix("All current process info: ");
-      std::string pid_pro_prefix("Selected PID process info: ");
+
+      std::cout << "========= The current information of process =========" << std::endl;
+      std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix);
+      std::cout << ProcessMoniterReply << std::endl;
+
+      SelectedProcessMoniterClient selected_client(grpc::CreateChannel(
+          target_str,
+          grpc::InsecureChannelCredentials()));
 
       std::cout << "Input PID: ";
       std::string PID_number;
       std::cin >> PID_number;
       std::cout << std::endl;
 
-      std::cout << "========= The current information of process =========" << std::endl;
-      std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix, pid_pro_prefix, PID_number);
-
-      std::cout << ProcessMoniterReply << std::endl;
+      std::string pid_pro_prefix("Selected PID process info: \n");
+      std::string SelectedProcessMoniterReply = selected_client.selected_process_moniter_method(PID_number, pid_pro_prefix);
+      std::cout << SelectedProcessMoniterReply << std::endl;
+    }
+    else
+    {
+      std::cout << "Wrong input" << std::endl;
     }
     std::cout << "\n"
               << std::endl;

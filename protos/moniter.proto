@@ -24,6 +24,7 @@ service MoniterService {
   rpc current_cpu_usage_moniter_method(CpuMoniterRequest) returns (CpuMoniterReply) {}
   rpc current_disk_usage_moniter_method(DiskMoniterRequest) returns (DiskMoniterReply) {}
   rpc current_process_moniter_method(ProcessMoniterRequest) returns (ProcessMoniterReply) {}
+  rpc selected_process_moniter_method(SelectedProcessMoniterRequest) returns (SelectedProcessMoniterReply) {}
 }
 
 
@@ -67,17 +68,26 @@ message DiskMoniterReply{
 
 // The request message contains current process information reequest,
 // current process's parent process information request, total process information request,
-// process information request that selected by client's input PID and
-// client's input PID number
 message ProcessMoniterRequest{
   string process_info_request = 1;
   string parent_process_info_request = 2;
   string all_process_info_request = 3;
-  string pid_process_info_request = 4;
-  string pid_number = 5;
 }
 
-// The request message containing the information of process
+// The reply message containing the information of process
 message ProcessMoniterReply {
   string process_info_reply = 1;
+}
+
+
+// The request message contains process information request 
+//that selected by client's input PID and client's input PID number
+message SelectedProcessMoniterRequest{
+  string pid_process_info_request = 1;
+  string pid_number = 2;
+}
+
+//The reply message containing the information of selected process
+message SelectedProcessMoniterReply{
+  string selected_process_info_reply = 1;
 }

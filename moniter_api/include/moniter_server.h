@@ -34,6 +34,9 @@ using moniter::DiskMoniterRequest;
 using moniter::ProcessMoniterReply;
 using moniter::ProcessMoniterRequest;
 
+using moniter::SelectedProcessMoniterReply;
+using moniter::SelectedProcessMoniterRequest;
+
 using moniter::MoniterService;
 
 struct stJiffies // 실시간 cpu 사용량 측정을 위한 구조체
@@ -146,7 +149,7 @@ class MoniterServiceImpl final : public MoniterService::Service
     {
         char buffer[128];                  // pipe를 통해서 shell창의 출력 결과를 임시적으로 저장하는 buffer이다.
         std::string all_process_info = ""; // shell창의 출력 결과를 받는 변수
-        FILE *pipe = popen("ps", "r");     // shell창에 ps라는 명령어를 내리고 그 결과를 read mode로 읽어온다.
+        FILE *pipe = popen("ps -ef", "r"); // shell창에 ps라는 명령어를 내리고 그 결과를 read mode로 읽어온다.
         if (!pipe)
             throw std::runtime_error("popen() failed!");
         try
@@ -162,9 +165,21 @@ class MoniterServiceImpl final : public MoniterService::Service
             throw;
         }
 
+        std::string process_pid(std::to_string(getpid()));         // 현재 process의 PID를 받는다.
+        std::string parent_process_pid(std::to_string(getppid())); // 현재 process의 parent process의 PID를 받는다.
+
+        reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() + parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info);
+
+        return Status::OK;
+    }
+
+    Status selected_process_moniter_method(ServerContext *context,
+                                           const SelectedProcessMoniterRequest *request,
+                                           SelectedProcessMoniterReply *reply) override
+    {
         char pid_buffer[128];
         std::string pid_process_info = "";
-        std::string temp = "ps " + request->pid_number();
+        std::string temp = "ps -ef | grep " + request->pid_number();
         const char *command = temp.c_str();
         FILE *pipe2 = popen(command, "r");
         if (!pipe2)
@@ -182,10 +197,7 @@ class MoniterServiceImpl final : public MoniterService::Service
             throw;
         }
 
-        std::string process_pid(std::to_string(getpid()));         // 현재 process의 PID를 받는다.
-        std::string parent_process_pid(std::to_string(getppid())); // 현재 process의 parent process의 PID를 받는다.
-
-        reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() + parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info + "\n" + request->pid_process_info_request() + pid_process_info);
+        reply->set_selected_process_info_reply(request->pid_process_info_request() + pid_process_info);
 
         return Status::OK;
     }
