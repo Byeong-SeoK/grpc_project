@@ -67,12 +67,12 @@ public:
     SelectedProcessMoniterClient(std::shared_ptr<Channel> channel)
         : stub_(MoniterService::NewStub(channel)) {}
 
-    std::string selected_process_moniter_method(const std::string &PID_number,
+    std::string selected_process_moniter_method(const std::string &selected_process_name,
                                                 const std::string &pid_process_info_request)
     {
         SelectedProcessMoniterRequest request;
         request.set_pid_process_info_request(pid_process_info_request);
-        request.set_pid_number(PID_number);
+        request.set_selected_process_name(selected_process_name);
 
         SelectedProcessMoniterReply reply;
 

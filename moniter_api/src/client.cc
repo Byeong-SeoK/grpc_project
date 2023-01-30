@@ -15,17 +15,18 @@
  * limitations under the License.
  *
  */
+#include <glog/logging.h>
 
 #include <iostream>
 #include <memory>
 #include <string>
 
 #include <grpcpp/grpcpp.h>
-#include "./include/moniter_server.h"
-#include "./include/memory_client.h"
-#include "./include/cpu_client.h"
-#include "./include/disk_client.h"
-#include "./include/process_client.h"
+#include "../include/moniter_server.h"
+#include "../include/memory_client.h"
+#include "../include/cpu_client.h"
+#include "../include/disk_client.h"
+#include "../include/process_client.h"
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -125,11 +126,11 @@ int main(int argc, char **argv)
     {
       DiskMoniterClient disk_client(grpc::CreateChannel(
           target_str,
-          grpc::InsecureChannelCredentials()));
+          grpc::InsecureChannelCredentials())); // Create disk moniter client object
 
-      std::string totalDisk_prefix("Current total volume of disk: ");
-      std::string usedDisk_prefix("Current usage volume of disk: ");
-      std::string availDisk_prefix("Current available volume of disk: ");
+      std::string totalDisk_prefix("Current total volume of disk: ");     // Current disk volume size that mount on root directory (linux)
+      std::string usedDisk_prefix("Current usage volume of disk: ");      // Current used disk volume size that mount on root directory (linux)
+      std::string availDisk_prefix("Current available volume of disk: "); // Current available disk volume size that mount on root directory (linux)
 
       std::cout << "========= The current information of disk =========" << std::endl;
       std::string DiskMoniterReply = disk_client.current_disk_usage_moniter_method(totalDisk_prefix, usedDisk_prefix, availDisk_prefix);
@@ -140,11 +141,11 @@ int main(int argc, char **argv)
     {
       ProcessMoniterClient process_client(grpc::CreateChannel(
           target_str,
-          grpc::InsecureChannelCredentials()));
+          grpc::InsecureChannelCredentials())); // Create process monitering client object
 
-      std::string proc_prefix("Current process PID: ");
-      std::string pproc_prefix("Current parent process PID: ");
-      std::string aproc_prefix("All current process info: ");
+      std::string proc_prefix("Current process PID: ");         // Current process's PID
+      std::string pproc_prefix("Current parent process PID: "); // Current process's paraent process's PID
+      std::string aproc_prefix("All current process info: ");   // Total current process
 
       std::cout << "========= The current information of process =========" << std::endl;
       std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix);
@@ -152,15 +153,15 @@ int main(int argc, char **argv)
 
       SelectedProcessMoniterClient selected_client(grpc::CreateChannel(
           target_str,
-          grpc::InsecureChannelCredentials()));
+          grpc::InsecureChannelCredentials())); // Create selected monitering client object
 
-      std::cout << "Input Process name: ";
-      std::string PID_number;
-      std::cin >> PID_number;
+      std::cout << "Input Process name that you want to monitor: ";
+      std::string selected_process_name;
+      std::cin >> selected_process_name;
       std::cout << std::endl;
 
-      std::string pid_pro_prefix("Selected PID process info: \n");
-      std::string SelectedProcessMoniterReply = selected_client.selected_process_moniter_method(PID_number, pid_pro_prefix);
+      std::string pid_pro_prefix("Selected PID process info: \n"); // Process information that user selected
+      std::string SelectedProcessMoniterReply = selected_client.selected_process_moniter_method(selected_process_name, pid_pro_prefix);
       std::cout << SelectedProcessMoniterReply << std::endl;
     }
     else

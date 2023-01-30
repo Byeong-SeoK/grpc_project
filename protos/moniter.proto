@@ -84,7 +84,7 @@ message ProcessMoniterReply {
 //that selected by client's input PID and client's input PID number
 message SelectedProcessMoniterRequest{
   string pid_process_info_request = 1;
-  string pid_number = 2;
+  string selected_process_name = 2;
 }
 
 //The reply message containing the information of selected process

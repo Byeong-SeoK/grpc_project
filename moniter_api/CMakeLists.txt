@@ -21,7 +21,12 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(Moniter C CXX)
 
+
 include(../cmake/common.cmake)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(glog0.3.5 REQUIRED libglog)
+
 
 # Monitering API Proto file
 get_filename_component(mm_proto "../protos/moniter.proto" ABSOLUTE)
@@ -48,7 +53,6 @@ add_custom_command(
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 
-
 # mm_grpc_proto
 add_library(mm_grpc_proto
   ${mm_grpc_srcs}
@@ -61,28 +65,17 @@ target_link_libraries(mm_grpc_proto
   ${_PROTOBUF_LIBPROTOBUF})
 
 
+
 # include monitering API header
 add_library(system_monitering_API
 "./include/moniter_server.h"
-"./include/memory_client.h"
 "./include/cpu_client.h"
 "./include/disk_client.h"
 "./include/process_client.h")
 target_link_libraries(system_monitering_API
-  mm_grpc_proto
+  ${glog_LIBRARIES}
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
 
-
-# Targets [async_](client|server)
-foreach(_target
-  client server )
-  add_executable(${_target} "${_target}.cc")
-  target_link_libraries(${_target}
-    mm_grpc_proto
-    system_monitering_API
-    ${_REFLECTION}
-    ${_GRPC_GRPCPP}
-    ${_PROTOBUF_LIBPROTOBUF})
-endforeach()
+add_subdirectory(src)

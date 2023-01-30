@@ -179,7 +179,7 @@ class MoniterServiceImpl final : public MoniterService::Service
     {
         char pid_buffer[128];
         std::string pid_process_info = "";
-        std::string temp = "ps -ef | grep " + request->pid_number();
+        std::string temp = "ps -ef | grep " + request->selected_process_name(); // request
         const char *command = temp.c_str();
         FILE *pipe2 = popen(command, "r");
         if (!pipe2)

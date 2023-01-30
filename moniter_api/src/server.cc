@@ -16,6 +16,8 @@
  *
  */
 
+#include <glog/logging.h>
+
 #include <iostream>
 #include <memory>
 #include <string>
@@ -26,7 +28,7 @@
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
-#include "./include/moniter_server.h"
+#include "../include/moniter_server.h"
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
