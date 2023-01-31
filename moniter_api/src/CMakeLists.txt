@@ -2,16 +2,9 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(Moniter C CXX)
 
-add_library(memory_moniter_API #외부 사용자 정의 class의 method를 구현할 때는 관련된 header파일과 cc파일이 상대 경로로 들어가야 한다. 
-    "../include/memory_client.h"
-    "./memory_client.cc"
-)
-target_link_libraries(memory_moniter_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
-  ${glog_LIBRARIES}
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF}
-)
+add_subdirectory(memory)
+add_subdirectory(cpu)
+
 
 #Targets [async_](client|server)
 foreach(_target
@@ -21,6 +14,8 @@ target_link_libraries(${_target}
     mm_grpc_proto
     memory_moniter_API #여기서는 system_moniter_API가 아닌 현 cmakelist에 정의된 memory_moniter_API가 들어가야한다. 
                        #왜냐하면 system_moniter_API는 부모 cmake이므로 여기에서 해당 파일을 알 수 가 없다.
+                       #다만 하위 directory의 cmake에서 만든 alias는 참조가 가능하다.
+    cpu_moniter_API
     ${glog_LIBRARIES}
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
