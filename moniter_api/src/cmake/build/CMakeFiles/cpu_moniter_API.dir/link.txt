@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcpu_moniter_API.a CMakeFiles/cpu_moniter_API.dir/cpu/cpu_client.cc.o
+/usr/bin/ranlib libcpu_moniter_API.a

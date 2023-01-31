@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmemory_server_API.a CMakeFiles/memory_server_API.dir/memory/memory_server.cc.o
+/usr/bin/ranlib libmemory_server_API.a

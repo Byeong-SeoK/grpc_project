@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmm_grpc_proto.a CMakeFiles/mm_grpc_proto.dir/moniter.grpc.pb.cc.o CMakeFiles/mm_grpc_proto.dir/moniter.pb.cc.o
+/usr/bin/ranlib libmm_grpc_proto.a

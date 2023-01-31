@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsystem_monitering_API.a CMakeFiles/system_monitering_API.dir/memory/memory_server.cc.o CMakeFiles/system_monitering_API.dir/cpu/cpu_server.cc.o CMakeFiles/system_monitering_API.dir/disk/disk_server.cc.o CMakeFiles/system_monitering_API.dir/process/all_process_server.cc.o CMakeFiles/system_monitering_API.dir/process/selected_process_server.cc.o
+/usr/bin/ranlib libsystem_monitering_API.a

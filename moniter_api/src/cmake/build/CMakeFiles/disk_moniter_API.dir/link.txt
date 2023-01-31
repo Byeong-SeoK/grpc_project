@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdisk_moniter_API.a CMakeFiles/disk_moniter_API.dir/disk/disk_client.cc.o
+/usr/bin/ranlib libdisk_moniter_API.a

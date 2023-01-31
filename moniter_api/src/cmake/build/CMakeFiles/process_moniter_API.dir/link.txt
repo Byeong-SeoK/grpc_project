@@ -1,0 +1,2 @@
+/usr/bin/ar qc libprocess_moniter_API.a CMakeFiles/process_moniter_API.dir/process/all_process_client.cc.o CMakeFiles/process_moniter_API.dir/process/selected_process_client.cc.o
+/usr/bin/ranlib libprocess_moniter_API.a
