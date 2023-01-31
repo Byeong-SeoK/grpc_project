@@ -4,6 +4,7 @@ project(Moniter C CXX)
 
 add_subdirectory(memory)
 add_subdirectory(cpu)
+add_subdirectory(disk)
 
 
 #Targets [async_](client|server)
@@ -16,6 +17,7 @@ target_link_libraries(${_target}
                        #왜냐하면 system_moniter_API는 부모 cmake이므로 여기에서 해당 파일을 알 수 가 없다.
                        #다만 하위 directory의 cmake에서 만든 alias는 참조가 가능하다.
     cpu_moniter_API
+    disk_moniter_API
     ${glog_LIBRARIES}
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
