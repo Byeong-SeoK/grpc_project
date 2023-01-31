@@ -1,2 +1,0 @@
-/usr/bin/ar qc libmemory_moniter_API.a CMakeFiles/memory_moniter_API.dir/memory/memory_client.cc.o
-/usr/bin/ranlib libmemory_moniter_API.a
