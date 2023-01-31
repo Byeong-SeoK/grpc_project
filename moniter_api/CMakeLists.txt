@@ -68,8 +68,7 @@ target_link_libraries(mm_grpc_proto
 
 # include monitering API header
 add_library(system_monitering_API
-"./include/moniter_server.h"
-"./include/process_client.h")
+"./include/moniter_server.h")
 target_link_libraries(system_monitering_API
   ${glog_LIBRARIES}
   ${_REFLECTION}

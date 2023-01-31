@@ -5,6 +5,7 @@ project(Moniter C CXX)
 add_subdirectory(memory)
 add_subdirectory(cpu)
 add_subdirectory(disk)
+add_subdirectory(process)
 
 
 #Targets [async_](client|server)
@@ -18,6 +19,7 @@ target_link_libraries(${_target}
                        #다만 하위 directory의 cmake에서 만든 alias는 참조가 가능하다.
     cpu_moniter_API
     disk_moniter_API
+    process_moniter_API
     ${glog_LIBRARIES}
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
