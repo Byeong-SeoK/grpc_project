@@ -1,4 +1,4 @@
-#include "../../include/disk_client.h"
+#include "../../include/moniter_client.h"
 
 #include <iostream>
 #include <memory>
@@ -21,9 +21,9 @@ using moniter::DiskMoniterRequest;
 
 using moniter::MoniterService;
 
-std::string DiskMoniterClient::current_disk_usage_moniter_method(const std::string &total_disk_volume_request,
-                                                                 const std::string &disk_usage_request,
-                                                                 const std::string &avail_disk_volume_request)
+std::string MoniterClient::current_disk_usage_moniter_method(const std::string &total_disk_volume_request,
+                                                             const std::string &disk_usage_request,
+                                                             const std::string &avail_disk_volume_request)
 {
 
     // Data we are sending to the server.

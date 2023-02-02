@@ -21,8 +21,11 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(Moniter C CXX)
 
+#find_package (glog 0.3.5)
 
 include(../../cmake/common.cmake)
+
+#include(../../cmake/FindGlog.cmake)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(glog0.3.5 REQUIRED libglog)
@@ -60,6 +63,7 @@ add_library(mm_grpc_proto
   ${mm_proto_srcs}
   ${mm_proto_hdrs})
 target_link_libraries(mm_grpc_proto
+  ${GLOG_LIBRARIES}
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
@@ -67,7 +71,7 @@ target_link_libraries(mm_grpc_proto
 
 
 # include monitering API header of server part
-add_library(system_monitering_API
+add_library(system_monitering_server_API
   "../include/moniter_server.h"
   "./memory/memory_server.cc"
   "./cpu/cpu_server.cc"
@@ -75,52 +79,29 @@ add_library(system_monitering_API
   "./process/all_process_server.cc"
   "./process/selected_process_server.cc"
 )
-target_link_libraries(system_monitering_API
-  ${glog_LIBRARIES}
+target_link_libraries(system_monitering_server_API
+  ${GLOG_LIBRARIES}
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF})
 
 
+
+
 #include cpu monitoring API header
-add_library(cpu_moniter_API #외부 사용자 정의 class의 method를 구현할 때는 관련된 header파일과 cc파일이 상대 경로로 들어가야 한다. 
-    "../include/cpu_client.h"
+add_library(system_monitering_client_API #외부 사용자 정의 class의 method를 구현할 때는 관련된 header파일과 cc파일이 상대 경로로 들어가야 한다. 
+    "../include/moniter_client.h"
+    "./memory/memory_client.cc"
     "./cpu/cpu_client.cc"
-)
-target_link_libraries(cpu_moniter_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
-  ${glog_LIBRARIES}
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF}
-)
-
-
-#include disk monitoring API header
-add_library(disk_moniter_API #외부 사용자 정의 class의 method를 구현할 때는 관련된 header파일과 cc파일이 상대 경로로 들어가야 한다. 
-    "../include/disk_client.h"
     "./disk/disk_client.cc"
-)
-target_link_libraries(disk_moniter_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
-  ${glog_LIBRARIES}
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF}
-)
-
-
-
-#include process monitoring API header
-add_library(process_moniter_API #외부 사용자 정의 class의 method를 구현할 때는 관련된 header파일과 cc파일이 상대 경로로 들어가야 한다. 
-    "../include/process_client.h"
     "./process/all_process_client.cc"
     "./process/selected_process_client.cc"
 )
 #process_client.h에 class가 2개라 해서 add_library를 2개를 사용하면 안된다. Compile, build, linking할 때는
 #header 파일 1개가 하나의 라이브러리에 해당하므로 add_library를 2개를 사용하면 첫번째 add_library에서는
 #아래 쪽 class를 build하지 못하여 오류가 발생하고 두번째 add_library에서는 위 쪽 class를 build하지 못하여 오류가 발생한다. 
-target_link_libraries(
-  process_moniter_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
-  ${glog_LIBRARIES}
+target_link_libraries(system_monitering_client_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
+  ${GLOG_LIBRARIES}
   ${_REFLECTION}
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF}
@@ -128,38 +109,35 @@ target_link_libraries(
 
 
 
-# include memory monitering API header
-add_library(memory_moniter_API #외부 사용자 정의 class의 method를 구현할 때는 관련된 header파일과 cc파일이 상대 경로로 들어가야 한다. 
-    "../include/memory_client.h"
-    "./memory/memory_client.cc"
-)
-target_link_libraries(
-  memory_moniter_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
-  ${glog_LIBRARIES}
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF}
-)
-
-
+# include log monitoring API header
+# add_library(log_monitor_API
+#   "../include/service_log_client.h"
+#   "./log/service_log_client.cc"
+# )
+# target_link_libraries(
+#   log_monitor_API
+#   ${GLOG_LIBRARIES}
+#   ${_REFLECTION}
+#   ${_GRPC_GRPCPP}
+#   ${_PROTOBUF_LIBPROTOBUF}
+# )
 
 
 
 #Targets [async_](client|server)
 foreach(_target
-    client server )
+    client server)
 add_executable(${_target} "${_target}.cc")
 target_link_libraries(${_target}
     mm_grpc_proto
-    memory_moniter_API #여기서는 system_moniter_API가 아닌 현 cmakelist에 정의된 memory_moniter_API가 들어가야한다. 
-                       #왜냐하면 system_moniter_API는 부모 cmake이므로 여기에서 해당 파일을 알 수 가 없다.
-                       #다만 하위 directory의 cmake에서 만든 alias는 참조가 가능하다.
+                        #memory_moniter_API 
+                        #여기서는 system_moniter_API가 아닌 현 cmakelist에 정의된 memory_moniter_API가 들어가야한다. 
+                        #왜냐하면 system_moniter_API는 부모 cmake이므로 여기에서 해당 파일을 알 수 가 없다.
+                        #다만 하위 directory의 cmake에서 만든 alias는 참조가 가능하다.
     
-    system_monitering_API
-    cpu_moniter_API
-    disk_moniter_API
-    process_moniter_API
-    ${glog_LIBRARIES}
+    system_monitering_server_API
+    system_monitering_client_API
+    ${GLOG_LIBRARIES}
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
     ${_PROTOBUF_LIBPROTOBUF})

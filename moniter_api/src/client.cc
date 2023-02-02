@@ -23,10 +23,7 @@
 
 #include <grpcpp/grpcpp.h>
 #include "../include/moniter_server.h"
-#include "../include/memory_client.h"
-#include "../include/cpu_client.h"
-#include "../include/disk_client.h"
-#include "../include/process_client.h"
+#include "../include/moniter_client.h"
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -72,14 +69,18 @@ int main(int argc, char **argv)
     target_str = "localhost:50051";
   }
 
+  MoniterClient client(grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())); // client 객체 생성 및 gRPC 통신 채널 생성
+
+  std::cout << std::endl;
   while (true)
   {
-    std::cout << "========= Choose monitering service that you want =========" << std::endl;
-    std::cout << "1. Memory usage monitering service" << std::endl;
-    std::cout << "2. CPU usage monitering service" << std::endl;
-    std::cout << "3. Disk usage monitering service" << std::endl;
-    std::cout << "4. Process monitering service" << std::endl;
-    std::cout << "0. Exit the monitering" << std::endl;
+    std::cout << "========= Choose monitoring service that you want =========" << std::endl;
+    std::cout << "1. Memory usage monitoring service" << std::endl;
+    std::cout << "2. CPU usage monitoring service" << std::endl;
+    std::cout << "3. Disk usage monitoring service" << std::endl;
+    std::cout << "4. Process monitoring service" << std::endl;
+    std::cout << "5. Simple echo type log monitoring service" << std::endl;
+    std::cout << "0. Exit the monitoring" << std::endl;
 
     int number = -1;
     std::cout << "Input service number: ";
@@ -93,17 +94,13 @@ int main(int argc, char **argv)
     }
     else if (number == 1)
     {
-      MemoryClient memory(grpc::CreateChannel(
-          target_str,
-          grpc::InsecureChannelCredentials()));                                                  // MemoryMoniter type class 생성
-                                                                                                 // client order of memory object define
       std::string virtual_memory_prefix("Current usage of virtual memory volume: ");             // 현재 사용 중인 가상 메모리 용량
       std::string physical_memory_prefix("Current usage of physical memeory volume: ");          // 현재 사용 중인 물리적 메모리 용량
       std::string avail_virtual_memory_prefix("Current available of virtual memory volume: ");   // 현재 가용한 가상 메모리 용량
       std::string avail_physical_memory_prefix("Current available of physical memory volume: "); // 현재 가용한 물리적 메모리 용량
 
       std::cout << "========= The current usage of memory system =========" << std::endl;
-      std::string memory_reply = memory.current_memory_moniter_method(virtual_memory_prefix,
+      std::string memory_reply = client.current_memory_moniter_method(virtual_memory_prefix,
                                                                       physical_memory_prefix,
                                                                       avail_virtual_memory_prefix,
                                                                       avail_physical_memory_prefix);
@@ -111,49 +108,33 @@ int main(int argc, char **argv)
     }
     else if (number == 2)
     {
-      CpuMoniterClient cpu_client(grpc::CreateChannel(
-          target_str,
-          grpc::InsecureChannelCredentials()));
-
       std::string sentence("Current usage of CPU volume: ");
       while (true)
       {
-        std::string reply = cpu_client.current_cpu_usage_moniter_method(sentence);
+        std::string reply = client.current_cpu_usage_moniter_method(sentence);
         std::cout << reply << std::endl;
       }
     }
     else if (number == 3)
     {
-      DiskMoniterClient disk_client(grpc::CreateChannel(
-          target_str,
-          grpc::InsecureChannelCredentials())); // Create disk moniter client object
-
       std::string totalDisk_prefix("Current total volume of disk: ");     // Current disk volume size that mount on root directory (linux)
       std::string usedDisk_prefix("Current usage volume of disk: ");      // Current used disk volume size that mount on root directory (linux)
       std::string availDisk_prefix("Current available volume of disk: "); // Current available disk volume size that mount on root directory (linux)
 
       std::cout << "========= The current information of disk =========" << std::endl;
-      std::string DiskMoniterReply = disk_client.current_disk_usage_moniter_method(totalDisk_prefix, usedDisk_prefix, availDisk_prefix);
+      std::string DiskMoniterReply = client.current_disk_usage_moniter_method(totalDisk_prefix, usedDisk_prefix, availDisk_prefix);
 
       std::cout << DiskMoniterReply << std::endl;
     }
     else if (number == 4)
     {
-      ProcessMoniterClient process_client(grpc::CreateChannel(
-          target_str,
-          grpc::InsecureChannelCredentials())); // Create process monitering client object
-
       std::string proc_prefix("Current process PID: ");         // Current process's PID
       std::string pproc_prefix("Current parent process PID: "); // Current process's paraent process's PID
       std::string aproc_prefix("All current process info: ");   // Total current process
 
       std::cout << "========= The current information of process =========" << std::endl;
-      std::string ProcessMoniterReply = process_client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix);
+      std::string ProcessMoniterReply = client.current_process_moniter_method(proc_prefix, pproc_prefix, aproc_prefix);
       std::cout << ProcessMoniterReply << std::endl;
-
-      SelectedProcessMoniterClient selected_client(grpc::CreateChannel(
-          target_str,
-          grpc::InsecureChannelCredentials())); // Create selected monitering client object
 
       std::cout << "Input Process name that you want to monitor: ";
       std::string selected_process_name;
@@ -161,9 +142,19 @@ int main(int argc, char **argv)
       std::cout << std::endl;
 
       std::string pid_pro_prefix("Selected PID process info: \n"); // Process information that user selected
-      std::string SelectedProcessMoniterReply = selected_client.selected_process_moniter_method(selected_process_name, pid_pro_prefix);
+      std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, pid_pro_prefix);
       std::cout << SelectedProcessMoniterReply << std::endl;
     }
+    // else if (number == 5)
+    // {
+    //   ServiceLogMonitor log_client(grpc::CreateChannel(
+    //       target_str,
+    //       grpc::InsecureChannelCredentials()));
+
+    //   std::string log_request_prefix("Log: ");
+    //   std::string log_service_reply = log_client.service_log_monitor_method(log_request_prefix, argv);
+    //   std::cout << log_service_reply << std::endl;
+    // }
     else
     {
       std::cout << "Wrong input" << std::endl;

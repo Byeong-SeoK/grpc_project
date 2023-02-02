@@ -1,4 +1,4 @@
-#include "../../include/process_client.h"
+#include "../../include/moniter_client.h"
 
 #include <iostream>
 #include <memory>
@@ -21,8 +21,8 @@ using moniter::SelectedProcessMoniterRequest;
 
 using moniter::MoniterService;
 
-std::string SelectedProcessMoniterClient::selected_process_moniter_method(const std::string &selected_process_name,
-                                                                          const std::string &pid_process_info_request)
+std::string MoniterClient::selected_process_moniter_method(const std::string &selected_process_name,
+                                                           const std::string &pid_process_info_request)
 {
     SelectedProcessMoniterRequest request;
     request.set_pid_process_info_request(pid_process_info_request);

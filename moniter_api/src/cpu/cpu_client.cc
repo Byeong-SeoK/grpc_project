@@ -1,4 +1,4 @@
-#include "../../include/cpu_client.h"
+#include "../../include/moniter_client.h"
 
 #include <iostream>
 #include <memory>
@@ -21,7 +21,7 @@ using moniter::CpuMoniterRequest;
 
 using moniter::MoniterService;
 
-std::string CpuMoniterClient::current_cpu_usage_moniter_method(const std::string &sentence)
+std::string MoniterClient::current_cpu_usage_moniter_method(const std::string &sentence)
 {
     // Data we are sending to the server.
     CpuMoniterRequest request;

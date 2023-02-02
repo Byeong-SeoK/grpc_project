@@ -11,8 +11,10 @@
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
 
+#include <glog/logging.h>
+
 #ifdef BAZEL_BUILD
-#include "grpc_project/protos/moniter.grpc.pb.h"
+#include "moniter_api/protos/moniter.grpc.pb.h"
 #else
 #include "moniter.grpc.pb.h"
 #endif
@@ -36,6 +38,9 @@ using moniter::ProcessMoniterRequest;
 
 using moniter::SelectedProcessMoniterReply;
 using moniter::SelectedProcessMoniterRequest;
+
+using moniter::ServiceLogReply;
+using moniter::ServiceLogRequest;
 
 using moniter::MoniterService;
 
@@ -62,4 +67,6 @@ class MoniterServiceImpl final : public MoniterService::Service
     Status current_process_moniter_method(ServerContext *context, const ProcessMoniterRequest *request, ProcessMoniterReply *reply) override;
 
     Status selected_process_moniter_method(ServerContext *context, const SelectedProcessMoniterRequest *request, SelectedProcessMoniterReply *reply) override;
+
+    // Status service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply) override;
 };

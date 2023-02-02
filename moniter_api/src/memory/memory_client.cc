@@ -1,4 +1,4 @@
-#include "../../include/memory_client.h"
+#include "../../include/moniter_client.h"
 
 #include <iostream>
 #include <memory>
@@ -21,10 +21,10 @@ using moniter::MemoryRequest;
 
 using moniter::MoniterService;
 
-std::string MemoryClient::current_memory_moniter_method(const std::string virtual_memory_request,
-                                                        const std::string physical_memory_request,
-                                                        const std::string avail_virtual_memory_request,
-                                                        const std::string avail_physical_memory_request)
+std::string MoniterClient::current_memory_moniter_method(const std::string virtual_memory_request,
+                                                         const std::string physical_memory_request,
+                                                         const std::string avail_virtual_memory_request,
+                                                         const std::string avail_physical_memory_request)
 {
     // Data we are sending to the server.
     MemoryRequest request;

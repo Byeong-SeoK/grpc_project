@@ -1,4 +1,4 @@
-#include "../../include/process_client.h"
+#include "../../include/moniter_client.h"
 
 #include <iostream>
 #include <memory>
@@ -21,9 +21,9 @@ using moniter::ProcessMoniterRequest;
 
 using moniter::MoniterService;
 
-std::string ProcessMoniterClient::current_process_moniter_method(const std::string &process_info_request,
-                                                                 const std::string &parent_process_info_request,
-                                                                 const std::string &all_process_info_request) // 모든 process 정보 조회
+std::string MoniterClient::current_process_moniter_method(const std::string &process_info_request,
+                                                          const std::string &parent_process_info_request,
+                                                          const std::string &all_process_info_request) // 모든 process 정보 조회
 {
     ProcessMoniterRequest request;
     request.set_process_info_request(process_info_request);
