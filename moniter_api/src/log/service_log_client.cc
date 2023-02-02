@@ -1,4 +1,4 @@
-#include "../../include/service_log_client.h"
+#include "../../include/moniter_client.h"
 #include <glog/logging.h>
 
 #include <iostream>
@@ -20,7 +20,7 @@ using moniter::ServiceLogRequest;
 
 using moniter::MoniterService;
 
-std::string ServiceLogMonitor::service_log_monitor_method(const std::string &service_log_request, char **temp)
+std::string MoniterClient::service_log_monitor_method(const std::string &service_log_request)
 {
 
     // Data we are sending to the server.
@@ -49,9 +49,4 @@ std::string ServiceLogMonitor::service_log_monitor_method(const std::string &ser
                   << std::endl;
         return "RPC failed";
     }
-}
-
-char **ServiceLogMonitor::simple_transmission(char **temp)
-{
-    return temp;
 }

@@ -68,5 +68,5 @@ class MoniterServiceImpl final : public MoniterService::Service
 
     Status selected_process_moniter_method(ServerContext *context, const SelectedProcessMoniterRequest *request, SelectedProcessMoniterReply *reply) override;
 
-    // Status service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply) override;
+    Status service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply) override;
 };

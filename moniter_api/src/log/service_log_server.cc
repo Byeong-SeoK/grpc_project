@@ -10,6 +10,7 @@
 #include "sys/sysinfo.h"
 #include "sys/types.h"
 #include "sys/statvfs.h"
+#include "time.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -21,20 +22,15 @@ using moniter::ServiceLogRequest;
 
 using moniter::MoniterService;
 
-Status MoniterServiceImpl::service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply, char **temp)
+Status MoniterServiceImpl::service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply)
 {
-    google::InitGoogleLogging(temp[0]);
-
-    // default 설정 시, INFO, WARNING 레벨은 로그 파일에만 출력됨
-    // LOG(INFO) << "INFO 레벨의 로그";
+    time_t currentSec = time(NULL);
+    tm *t = localtime(&currentSec);
+    // std::cout << t->tm_mon + 1 << " " << t->tm_mday << " " << t->tm_hour << " " << t->tm_min << " " << t->tm_sec << std::endl;
+    LOG(INFO) << "INFO 레벨의 로그";
     LOG(WARNING) << "WARNING 레벨의 로그";
-
-    // default 설정 시, ERROR 레벨 이상부터 stderr 로 출력된다.
-    // LOG(ERROR) << "ERROR 레벨의 로그";
-
-    // FATAL의 경우, Stack trace를 출력하고 프로그램을 종료시킨다.
-    // LOG(FATAL) << "FATAL 레벨의 로그"
-
-    reply->set_service_log_reply(request->service_log_request() + LOG(WARNING) << "INFO 레벨의 로그");
+    LOG(ERROR) << "ERROR 레벨의 로그";
+    sleep(1);
+    reply->set_service_log_reply(request->service_log_request());
     return Status::OK;
 }

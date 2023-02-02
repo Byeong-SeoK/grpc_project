@@ -30,6 +30,9 @@ using moniter::ProcessMoniterRequest;
 using moniter::SelectedProcessMoniterReply;
 using moniter::SelectedProcessMoniterRequest;
 
+using moniter::ServiceLogReply;
+using moniter::ServiceLogRequest;
+
 using moniter::MoniterService;
 
 class MoniterClient
@@ -52,8 +55,9 @@ public:
                                                const std::string &parent_process_info_request,
                                                const std::string &all_process_info_request);
 
-    std::string selected_process_moniter_method(const std::string &selected_process_name,
-                                                const std::string &pid_process_info_request);
+    std::string selected_process_moniter_method(const std::string &selected_process_name, const std::string &pid_process_info_request);
+
+    std::string service_log_monitor_method(const std::string &service_log_request);
 
 private:
     std::unique_ptr<MoniterService::Stub> stub_;

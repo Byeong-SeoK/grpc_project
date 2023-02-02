@@ -25,10 +25,12 @@ project(Moniter C CXX)
 
 include(../../cmake/common.cmake)
 
-#include(../../cmake/FindGlog.cmake)
+include(../../cmake/FindGlog.cmake)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(glog0.3.5 REQUIRED libglog)
+
+find_package(GFLAGS REQUIRED)
 
 
 # Monitering API Proto file
@@ -78,6 +80,7 @@ add_library(system_monitering_server_API
   "./disk/disk_server.cc"
   "./process/all_process_server.cc"
   "./process/selected_process_server.cc"
+  "./log/service_log_server.cc"
 )
 target_link_libraries(system_monitering_server_API
   ${GLOG_LIBRARIES}
@@ -96,6 +99,7 @@ add_library(system_monitering_client_API #외부 사용자 정의 class의 metho
     "./disk/disk_client.cc"
     "./process/all_process_client.cc"
     "./process/selected_process_client.cc"
+    "./log/service_log_client.cc"
 )
 #process_client.h에 class가 2개라 해서 add_library를 2개를 사용하면 안된다. Compile, build, linking할 때는
 #header 파일 1개가 하나의 라이브러리에 해당하므로 add_library를 2개를 사용하면 첫번째 add_library에서는
@@ -106,22 +110,6 @@ target_link_libraries(system_monitering_client_API #add_libaray 이후 target_li
   ${_GRPC_GRPCPP}
   ${_PROTOBUF_LIBPROTOBUF}
 )
-
-
-
-# include log monitoring API header
-# add_library(log_monitor_API
-#   "../include/service_log_client.h"
-#   "./log/service_log_client.cc"
-# )
-# target_link_libraries(
-#   log_monitor_API
-#   ${GLOG_LIBRARIES}
-#   ${_REFLECTION}
-#   ${_GRPC_GRPCPP}
-#   ${_PROTOBUF_LIBPROTOBUF}
-# )
-
 
 
 #Targets [async_](client|server)

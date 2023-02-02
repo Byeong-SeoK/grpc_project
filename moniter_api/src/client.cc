@@ -69,6 +69,7 @@ int main(int argc, char **argv)
     target_str = "localhost:50051";
   }
 
+  google::InitGoogleLogging(argv[0]);
   MoniterClient client(grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())); // client 객체 생성 및 gRPC 통신 채널 생성
 
   std::cout << std::endl;
@@ -145,16 +146,15 @@ int main(int argc, char **argv)
       std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, pid_pro_prefix);
       std::cout << SelectedProcessMoniterReply << std::endl;
     }
-    // else if (number == 5)
-    // {
-    //   ServiceLogMonitor log_client(grpc::CreateChannel(
-    //       target_str,
-    //       grpc::InsecureChannelCredentials()));
-
-    //   std::string log_request_prefix("Log: ");
-    //   std::string log_service_reply = log_client.service_log_monitor_method(log_request_prefix, argv);
-    //   std::cout << log_service_reply << std::endl;
-    // }
+    else if (number == 5)
+    {
+      std::string log_request_prefix("Log: ");
+      while (true)
+      {
+        std::string log_service_reply = client.service_log_monitor_method(log_request_prefix);
+        std::cout << log_service_reply << std::endl;
+      }
+    }
     else
     {
       std::cout << "Wrong input" << std::endl;
