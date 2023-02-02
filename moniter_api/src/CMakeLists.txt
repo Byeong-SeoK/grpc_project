@@ -112,6 +112,18 @@ target_link_libraries(system_monitering_client_API #add_libaray 이후 target_li
 )
 
 
+add_library(client_UI
+  "../include/client_UI.h"
+  "./UI/client_UI.cc"
+)
+target_link_libraries(system_monitering_client_API #add_libaray 이후 target_link를 해야 build와 linking이 한번에 가능하도록 만들 수 있다.
+  ${GLOG_LIBRARIES}
+  ${_REFLECTION}
+  ${_GRPC_GRPCPP}
+  ${_PROTOBUF_LIBPROTOBUF}
+)
+
+
 #Targets [async_](client|server)
 foreach(_target
     client server)
@@ -125,6 +137,7 @@ target_link_libraries(${_target}
     
     system_monitering_server_API
     system_monitering_client_API
+    client_UI
     ${GLOG_LIBRARIES}
     ${_REFLECTION}
     ${_GRPC_GRPCPP}
