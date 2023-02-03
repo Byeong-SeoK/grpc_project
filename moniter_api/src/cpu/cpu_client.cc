@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <glog/logging.h>
 
 #include <grpcpp/grpcpp.h>
 
@@ -41,12 +42,14 @@ std::string MoniterClient::current_cpu_usage_moniter_method(const std::string &s
     // Act upon its status.
     if (status.ok())
     {
+        LOG(INFO) << "CPU monitoring service API success" << std::endl;
         return reply.cpu_reply();
     }
     else
     {
-        std::cout << status.error_code() << ": " << status.error_message()
-                  << std::endl;
+        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        // std::cout << status.error_code() << ": " << status.error_message()
+        //           << std::endl;
         return "RPC failed";
     }
 }

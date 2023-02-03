@@ -41,12 +41,14 @@ std::string MoniterClient::service_log_monitor_method(const std::string &service
     // Act upon its status.
     if (status.ok())
     {
+        LOG(INFO) << "Log service API Success" << std::endl;
         return reply.service_log_reply();
     }
     else
     {
-        std::cout << status.error_code() << ": " << status.error_message()
-                  << std::endl;
+        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        // std::cout << status.error_code() << ": " << status.error_message()
+        //           << std::endl;
         return "RPC failed";
     }
 }

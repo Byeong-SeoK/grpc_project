@@ -5,6 +5,7 @@
 #include <string>
 
 #include <grpcpp/grpcpp.h>
+#include <glog/logging.h>
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -47,12 +48,14 @@ std::string MoniterClient::current_memory_moniter_method(const std::string virtu
     // Act upon its status.
     if (status.ok())
     {
+        LOG(INFO) << "Memory monitoring service API Success" << std::endl;
         return reply.memory_info_reply();
     }
     else
     {
-        std::cout << status.error_code() << ": " << status.error_message()
-                  << std::endl;
+        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        // std::cout << status.error_code() << ": " << status.error_message()
+        //           << std::endl;
         return "RPC failed";
     }
 }

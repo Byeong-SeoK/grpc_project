@@ -22,6 +22,7 @@
 #include <string>
 
 #include <grpcpp/grpcpp.h>
+#include <glog/logging.h>
 #include "../include/moniter_server.h"
 #include "../include/moniter_client.h"
 #include "../include/client_UI.h"
@@ -54,14 +55,16 @@ int main(int argc, char **argv)
       }
       else
       {
-        std::cout << "The only correct argument syntax is --target="
-                  << std::endl;
+        LOG(ERROR) << "The only correct argument syntax is --target=" << std::endl;
+        // std::cout << "The only correct argument syntax is --target="
+        //           << std::endl;
         return 0;
       }
     }
     else
     {
-      std::cout << "The only acceptable argument is --target=" << std::endl;
+      LOG(ERROR) << "The only acceptable argument is --target=" << std::endl;
+      // std::cout << "The only acceptable argument is --target=" << std::endl;
       return 0;
     }
   }
@@ -86,6 +89,7 @@ int main(int argc, char **argv)
 
     if (number == 0)
     {
+      LOG(INFO) << "Finish monitoring service" << std::endl;
       std::cout << "Exit" << std::endl;
       break;
     }
@@ -103,8 +107,8 @@ int main(int argc, char **argv)
       UI.set_request(2);
       while (true)
       {
-        std::string reply = client.current_cpu_usage_moniter_method(UI.get_request()[0]);
-        std::cout << reply << std::endl;
+        std::string cpu_reply = client.current_cpu_usage_moniter_method(UI.get_request()[0]);
+        std::cout << cpu_reply << std::endl;
       }
     }
     else if (number == 3)
@@ -128,18 +132,19 @@ int main(int argc, char **argv)
       std::cin >> selected_process_name;
       std::cout << std::endl;
 
-      std::string pid_pro_prefix("Selected PID process info: \n"); // Process information that user selected
-      std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, pid_pro_prefix);
+      std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, UI.get_request()[3]);
       std::cout << SelectedProcessMoniterReply << std::endl;
     }
     else if (number == 5)
     {
       std::string log_request_prefix("Log: ");
-      while (true)
-      {
-        std::string log_service_reply = client.service_log_monitor_method(log_request_prefix);
-        std::cout << log_service_reply << std::endl;
-      }
+      std::string log_service_reply = client.service_log_monitor_method(log_request_prefix);
+      std::cout << log_service_reply << std::endl;
+      // while (true)
+      // {
+      //   std::string log_service_reply = client.service_log_monitor_method(log_request_prefix);
+      //   std::cout << log_service_reply << std::endl;
+      // }
     }
     else
     {

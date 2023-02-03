@@ -70,5 +70,5 @@ class MoniterServiceImpl final : public MoniterService::Service
 
     Status service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply) override;
 
-    void Write(const std::string &pgmname, const std::string &msg);
+    void writeLog(std::string name, int line, int lv, const char *str, ...);
 };

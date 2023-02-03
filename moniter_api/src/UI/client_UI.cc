@@ -33,9 +33,10 @@ void Client_UI::set_request(int num)
     }
     else if (num == 4)
     {
-        this->vecRequest.push_back("Current process PID: ");        // Current process's PID
-        this->vecRequest.push_back("Current parent process PID: "); // Current process's paraent process's PID
-        this->vecRequest.push_back("All current process info: ");   // Total current process
+        this->vecRequest.push_back("Current process PID: ");         // Current process's PID
+        this->vecRequest.push_back("Current parent process PID: ");  // Current process's paraent process's PID
+        this->vecRequest.push_back("All current process info: ");    // Total current process
+        this->vecRequest.push_back("Selected PID process info: \n"); // Process information that user selected
     }
 }
 

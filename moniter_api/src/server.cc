@@ -28,6 +28,7 @@
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
+#include <glog/logging.h>
 
 #include "../include/moniter_server.h"
 

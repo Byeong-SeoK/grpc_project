@@ -5,6 +5,7 @@
 #include <string>
 
 #include <grpcpp/grpcpp.h>
+#include <glog/logging.h>
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -41,12 +42,14 @@ std::string MoniterClient::current_process_moniter_method(const std::string &pro
     // Act upon its status.
     if (status.ok())
     {
+        LOG(INFO) << "Total process monitoring service API Success" << std::endl;
         return reply.process_info_reply();
     }
     else
     {
-        std::cout << status.error_code() << ": " << status.error_message()
-                  << std::endl;
+        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        // std::cout << status.error_code() << ": " << status.error_message()
+        //           << std::endl;
         return "RPC failed";
     }
 }

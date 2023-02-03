@@ -35,6 +35,7 @@ Status MoniterServiceImpl::current_disk_usage_moniter_method(ServerContext *cont
     std::string usedDisk_suffix(std::to_string(used));       // used disk volume을 받는 변수
     std::string availDisk_suffix(std::to_string(available)); // available disk volume을 받는 변수
 
-    reply->set_disk_info_reply(request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() + usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
+    reply->set_disk_info_reply(request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() +
+                               usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
     return Status::OK;
 }

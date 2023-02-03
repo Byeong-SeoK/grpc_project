@@ -44,7 +44,8 @@ Status MoniterServiceImpl::current_process_moniter_method(ServerContext *context
     std::string process_pid(std::to_string(getpid()));         // 현재 process의 PID를 받는다.
     std::string parent_process_pid(std::to_string(getppid())); // 현재 process의 parent process의 PID를 받는다.
 
-    reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() + parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info);
+    reply->set_process_info_reply(request->process_info_request() + process_pid + "\n" + request->parent_process_info_request() +
+                                  parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info);
 
     return Status::OK;
 }
