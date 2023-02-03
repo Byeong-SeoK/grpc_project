@@ -49,6 +49,10 @@ std::string MoniterClient::current_memory_moniter_method(const std::string virtu
     if (status.ok())
     {
         LOG(INFO) << "Memory monitoring service API Success" << std::endl;
+
+        // std::cout << google::INFO << " " << google::WARNING << " " << google::ERROR << " " << google::FATAL << " " << google::ERROR << std::endl;
+        // 위 코드를 통해서 INFO, WARNING, ERROR, FATAL 각각 0,1,2,3 이라는 고유 번호로 구분할 수 있음을 알 수 있다.
+
         return reply.memory_info_reply();
     }
     else

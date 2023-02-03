@@ -23,6 +23,7 @@
 
 #include <grpcpp/grpcpp.h>
 #include <glog/logging.h>
+#include <gflags/gflags.h>
 #include "../include/moniter_server.h"
 #include "../include/moniter_client.h"
 #include "../include/client_UI.h"
@@ -73,6 +74,7 @@ int main(int argc, char **argv)
     target_str = "localhost:50051";
   }
 
+  FLAGS_log_dir = "../../../../file/";
   google::InitGoogleLogging(argv[0]);
   MoniterClient client(grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())); // client 객체 생성 및 gRPC 통신 채널 생성
   Client_UI UI;                                                                              // client UI를 다루는 객체 생성
