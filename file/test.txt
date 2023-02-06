@@ -1,9 +1,0 @@
-[INFO]  °Õ´ [ÐÕ´:10] : test log
-[INFO]  °Õk^ [ÐÕk^:10] : test log
-[INFO]  °Õk^ [ÐÕk^:10] : test log
-[INFO]  °Õk^ [ÐÕk^:10] : test log
-[INFO]  °Õk^ [ÐÕk^:10] : test log
-[INFO]  °ÕWÈ [ÐÕWÈ:10] : test log
-[INFO]  °…ÿ(Ó [Ð…ÿ(Ó:10] : test log
-[INFO]  °åÿ/Ò [Ðåÿ/Ò:10] : test log
-[INFO]  °…ÆLÒ [Ð…ÆLÒ:10] : test log

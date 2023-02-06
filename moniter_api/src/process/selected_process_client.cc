@@ -1,4 +1,5 @@
 #include "../../include/moniter_client.h"
+#include "../../include/save_log.h"
 
 #include <iostream>
 #include <memory>
@@ -37,17 +38,20 @@ std::string MoniterClient::selected_process_moniter_method(const std::string &se
     Status status =
         stub_->selected_process_moniter_method(&context, request, &reply);
 
+    SaveLog log;
+
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "Selected process monitoring service API Success" << std::endl;
+        // LOG(INFO) << "Selected process monitoring service API Success" << std::endl;
+        log.save_level_Log(google::INFO, "Selected process monitoring service API Success");
         return reply.selected_process_info_reply();
     }
     else
     {
-        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
-        // std::cout << status.error_code() << ": " << status.error_message()
-        //           << std::endl;
+        // LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        std::string error_msg = status.error_code() + ": " + status.error_message();
+        log.save_level_Log(google::ERROR, error_msg.c_str());
         return "RPC failed";
     }
 }

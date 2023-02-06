@@ -1,4 +1,5 @@
 #include "../../include/moniter_client.h"
+#include "../../include/save_log.h"
 
 #include <iostream>
 #include <memory>
@@ -39,17 +40,20 @@ std::string MoniterClient::current_cpu_usage_moniter_method(const std::string &s
     Status status =
         stub_->current_cpu_usage_moniter_method(&context, request, &reply);
 
+    SaveLog log;
+
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "CPU monitoring service API success" << std::endl;
+        // LOG(INFO) << "CPU monitoring service API success" << std::endl;
+        log.save_level_Log(google::INFO, "CPU monitoring service API success");
         return reply.cpu_reply();
     }
     else
     {
-        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
-        // std::cout << status.error_code() << ": " << status.error_message()
-        //           << std::endl;
+        // LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        std::string error_msg = status.error_code() + ": " + status.error_message();
+        log.save_level_Log(google::ERROR, error_msg.c_str());
         return "RPC failed";
     }
 }

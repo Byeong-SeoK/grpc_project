@@ -12,5 +12,5 @@
 class SaveLog
 {
 public:
-    voic save_level_Log(std::string log, int level);
-}
+    void save_level_Log(int level, const char *log); // level 파라미터에는 google::* 룰 받고 log에는 기록으로 남길 sentence를 받는다.
+};

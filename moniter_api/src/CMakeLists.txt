@@ -71,6 +71,17 @@ target_link_libraries(mm_grpc_proto
   ${_PROTOBUF_LIBPROTOBUF})
 
 
+add_library(system_log_API
+  "../include/save_log.h"
+  "./log/save_log.cc"
+)
+target_link_libraries(system_log_API
+  ${GLOG_LIBRARIES}
+  ${_REFLECTION}
+  ${_GRPC_GRPCPP}
+  ${_PROTOBUF_LIBPROTOBUF}
+)
+
 
 # include monitering API header of server part
 add_library(system_monitering_server_API
@@ -137,6 +148,7 @@ target_link_libraries(${_target}
     
     system_monitering_server_API
     system_monitering_client_API
+    system_log_API
     client_UI
     ${GLOG_LIBRARIES}
     ${_REFLECTION}

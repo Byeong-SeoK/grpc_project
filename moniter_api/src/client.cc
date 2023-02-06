@@ -27,6 +27,7 @@
 #include "../include/moniter_server.h"
 #include "../include/moniter_client.h"
 #include "../include/client_UI.h"
+#include "../include/save_log.h"
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -74,10 +75,13 @@ int main(int argc, char **argv)
     target_str = "localhost:50051";
   }
 
+  fLB::FLAGS_logtostderr = 0;
   FLAGS_log_dir = "../../../../file/";
+
   google::InitGoogleLogging(argv[0]);
   MoniterClient client(grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())); // client 객체 생성 및 gRPC 통신 채널 생성
   Client_UI UI;                                                                              // client UI를 다루는 객체 생성
+  SaveLog log;
 
   std::cout << std::endl;
   while (true)
@@ -91,7 +95,7 @@ int main(int argc, char **argv)
 
     if (number == 0)
     {
-      LOG(INFO) << "Finish monitoring service" << std::endl;
+      log.save_level_Log(google::INFO, "Finish monitoring service");
       std::cout << "Exit" << std::endl;
       break;
     }

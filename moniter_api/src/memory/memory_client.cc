@@ -1,4 +1,5 @@
 #include "../../include/moniter_client.h"
+#include "../../include/save_log.h"
 
 #include <iostream>
 #include <memory>
@@ -45,21 +46,21 @@ std::string MoniterClient::current_memory_moniter_method(const std::string virtu
     Status status =
         stub_->current_memory_moniter_method(&context, request, &reply);
 
+    SaveLog log;
+
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "Memory monitoring service API Success" << std::endl;
-
-        // std::cout << google::INFO << " " << google::WARNING << " " << google::ERROR << " " << google::FATAL << " " << google::ERROR << std::endl;
-        // 위 코드를 통해서 INFO, WARNING, ERROR, FATAL 각각 0,1,2,3 이라는 고유 번호로 구분할 수 있음을 알 수 있다.
+        log.save_level_Log(google::INFO, "Memory monitoring service API Success");
 
         return reply.memory_info_reply();
     }
     else
     {
-        LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
-        // std::cout << status.error_code() << ": " << status.error_message()
-        //           << std::endl;
+        // LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
+        std::string error_msg = status.error_code() + ": " + status.error_message();
+
+        log.save_level_Log(google::ERROR, error_msg.c_str());
         return "RPC failed";
     }
 }

@@ -12,6 +12,7 @@
 #include <grpcpp/health_check_service_interface.h>
 
 #include <glog/logging.h>
+#include <gflags/gflags.h>
 
 #ifdef BAZEL_BUILD
 #include "moniter_api/protos/moniter.grpc.pb.h"
@@ -70,5 +71,11 @@ class MoniterServiceImpl final : public MoniterService::Service
 
     Status service_log_monitor_method(ServerContext *context, const ServiceLogRequest *request, ServiceLogReply *reply) override;
 
-    void writeLog(std::string name, int line, int lv, const char *str, ...);
+    // void writeLog(std::string name, int line, int lv, const char *str, ...);
 };
+
+// class SaveLog
+// {
+// public:
+//     void save_level_Log(const char *log, int level);
+// };
