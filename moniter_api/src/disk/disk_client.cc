@@ -1,6 +1,7 @@
 #include "../../include/moniter_client.h"
-#include "../../include/save_log.h"
+#include "../../include/set_log_dir.h"
 
+#include <sys/stat.h>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -27,7 +28,6 @@ std::string MoniterClient::current_disk_usage_moniter_method(const std::string &
                                                              const std::string &disk_usage_request,
                                                              const std::string &avail_disk_volume_request)
 {
-
     // Data we are sending to the server.
     DiskMoniterRequest request;
     request.set_total_disk_volume_request(total_disk_volume_request);
@@ -45,20 +45,20 @@ std::string MoniterClient::current_disk_usage_moniter_method(const std::string &
     Status status =
         stub_->current_disk_usage_moniter_method(&context, request, &reply);
 
-    SaveLog log;
+    SetlogDir dir;
+    std::string logDir = dir.setDir();
+    mkdir(logDir.c_str(), 0755); // 날짜별 로그 폴더 생성, 폴더 접근 권한은 0755가 가장 기본적인 값이다.
+    FLAGS_log_dir = logDir;
+
     // Act upon its status.
     if (status.ok())
     {
-        // LOG(INFO) << "Disk monitoring service API Success" << std::endl;
-        log.save_level_Log(google::INFO, "Disk monitoring service API Success");
+        LOG(INFO) << "Disk monitoring service API Success";
         return reply.disk_info_reply();
     }
     else
     {
-        // LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
-        std::string error_msg = status.error_code() + ": " + status.error_message();
-        log.save_level_Log(google::ERROR, error_msg.c_str());
-
+        LOG(ERROR) << status.error_code() << ": " << status.error_message();
         return "RPC failed";
     }
 }

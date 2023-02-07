@@ -1,4 +1,5 @@
 #include "../../include/moniter_server.h"
+#include "../../include/set_log_dir.h"
 
 #include <iostream>
 #include <memory>
@@ -8,6 +9,7 @@
 #include "sys/sysinfo.h"
 #include "sys/types.h"
 #include "sys/statvfs.h"
+#include "sys/stat.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -23,6 +25,16 @@ Status MoniterServiceImpl::current_memory_moniter_method(ServerContext *context,
                                                          const MemoryRequest *request,
                                                          MemoryReply *reply)
 {
+    fLB::FLAGS_logtostderr = 0; // 0으로 값을 주면 shell창과 파일 동시에 로그 기록이 남지만, 1으로 값을 주면 로그 기록이 파일에는 남지 않는다.
+
+    SetlogDir dir;
+    std::string logDir = dir.setDir();
+
+    FLAGS_log_dir = logDir;
+    mkdir(logDir.c_str(), 0755);
+
+    LOG(INFO) << "Memory monitoring API start .";
+
     struct sysinfo memInfo;
 
     sysinfo(&memInfo);
@@ -56,6 +68,8 @@ Status MoniterServiceImpl::current_memory_moniter_method(ServerContext *context,
     reply->set_memory_info_reply(request->virtual_memory_request() + v_suffix + "MB\n" + request->physical_memory_request() + p_suffix + "MB\n" +
                                  request->avail_virtual_memory_request() + avm_suffix + "MB\n" + request->avail_physical_memory_request() + apm_suffix + "MB");
     // 이 set_*()의 인자는 request->* 하나만 받는다. 그래서 여러 개의 request->*를 넘기면 build 오류가 발생한다.
+
+    LOG(INFO) << "Memory monitoring API end .";
 
     return Status::OK;
 }

@@ -1,6 +1,7 @@
 #include "../../include/moniter_client.h"
-#include "../../include/save_log.h"
+#include "../../include/set_log_dir.h"
 
+#include "sys/stat.h"
 #include <iostream>
 #include <memory>
 #include <string>
@@ -40,20 +41,20 @@ std::string MoniterClient::current_cpu_usage_moniter_method(const std::string &s
     Status status =
         stub_->current_cpu_usage_moniter_method(&context, request, &reply);
 
-    SaveLog log;
+    SetlogDir dir;
+    std::string logDir = dir.setDir();
+    mkdir(logDir.c_str(), 0755); // 날짜별 로그 폴더 생성, 폴더 접근 권한은 0755가 가장 기본적인 값이다.
+    FLAGS_log_dir = logDir;
 
     // Act upon its status.
     if (status.ok())
     {
-        // LOG(INFO) << "CPU monitoring service API success" << std::endl;
-        log.save_level_Log(google::INFO, "CPU monitoring service API success");
+        LOG(INFO) << "CPU monitoring service API success";
         return reply.cpu_reply();
     }
     else
     {
-        // LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
-        std::string error_msg = status.error_code() + ": " + status.error_message();
-        log.save_level_Log(google::ERROR, error_msg.c_str());
+        LOG(ERROR) << status.error_code() << ": " << status.error_message();
         return "RPC failed";
     }
 }

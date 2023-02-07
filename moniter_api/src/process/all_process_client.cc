@@ -1,6 +1,7 @@
 #include "../../include/moniter_client.h"
-#include "../../include/save_log.h"
+#include "../../include/set_log_dir.h"
 
+#include <sys/stat.h>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -40,20 +41,18 @@ std::string MoniterClient::current_process_moniter_method(const std::string &pro
     Status status =
         stub_->current_process_moniter_method(&context, request, &reply);
 
-    SaveLog log;
+    SetlogDir dir;
+    std::string logDir = dir.setDir();
 
     // Act upon its status.
     if (status.ok())
     {
-        // LOG(INFO) << "Total process monitoring service API Success" << std::endl;
-        log.save_level_Log(google::INFO, "Total process monitoring service API Success");
+        LOG(INFO) << "Total process monitoring service API Success";
         return reply.process_info_reply();
     }
     else
     {
-        // LOG(ERROR) << status.error_code() << ": " << status.error_message() << std::endl;
-        std::string error_msg = status.error_code() + ": " + status.error_message();
-        log.save_level_Log(google::ERROR, error_msg.c_str());
+        LOG(ERROR) << status.error_code() << ": " << status.error_message();
         return "RPC failed";
     }
 }

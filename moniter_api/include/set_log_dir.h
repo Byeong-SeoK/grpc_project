@@ -9,8 +9,8 @@
 #include "moniter.grpc.pb.h"
 #endif
 
-class SaveLog
+class SetlogDir
 {
 public:
-    void save_level_Log(int level, const char *log); // level 파라미터에는 google::* 룰 받고 log에는 기록으로 남길 sentence를 받는다.
+    std::string setDir(); // 로그 기록이 저장될 파일 디렉토리를 지정
 };

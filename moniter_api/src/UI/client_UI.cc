@@ -8,7 +8,6 @@ void Client_UI::show_menu()
     std::cout << "2. CPU usage monitoring service" << std::endl;
     std::cout << "3. Disk usage monitoring service" << std::endl;
     std::cout << "4. Process monitoring service" << std::endl;
-    std::cout << "5. Simple echo type log monitoring service" << std::endl;
     std::cout << "0. Exit the monitoring" << std::endl;
 }
 
@@ -42,7 +41,7 @@ void Client_UI::set_request(int num)
 
 std::vector<std::string> Client_UI::get_request()
 {
-    return this->vecRequest;
+    return this->vecRequest; // proto의 request message 여러 개를 한번에 받는 vector
 }
 
 void Client_UI::clear_request_vector()

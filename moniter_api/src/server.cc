@@ -70,7 +70,11 @@ void RunServer()
 
 int main(int argc, char **argv)
 {
+  google::InitGoogleLogging(argv[0]); // ./server에 대한 것들에 대해 log 기록
+
   RunServer();
+
+  LOG(INFO) << "Server terminated .";
 
   return 0;
 }

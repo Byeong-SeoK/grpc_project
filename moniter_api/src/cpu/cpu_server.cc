@@ -1,4 +1,7 @@
 #include "../../include/moniter_server.h"
+#include "../../include/set_log_dir.h"
+
+#include <grpcpp/grpcpp.h>
 
 #include <iostream>
 #include <memory>
@@ -8,6 +11,7 @@
 #include "sys/sysinfo.h"
 #include "sys/types.h"
 #include "sys/statvfs.h"
+#include "sys/stat.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -23,10 +27,24 @@ Status MoniterServiceImpl::current_cpu_usage_moniter_method(ServerContext *conte
                                                             const CpuMoniterRequest *request,
                                                             CpuMoniterReply *reply)
 {
+    SetlogDir dir;
+    std::string logDir = dir.setDir();
+
+    FLAGS_log_dir = logDir;
+    mkdir(logDir.c_str(), 0755); // 여기까지가 로그가 저장될 파일 경로 만들기
+
+    LOG(INFO) << "cpu monitoring API start .";
+
     FILE *pStat = NULL;
     char cpuID[6] = {0};
 
     pStat = fopen("/proc/stat", "r"); // proc/stat을 read 모드로 열어서 cpu 상태를 읽어와 pStat에 저장한다.
+    if (pStat == nullptr)
+    {
+        LOG(ERROR) << "cpu monitoring API - Error";
+        return grpc::Status(grpc::StatusCode::NOT_FOUND, "Cannot find /proc/stat");
+    }
+
     fscanf(pStat, "%s %d %d %d %d", cpuID, &curJiffies.user, &curJiffies.nice,
            &curJiffies.system, &curJiffies.idle);
 
@@ -46,6 +64,8 @@ Status MoniterServiceImpl::current_cpu_usage_moniter_method(ServerContext *conte
     sleep(1);
 
     reply->set_cpu_reply(request->cpu_request() + std::to_string(diffJiffies.usage) + '%');
+
+    LOG(INFO) << "cpu monitoring API end .";
 
     return Status::OK;
 }

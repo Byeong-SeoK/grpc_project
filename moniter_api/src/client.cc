@@ -17,9 +17,11 @@
  */
 #include <glog/logging.h>
 
+#include <sys/stat.h>
 #include <iostream>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <grpcpp/grpcpp.h>
 #include <glog/logging.h>
@@ -27,7 +29,7 @@
 #include "../include/moniter_server.h"
 #include "../include/moniter_client.h"
 #include "../include/client_UI.h"
-#include "../include/save_log.h"
+#include "../include/set_log_dir.h"
 
 #ifdef BAZEL_BUILD
 #include "resource_moniter/protos/moniter.grpc.pb.h"
@@ -37,6 +39,18 @@
 
 int main(int argc, char **argv)
 {
+  fLB::FLAGS_logtostderr = 0;
+  FLAGS_log_dir = "../../../../file/";
+
+  google::InitGoogleLogging(argv[0]); //./client에 대한 것들에 대해 log를 기록
+
+  Client_UI UI; // client UI를 다루는 객체 생성
+
+  SetlogDir dir;
+  std::string logDir = dir.setDir();
+  mkdir(logDir.c_str(), 0755); // 날짜별 로그 폴더 생성, 폴더 접근 권한은 0755가 가장 기본적인 값이다.
+  FLAGS_log_dir = logDir;      // client log가 저장될 파일 경로 지정 및 날짜별 폴더 생성
+
   // Instantiate the client. It requires a channel, out of which the actual RPCs
   // are created. This channel models a connection to an endpoint specified by
   // the argument "--target=" which is the only expected argument.
@@ -57,16 +71,13 @@ int main(int argc, char **argv)
       }
       else
       {
-        LOG(ERROR) << "The only correct argument syntax is --target=" << std::endl;
-        // std::cout << "The only correct argument syntax is --target="
-        //           << std::endl;
+        LOG(ERROR) << "The only correct argument syntax is --target=";
         return 0;
       }
     }
     else
     {
-      LOG(ERROR) << "The only acceptable argument is --target=" << std::endl;
-      // std::cout << "The only acceptable argument is --target=" << std::endl;
+      LOG(ERROR) << "The only acceptable argument is --target=";
       return 0;
     }
   }
@@ -75,15 +86,9 @@ int main(int argc, char **argv)
     target_str = "localhost:50051";
   }
 
-  fLB::FLAGS_logtostderr = 0;
-  FLAGS_log_dir = "../../../../file/";
-
-  google::InitGoogleLogging(argv[0]);
   MoniterClient client(grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())); // client 객체 생성 및 gRPC 통신 채널 생성
-  Client_UI UI;                                                                              // client UI를 다루는 객체 생성
-  SaveLog log;
-
   std::cout << std::endl;
+
   while (true)
   {
     UI.show_menu();
@@ -95,7 +100,6 @@ int main(int argc, char **argv)
 
     if (number == 0)
     {
-      log.save_level_Log(google::INFO, "Finish monitoring service");
       std::cout << "Exit" << std::endl;
       break;
     }
@@ -111,10 +115,12 @@ int main(int argc, char **argv)
     else if (number == 2)
     {
       UI.set_request(2);
-      while (true)
+      int repeat = 0; // cpu API 실행 반복 횟수
+      while (repeat < 10)
       {
         std::string cpu_reply = client.current_cpu_usage_moniter_method(UI.get_request()[0]);
         std::cout << cpu_reply << std::endl;
+        repeat = repeat + 1;
       }
     }
     else if (number == 3)
@@ -141,26 +147,18 @@ int main(int argc, char **argv)
       std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, UI.get_request()[3]);
       std::cout << SelectedProcessMoniterReply << std::endl;
     }
-    else if (number == 5)
-    {
-      std::string log_request_prefix("Log: ");
-      std::string log_service_reply = client.service_log_monitor_method(log_request_prefix);
-      std::cout << log_service_reply << std::endl;
-      // while (true)
-      // {
-      //   std::string log_service_reply = client.service_log_monitor_method(log_request_prefix);
-      //   std::cout << log_service_reply << std::endl;
-      // }
-    }
     else
     {
       std::cout << "Wrong input" << std::endl;
+      LOG(WARNING) << "Wrong input service number";
     }
 
     UI.clear_request_vector();
     std::cout << "\n"
               << std::endl;
   }
+
+  LOG(INFO) << "Client terminated .";
 
   return 0;
 }
