@@ -56,11 +56,13 @@ std::string MoniterClient::current_memory_moniter_method(const std::string virtu
     if (status.ok())
     {
         LOG(INFO) << "Memory monitoring service API Success";
+        google::FlushLogFiles(google::GLOG_INFO);
         return reply.memory_info_reply();
     }
     else
     {
         LOG(ERROR) << status.error_code() << ": " << status.error_message();
+        google::FlushLogFiles(google::GLOG_ERROR);
         return "RPC failed";
     }
 }

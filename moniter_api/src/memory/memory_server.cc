@@ -71,5 +71,7 @@ Status MoniterServiceImpl::current_memory_moniter_method(ServerContext *context,
 
     LOG(INFO) << "Memory monitoring API end .";
 
+    google::FlushLogFiles(google::GLOG_INFO);
+
     return Status::OK;
 }

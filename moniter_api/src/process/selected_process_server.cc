@@ -40,6 +40,7 @@ Status MoniterServiceImpl::selected_process_moniter_method(ServerContext *contex
     if (!pipe2)
     {
         LOG(ERROR) << "popen() failed!";
+        google::FlushLogFiles(google::GLOG_ERROR);
         throw std::runtime_error("popen() failed!");
     }
     try
@@ -58,6 +59,7 @@ Status MoniterServiceImpl::selected_process_moniter_method(ServerContext *contex
     reply->set_selected_process_info_reply(request->pid_process_info_request() + pid_process_info);
 
     LOG(INFO) << "Selected process monitoring API end .";
+    google::FlushLogFiles(google::GLOG_INFO);
 
     return Status::OK;
 }

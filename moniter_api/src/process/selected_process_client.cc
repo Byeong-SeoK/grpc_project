@@ -48,11 +48,13 @@ std::string MoniterClient::selected_process_moniter_method(const std::string &se
     if (status.ok())
     {
         LOG(INFO) << "Selected process monitoring service API Success";
+        google::FlushLogFiles(google::GLOG_INFO);
         return reply.selected_process_info_reply();
     }
     else
     {
         LOG(ERROR) << status.error_code() << ": " << status.error_message();
+        google::FlushLogFiles(google::GLOG_ERROR);
         return "RPC failed";
     }
 }

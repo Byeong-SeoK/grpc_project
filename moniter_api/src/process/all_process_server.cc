@@ -38,6 +38,7 @@ Status MoniterServiceImpl::current_process_moniter_method(ServerContext *context
     if (!pipe)
     {
         LOG(ERROR) << "popen() failed!";
+        google::FlushLogFiles(google::GLOG_ERROR);
         throw std::runtime_error("popen() failed!");
     }
     try
@@ -60,6 +61,7 @@ Status MoniterServiceImpl::current_process_moniter_method(ServerContext *context
                                   parent_process_pid + "\n" + request->all_process_info_request() + "\n" + all_process_info);
 
     LOG(INFO) << "Total process monitoring API end .";
+    google::FlushLogFiles(google::GLOG_INFO);
 
     return Status::OK;
 }

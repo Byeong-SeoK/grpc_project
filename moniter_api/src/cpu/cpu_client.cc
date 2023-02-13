@@ -50,11 +50,13 @@ std::string MoniterClient::current_cpu_usage_moniter_method(const std::string &s
     if (status.ok())
     {
         LOG(INFO) << "CPU monitoring service API success";
+        google::FlushLogFiles(google::GLOG_INFO);
         return reply.cpu_reply();
     }
     else
     {
         LOG(ERROR) << status.error_code() << ": " << status.error_message();
+        google::FlushLogFiles(google::GLOG_ERROR);
         return "RPC failed";
     }
 }

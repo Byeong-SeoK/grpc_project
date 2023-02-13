@@ -50,6 +50,7 @@ int main(int argc, char **argv)
   std::string logDir = dir.setDir();
   mkdir(logDir.c_str(), 0755); // 날짜별 로그 폴더 생성, 폴더 접근 권한은 0755가 가장 기본적인 값이다.
   FLAGS_log_dir = logDir;      // client log가 저장될 파일 경로 지정 및 날짜별 폴더 생성
+  // google::SetLogFilenameExtension(".txt");
 
   // Instantiate the client. It requires a channel, out of which the actual RPCs
   // are created. This channel models a connection to an endpoint specified by
@@ -72,12 +73,14 @@ int main(int argc, char **argv)
       else
       {
         LOG(ERROR) << "The only correct argument syntax is --target=";
+        google::FlushLogFiles(google::GLOG_ERROR);
         return 0;
       }
     }
     else
     {
       LOG(ERROR) << "The only acceptable argument is --target=";
+      google::FlushLogFiles(google::GLOG_ERROR);
       return 0;
     }
   }
@@ -98,6 +101,10 @@ int main(int argc, char **argv)
     std::cin >> number;
     std::cout << std::endl;
 
+    // below two lines of code is for test
+    // int number = rand() % 4 + 1;
+    // std::cout << "This is for test: ";
+
     if (number == 0)
     {
       std::cout << "Exit" << std::endl;
@@ -116,7 +123,7 @@ int main(int argc, char **argv)
     {
       UI.set_request(2);
       int repeat = 0; // cpu API 실행 반복 횟수
-      while (repeat < 10)
+      while (repeat < 4)
       {
         std::string cpu_reply = client.current_cpu_usage_moniter_method(UI.get_request()[0]);
         std::cout << cpu_reply << std::endl;
@@ -147,10 +154,15 @@ int main(int argc, char **argv)
       std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, UI.get_request()[3]);
       std::cout << SelectedProcessMoniterReply << std::endl;
     }
+    else if (number == 5)
+    {
+      client.readLog();
+    }
     else
     {
       std::cout << "Wrong input" << std::endl;
       LOG(WARNING) << "Wrong input service number";
+      google::FlushLogFiles(google::GLOG_WARNING);
     }
 
     UI.clear_request_vector();
@@ -159,6 +171,8 @@ int main(int argc, char **argv)
   }
 
   LOG(INFO) << "Client terminated .";
+
+  google::FlushLogFiles(google::GLOG_INFO);
 
   return 0;
 }

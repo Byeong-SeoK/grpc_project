@@ -46,5 +46,5 @@ std::vector<std::string> Client_UI::get_request()
 
 void Client_UI::clear_request_vector()
 {
-    this->vecRequest.clear();
+    this->vecRequest.clear(); // 기존에 받았던 proto의 request message에 대해 reply를 받아서 이를 해제한다.
 }

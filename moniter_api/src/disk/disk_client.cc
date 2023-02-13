@@ -54,11 +54,14 @@ std::string MoniterClient::current_disk_usage_moniter_method(const std::string &
     if (status.ok())
     {
         LOG(INFO) << "Disk monitoring service API Success";
+        google::FlushLogFiles(google::GLOG_INFO);
+        // google::SetLogFilenameExtension("txt");
         return reply.disk_info_reply();
     }
     else
     {
         LOG(ERROR) << status.error_code() << ": " << status.error_message();
+        google::FlushLogFiles(google::GLOG_ERROR);
         return "RPC failed";
     }
 }
