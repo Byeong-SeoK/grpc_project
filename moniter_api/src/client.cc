@@ -156,7 +156,19 @@ int main(int argc, char **argv)
     }
     else if (number == 5)
     {
-      client.readLog();
+      std::cout << "========= Log inquire service =========" << std::endl;
+      std::string LogDate;
+      std::string comType;
+      std::string LogType;
+
+      std::cout << "Input log record date that you want to inquire: ";
+      std::cin >> LogDate;
+      std::cout << "Input computer type where the log is record: ";
+      std::cin >> comType;
+      std::cout << "Input log type that you want to inquire: ";
+      std::cin >> LogType;
+      std::cout << std::endl;
+      client.readLog(LogDate, comType, LogType);
     }
     else
     {

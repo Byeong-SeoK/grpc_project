@@ -54,7 +54,7 @@ public:
 
     std::string selected_process_moniter_method(const std::string &selected_process_name, const std::string &pid_process_info_request);
 
-    void readLog();
+    void readLog(std::string LogDate, std::string comType, std::string LogType);
 
 private:
     std::unique_ptr<MoniterService::Stub> stub_;

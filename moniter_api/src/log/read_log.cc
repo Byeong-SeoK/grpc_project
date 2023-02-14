@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <fstream>
-#include <memory>
 #include <vector>
+#include <regex>
 #include <string>
 #include <typeinfo>
+#include <unistd.h>
 
 #include "sys/sysinfo.h"
 #include "sys/types.h"
@@ -33,14 +34,69 @@
 
 using moniter::MoniterService;
 
-void MoniterClient::readLog()
+void MoniterClient::readLog(std::string LogDate, std::string comType, std::string LogType)
 {
+    struct stat st;
 
-    time_t currentSec = time(NULL);
-    tm *t = localtime(&currentSec);
-    std::string strDate = std::to_string(t->tm_year - 100) + "." + std::to_string(t->tm_mon + 1) + "." +
-                          std::to_string(t->tm_mday); // 로그 파일은 날짜가 변동될 때 새로 만들어지도록 한다.
-    // tm_year는 1900년부터 count 되므로 2023이면 123이 되어 100을 빼야한다. tm_mon은 0부터 count 되므로 2월을 1월처럼 표현이 되어 1을 더해야한다.
+    std::string dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/file/" + LogDate + "/";
+    // std::string logLocation = comType + ".DESKTOP-8L601US.byeongseok.log." + LogType + ".";
+    std::regex re("\d*-\d*\.\d*");
 
-    google::LogSink::send();
+    std::vector<std::string> fileVec;
+    char filebuffer[1024];
+    chdir(dirPath.c_str()); // 사용자가 입력한 날짜의 로그 폴더로 이동
+
+    FILE *pipe = popen("ls", "r"); // ls 명령어로 조회할 수 있는 정보를 읽어와서 pipe에 저장한다.
+    if (!pipe)
+    {
+        throw std::runtime_error("popen() failed!");
+    }
+    try
+    {
+        while (fgets(filebuffer, sizeof(filebuffer), pipe) != NULL)
+        {
+            // std::cout << fgets(filebuffer, sizeof(filebuffer), pipe) << std::endl;
+            fileVec.push_back(filebuffer); // ls를 통해 검색할 수 있는 모든 로그 파일을 fileVec 벡터에 저장한다.
+        }
+    }
+    catch (...)
+    {
+        pclose(pipe);
+        return;
+    }
+
+    chdir("/mnt/c/Users/INNO-C-535/grpc_project/moniter_api/src/cmake/build");
+    for (int i = 0; i < fileVec.size(); i++)
+    {
+        std::vector<std::string> lines;
+        std::smatch match;
+        // std::cout << std::regex_search(fileVec[i], match, re) << std::endl;
+
+        if (std::regex_search(fileVec[i], match, re))
+        {
+            std::string line;
+
+            std::string path = (dirPath + fileVec[i]).c_str();
+            // std::string path = "../../../../file/" + LogDate + "/" + fileVec[i];
+            std::ifstream ifs;
+            ifs.open(path.c_str());
+            if (!ifs.is_open())
+            {
+                std::cerr << "Error: " << strerror(errno) << std::endl; // 에러 확인
+                return;
+            }
+            std::cout << "fine" << std::endl;
+            while (getline(ifs, line))
+            {
+                lines.push_back(line);
+            }
+
+            for (const auto i : lines)
+                std::cout << i << std::endl;
+
+            ifs.close();
+        }
+    }
+
+    return;
 }

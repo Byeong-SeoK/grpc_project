@@ -91,3 +91,11 @@ message SelectedProcessMoniterRequest{
 message SelectedProcessMoniterReply{
   string selected_process_info_reply = 1;
 }
+
+message LogRequest{
+  string log_request = 1;
+}
+
+message LogReply{
+  string log_reply = 1;
+}

@@ -73,7 +73,11 @@
     "xtree": "cpp",
     "xutility": "cpp",
     "*.rh": "cpp",
-    "*.in": "cpp"
+    "*.in": "cpp",
+    "cstdarg": "cpp",
+    "regex": "cpp",
+    "filesystem": "cpp",
+    "codecvt": "cpp"
   },
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
