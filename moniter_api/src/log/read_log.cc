@@ -39,8 +39,8 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
     struct stat st;
 
     std::string dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/file/" + LogDate + "/";
-    // std::string logLocation = comType + ".DESKTOP-8L601US.byeongseok.log." + LogType + ".";
-    std::regex re("\d*-\d*\.\d*");
+    std::string logLocation = comType + ".DESKTOP-8L601US.byeongseok.log." + LogType + ".";
+    std::regex re("\.(\d*-\d*.\d*)");
 
     std::vector<std::string> fileVec;
     char filebuffer[1024];
@@ -72,20 +72,25 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
         std::smatch match;
         // std::cout << std::regex_search(fileVec[i], match, re) << std::endl;
 
-        if (std::regex_search(fileVec[i], match, re))
+        if (std::regex_search(fileVec[i], match, re)) // 해당 정규표현식 패턴을 만족하는 파일만 열어서 읽는다.
         {
             std::string line;
 
-            std::string path = (dirPath + fileVec[i]).c_str();
-            // std::string path = "../../../../file/" + LogDate + "/" + fileVec[i];
+            std::string extension = fileVec[i].substr(43);
+            std::string path = (dirPath + logLocation + extension).c_str();
+            // const char *path = ("../../../../file/" + LogDate + "/" + fileVec[i]).c_str();
+            // std::cout << path << " " << path.size() << std::endl;
+
+            path.erase(std::remove_if(path.begin(), path.end(), isspace), path.end()); // path는 string이므로 제일 뒤에 붙는 "\n" 이라는 개행문자를 지워야한다.
+
             std::ifstream ifs;
             ifs.open(path.c_str());
             if (!ifs.is_open())
             {
-                std::cerr << "Error: " << strerror(errno) << std::endl; // 에러 확인
-                return;
+                continue;
+                // std::cerr << "Error: " << strerror(errno) << std::endl; // 어떤 에러가 발생하였는지 확인
             }
-            std::cout << "fine" << std::endl;
+
             while (getline(ifs, line))
             {
                 lines.push_back(line);
@@ -94,6 +99,7 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
             for (const auto i : lines)
                 std::cout << i << std::endl;
 
+            std::cout << std::endl;
             ifs.close();
         }
     }
