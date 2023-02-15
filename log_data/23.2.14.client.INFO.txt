@@ -1,0 +1,4 @@
+Log file created at: 2023/02/14 10:36:40
+Running on machine: DESKTOP-8L601US
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0214 10:36:40.797897  1806 all_process_client.cc:50] Total process monitoring service API Success

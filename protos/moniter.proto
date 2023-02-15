@@ -25,7 +25,7 @@ service MoniterService {
   rpc current_disk_usage_moniter_method(DiskMoniterRequest) returns (DiskMoniterReply) {}
   rpc current_process_moniter_method(ProcessMoniterRequest) returns (ProcessMoniterReply) {}
   rpc selected_process_moniter_method(SelectedProcessMoniterRequest) returns (SelectedProcessMoniterReply) {}
-  rpc log_monitoring_method(LogMonitorRequest) returns (LogMonitorReply) {}
+  rpc server_log_monitor_method(LogRequest) returns (LogReply) {}
 }
 
 
@@ -95,7 +95,9 @@ message SelectedProcessMoniterReply{
 
 // The request message contains client's log request 
 message LogRequest{
-  string log_request = 1;
+  string log_date_request = 1;
+  string log_com_request = 2;
+  string log_type_request = 3;
 }
 
 //The reply message containing the log information

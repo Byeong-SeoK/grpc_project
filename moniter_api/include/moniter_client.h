@@ -30,6 +30,9 @@ using moniter::ProcessMoniterRequest;
 using moniter::SelectedProcessMoniterReply;
 using moniter::SelectedProcessMoniterRequest;
 
+using moniter::LogReply;
+using moniter::LogRequest;
+
 using moniter::MoniterService;
 
 class MoniterClient
@@ -53,6 +56,8 @@ public:
                                                const std::string &all_process_info_request);
 
     std::string selected_process_moniter_method(const std::string &selected_process_name, const std::string &pid_process_info_request);
+
+    std::string log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType);
 
     void readLog(std::string LogDate, std::string comType, std::string LogType);
 

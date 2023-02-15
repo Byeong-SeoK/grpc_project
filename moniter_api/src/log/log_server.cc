@@ -1,4 +1,4 @@
-#include "../../include/moniter_client.h"
+#include "../../include/moniter_server.h"
 
 #include <iostream>
 #include <fstream>
@@ -16,16 +16,25 @@
 #include <grpcpp/grpcpp.h>
 #include <glog/logging.h>
 
-#ifdef BAZEL_BUILD
-#include "resource_moniter/protos/moniter.grpc.pb.h"
-#else
-#include "moniter.grpc.pb.h"
-#endif
+using grpc::Server;
+using grpc::ServerBuilder;
+using grpc::ServerContext;
+using grpc::Status;
+
+using moniter::LogReply;
+using moniter::LogRequest;
 
 using moniter::MoniterService;
 
-void MoniterClient::readLog(std::string LogDate, std::string comType, std::string LogType)
+Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
+                                                     const LogRequest *request,
+                                                     LogReply *reply)
 {
+    std::string LogDate = request->log_date_request();
+    std::string comType = request->log_com_request();
+    std::string LogType = request->log_type_request();
+    std::string reply_message;
+
     std::string dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/file/" + LogDate + "/";
     std::string logLocation = comType + ".DESKTOP-8L601US.byeongseok.log." + LogType + ".";
     std::regex re("\.(\d*-\d*.\d*)");
@@ -43,14 +52,13 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
     {
         while (fgets(filebuffer, sizeof(filebuffer), pipe) != NULL)
         {
-            // std::cout << fgets(filebuffer, sizeof(filebuffer), pipe) << std::endl;
             fileVec.push_back(filebuffer); // ls를 통해 검색할 수 있는 모든 로그 파일을 fileVec 벡터에 저장한다.
         }
     }
     catch (...)
     {
         pclose(pipe);
-        return;
+        return grpc::Status(grpc::StatusCode::DEADLINE_EXCEEDED, "popen() failed!");
     }
 
     chdir("/mnt/c/Users/INNO-C-535/grpc_project/moniter_api/src/cmake/build");
@@ -58,7 +66,6 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
     {
         std::vector<std::string> lines;
         std::smatch match;
-        // std::cout << std::regex_search(fileVec[i], match, re) << std::endl;
 
         if (std::regex_search(fileVec[i], match, re)) // 해당 정규표현식 패턴을 만족하는 파일만 열어서 읽는다.
         {
@@ -66,8 +73,6 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
 
             std::string extension = fileVec[i].substr(43);
             std::string path = (dirPath + logLocation + extension).c_str();
-            // const char *path = ("../../../../file/" + LogDate + "/" + fileVec[i]).c_str();
-            // std::cout << path << " " << path.size() << std::endl;
 
             path.erase(std::remove_if(path.begin(), path.end(), isspace), path.end()); // path는 string이므로 제일 뒤에 붙는 "\n" 이라는 개행문자를 지워야한다.
 
@@ -84,13 +89,31 @@ void MoniterClient::readLog(std::string LogDate, std::string comType, std::strin
                 lines.push_back(line);
             }
 
-            for (const auto i : lines)
-                std::cout << i << std::endl;
+            // for (const auto i : lines)
+            //     std::cout << i << std::endl;
 
             std::cout << std::endl;
             ifs.close();
+
+            std::ofstream ofs;
+            std::string log_monitor_path = "/mnt/c/Users/INNO-C-535/grpc_project/log_data/";
+
+            chdir(log_monitor_path.c_str());
+            std::string filename = LogDate + "." + comType + "." + LogType + ".txt";
+            reply_message = filename;
+            filename.erase(std::remove_if(filename.begin(), filename.end(), isspace), filename.end()); // path는 string이므로 제일 뒤에 붙는 "\n" 이라는 개행문자를 지워야한다.
+
+            ofs.open(filename);
+            if (ofs.is_open())
+            {
+                for (const auto i : lines)
+                {
+                    ofs << i << std::endl;
+                }
+            }
         }
     }
+    reply->set_log_reply("You can access log data by this file: " + reply_message);
 
-    return;
+    return Status::OK;
 }

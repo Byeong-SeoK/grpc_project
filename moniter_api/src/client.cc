@@ -168,7 +168,9 @@ int main(int argc, char **argv)
       std::cout << "Input log type that you want to inquire: ";
       std::cin >> LogType;
       std::cout << std::endl;
-      client.readLog(LogDate, comType, LogType);
+      std::string LogMonitorReply = client.log_monitor_method(LogDate, comType, LogType);
+      std::cout << LogMonitorReply << std::endl;
+      // client.readLog(LogDate, comType, LogType);
     }
     else
     {

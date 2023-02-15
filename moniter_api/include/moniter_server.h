@@ -40,6 +40,9 @@ using moniter::ProcessMoniterRequest;
 using moniter::SelectedProcessMoniterReply;
 using moniter::SelectedProcessMoniterRequest;
 
+using moniter::LogReply;
+using moniter::LogRequest;
+
 using moniter::MoniterService;
 
 // Logic and data behind the server's behavior.
@@ -64,5 +67,8 @@ class MoniterServiceImpl final : public MoniterService::Service
 
     Status current_process_moniter_method(ServerContext *context, const ProcessMoniterRequest *request, ProcessMoniterReply *reply) override;
 
-    Status selected_process_moniter_method(ServerContext *context, const SelectedProcessMoniterRequest *request, SelectedProcessMoniterReply *reply) override;
+    Status selected_process_moniter_method(ServerContext *context, const SelectedProcessMoniterRequest *request,
+                                           SelectedProcessMoniterReply *reply) override;
+
+    Status server_log_monitor_method(ServerContext *context, const LogRequest *request, LogReply *reply) override;
 };
