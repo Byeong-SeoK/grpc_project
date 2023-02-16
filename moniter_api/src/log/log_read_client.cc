@@ -23,7 +23,7 @@ using moniter::LogRequest;
 
 using moniter::MoniterService;
 
-std::string MoniterClient::log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType)
+std::string MoniterClient::client_log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType)
 {
     // Data we are sending to the server.
     LogRequest request;

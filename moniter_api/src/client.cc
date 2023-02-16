@@ -158,13 +158,14 @@ int main(int argc, char **argv)
     {
       UI.set_request(5);
 
-      std::string LogMonitorReply = client.log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
+      std::string LogMonitorReply = client.client_log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
       std::cout << LogMonitorReply << std::endl;
     }
     else if (number == 6)
     {
       UI.set_request(6);
-      client.log_delete_method(UI.get_request()[0]);
+      std::string LogDeleteReply = client.client_log_delete_method(UI.get_request()[0]);
+      std::cout << LogDeleteReply << std::endl;
     }
     else
     {

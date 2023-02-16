@@ -43,6 +43,9 @@ using moniter::SelectedProcessMoniterRequest;
 using moniter::LogReply;
 using moniter::LogRequest;
 
+using moniter::LogDeleteReply;
+using moniter::LogDeleteRequest;
+
 using moniter::MoniterService;
 
 // Logic and data behind the server's behavior.
@@ -71,4 +74,6 @@ class MoniterServiceImpl final : public MoniterService::Service
                                            SelectedProcessMoniterReply *reply) override;
 
     Status server_log_monitor_method(ServerContext *context, const LogRequest *request, LogReply *reply) override;
+
+    Status server_log_delete_method(ServerContext *context, const LogDeleteRequest *request, LogDeleteReply *reply) override;
 };

@@ -26,6 +26,7 @@ service MoniterService {
   rpc current_process_moniter_method(ProcessMoniterRequest) returns (ProcessMoniterReply) {}
   rpc selected_process_moniter_method(SelectedProcessMoniterRequest) returns (SelectedProcessMoniterReply) {}
   rpc server_log_monitor_method(LogRequest) returns (LogReply) {}
+  rpc server_log_delete_method(LogDeleteRequest) returns (LogDeleteReply) {}
 }
 
 
@@ -103,4 +104,15 @@ message LogRequest{
 //The reply message containing the log information
 message LogReply{
   string log_reply = 1;
+}
+
+
+//The request message contains client's log delete request
+message LogDeleteRequest{
+  string log_delete_request = 1;
+}
+
+//The reply message contains client's log delete reply
+message LogDeleteReply{
+  string log_delete_reply = 1;
 }

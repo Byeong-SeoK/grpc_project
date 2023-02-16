@@ -57,9 +57,9 @@ public:
 
     std::string selected_process_moniter_method(const std::string &selected_process_name, const std::string &pid_process_info_request);
 
-    std::string log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType);
+    std::string client_log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType);
 
-    void log_delete_method(const std::string filename);
+    std::string client_log_delete_method(const std::string &filename);
 
 private:
     std::unique_ptr<MoniterService::Stub> stub_;
