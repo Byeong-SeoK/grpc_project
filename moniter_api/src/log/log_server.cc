@@ -35,13 +35,13 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
     std::string LogType = request->log_type_request();
     std::string reply_message;
 
-    std::string dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/file/" + LogDate + "/";
-    std::string logLocation = comType + ".DESKTOP-8L601US.byeongseok.log." + LogType + ".";
-    std::regex re("\.(\d*-\d*.\d*)");
+    std::string log_server_dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/file/" + LogDate + "/";
+    std::string logLocation = comType + ".DESKTOP-8L601US.byeongseok.log." + LogType;
+    std::regex re("\\.(\\d*-\\d*.\\d*)"); // 로그 파일의 확장자만 추출해내는 정규표현식
 
     std::vector<std::string> fileVec;
     char filebuffer[1024];
-    chdir(dirPath.c_str()); // 사용자가 입력한 날짜의 로그 폴더로 이동
+    chdir(log_server_dirPath.c_str()); // 사용자가 입력한 날짜의 로그 폴더로 이동
 
     FILE *pipe = popen("ls", "r"); // ls 명령어로 조회할 수 있는 정보를 읽어와서 pipe에 저장한다.
     if (!pipe)
@@ -61,18 +61,16 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
         return grpc::Status(grpc::StatusCode::DEADLINE_EXCEEDED, "popen() failed!");
     }
 
-    chdir("/mnt/c/Users/INNO-C-535/grpc_project/moniter_api/src/cmake/build");
     for (int i = 0; i < fileVec.size(); i++)
     {
         std::vector<std::string> lines;
-        std::smatch match;
+        std::smatch match; // fileVec[i]에서 정규표현식에 매치되는 부분 문자열을 담는다.
 
         if (std::regex_search(fileVec[i], match, re)) // 해당 정규표현식 패턴을 만족하는 파일만 열어서 읽는다.
         {
             std::string line;
 
-            std::string extension = fileVec[i].substr(43);
-            std::string path = (dirPath + logLocation + extension).c_str();
+            std::string path = (log_server_dirPath + logLocation + match[0].str()).c_str();
 
             path.erase(std::remove_if(path.begin(), path.end(), isspace), path.end()); // path는 string이므로 제일 뒤에 붙는 "\n" 이라는 개행문자를 지워야한다.
 
@@ -89,31 +87,28 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
                 lines.push_back(line);
             }
 
-            // for (const auto i : lines)
-            //     std::cout << i << std::endl;
-
-            std::cout << std::endl;
             ifs.close();
 
             std::ofstream ofs;
-            std::string log_monitor_path = "/mnt/c/Users/INNO-C-535/grpc_project/log_data/";
+            std::string log_client_dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/log_data/";
 
-            chdir(log_monitor_path.c_str());
+            chdir(log_client_dirPath.c_str()); // 로그를 저장할 폴더로 디렉토리를 변경한다.
             std::string filename = LogDate + "." + comType + "." + LogType + ".txt";
             reply_message = filename;
             filename.erase(std::remove_if(filename.begin(), filename.end(), isspace), filename.end()); // path는 string이므로 제일 뒤에 붙는 "\n" 이라는 개행문자를 지워야한다.
 
-            ofs.open(filename);
+            ofs.open(filename, std::ios::app); // std::ios::app을 통해서 기존에 있던 파일에 내용을 추가하도록 만든다.
             if (ofs.is_open())
             {
                 for (const auto i : lines)
                 {
                     ofs << i << std::endl;
                 }
+                ofs << std::endl;
             }
         }
     }
-    reply->set_log_reply("You can access log data by this file: " + reply_message);
+    reply->set_log_reply("You can access log data by this file: log_data/" + reply_message);
 
     return Status::OK;
 }

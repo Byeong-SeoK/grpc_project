@@ -110,7 +110,6 @@ add_library(system_monitering_client_API #외부 사용자 정의 class의 metho
     "./disk/disk_client.cc"
     "./process/all_process_client.cc"
     "./process/selected_process_client.cc"
-    "./log/read_log.cc"
     "./log/log_client.cc"
 )
 #process_client.h에 class가 2개라 해서 add_library를 2개를 사용하면 안된다. Compile, build, linking할 때는

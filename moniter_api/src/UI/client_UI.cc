@@ -1,4 +1,5 @@
 #include "../../include/client_UI.h"
+#include <iostream>
 #include <vector>
 
 void Client_UI::show_menu()
@@ -37,6 +38,25 @@ void Client_UI::set_request(int num)
         this->vecRequest.push_back("Current parent process PID: ");  // Current process's paraent process's PID
         this->vecRequest.push_back("All current process info: ");    // Total current process
         this->vecRequest.push_back("Selected PID process info: \n"); // Process information that user selected
+    }
+    else if (num == 5)
+    {
+        std::cout << "========= Log inquire service =========" << std::endl;
+        std::string LogDate;
+        std::string comType;
+        std::string LogType;
+
+        std::cout << "Input log record date that you want to inquire: ";
+        std::cin >> LogDate;
+        std::cout << "Input computer type where the log is record: ";
+        std::cin >> comType;
+        std::cout << "Input log type that you want to inquire: ";
+        std::cin >> LogType;
+        std::cout << std::endl;
+
+        this->vecRequest.push_back(LogDate);
+        this->vecRequest.push_back(comType);
+        this->vecRequest.push_back(LogType);
     }
 }
 

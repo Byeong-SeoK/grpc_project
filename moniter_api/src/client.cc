@@ -102,7 +102,7 @@ int main(int argc, char **argv)
     std::cout << std::endl;
 
     // below two lines of code is for test
-    // int number = rand() % 4 + 1;
+    // int number = rand() % 5 + 1;
     // std::cout << "This is for test: ";
 
     if (number == 0)
@@ -156,21 +156,10 @@ int main(int argc, char **argv)
     }
     else if (number == 5)
     {
-      std::cout << "========= Log inquire service =========" << std::endl;
-      std::string LogDate;
-      std::string comType;
-      std::string LogType;
+      UI.set_request(5);
 
-      std::cout << "Input log record date that you want to inquire: ";
-      std::cin >> LogDate;
-      std::cout << "Input computer type where the log is record: ";
-      std::cin >> comType;
-      std::cout << "Input log type that you want to inquire: ";
-      std::cin >> LogType;
-      std::cout << std::endl;
-      std::string LogMonitorReply = client.log_monitor_method(LogDate, comType, LogType);
+      std::string LogMonitorReply = client.log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
       std::cout << LogMonitorReply << std::endl;
-      // client.readLog(LogDate, comType, LogType);
     }
     else
     {

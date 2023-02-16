@@ -59,8 +59,6 @@ public:
 
     std::string log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType);
 
-    void readLog(std::string LogDate, std::string comType, std::string LogType);
-
 private:
     std::unique_ptr<MoniterService::Stub> stub_;
 };
