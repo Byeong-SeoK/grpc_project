@@ -161,6 +161,11 @@ int main(int argc, char **argv)
       std::string LogMonitorReply = client.log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
       std::cout << LogMonitorReply << std::endl;
     }
+    else if (number == 6)
+    {
+      UI.set_request(6);
+      client.log_delete_method(UI.get_request()[0]);
+    }
     else
     {
       std::cout << "Wrong input" << std::endl;

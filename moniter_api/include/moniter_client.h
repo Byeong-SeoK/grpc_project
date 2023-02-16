@@ -59,6 +59,8 @@ public:
 
     std::string log_monitor_method(const std::string &LogDate, const std::string &comType, const std::string &LogType);
 
+    void log_delete_method(const std::string filename);
+
 private:
     std::unique_ptr<MoniterService::Stub> stub_;
 };

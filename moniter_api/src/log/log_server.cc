@@ -108,7 +108,7 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
             }
         }
     }
-    reply->set_log_reply("You can access log data by this file: log_data/" + reply_message);
+    reply->set_log_reply("You can access log data by this file: /grpc_project/log_data/" + reply_message);
 
     return Status::OK;
 }

@@ -10,6 +10,7 @@ void Client_UI::show_menu()
     std::cout << "3. Disk usage monitoring service" << std::endl;
     std::cout << "4. Process monitoring service" << std::endl;
     std::cout << "5. Log inquiring service" << std::endl;
+    std::cout << "6. Log delete service" << std::endl;
     std::cout << "0. Exit the monitoring" << std::endl;
 }
 
@@ -57,6 +58,15 @@ void Client_UI::set_request(int num)
         this->vecRequest.push_back(LogDate);
         this->vecRequest.push_back(comType);
         this->vecRequest.push_back(LogType);
+    }
+    else if (num == 6)
+    {
+        std::string filename;
+        std::cout << "========= log delete service =========" << std::endl;
+        std::cout << "Input filename: ";
+        std::cin >> filename;
+
+        this->vecRequest.push_back(filename);
     }
 }
 
