@@ -42,7 +42,6 @@ void Client_UI::set_request(int num)
     }
     else if (num == 5)
     {
-        std::cout << "========= Log inquire service =========" << std::endl;
         std::string LogDate;
         std::string comType;
         std::string LogType;
@@ -62,7 +61,6 @@ void Client_UI::set_request(int num)
     else if (num == 6)
     {
         std::string filename;
-        std::cout << "========= log delete service =========" << std::endl;
         std::cout << "Input filename: ";
         std::cin >> filename;
 

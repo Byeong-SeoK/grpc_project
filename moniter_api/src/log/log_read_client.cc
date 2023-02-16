@@ -45,10 +45,12 @@ std::string MoniterClient::client_log_monitor_method(const std::string &LogDate,
     // Act upon its status.
     if (status.ok())
     {
+        LOG(INFO) << "Log monitoring service API Success";
         return reply.log_reply();
     }
     else
     {
+        LOG(ERROR) << status.error_code() << ": " << status.error_message();
         return "RPC failed";
     }
 }

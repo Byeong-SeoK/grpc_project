@@ -115,13 +115,13 @@ int main(int argc, char **argv)
       UI.set_request(1);
 
       std::cout << "========= The current usage of memory system =========" << std::endl;
-
       std::string memory_reply = client.current_memory_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2], UI.get_request()[3]);
       std::cout << memory_reply << std::endl;
     }
     else if (number == 2)
     {
       UI.set_request(2);
+
       int repeat = 0; // cpu API 실행 반복 횟수
       while (repeat < 4)
       {
@@ -158,12 +158,15 @@ int main(int argc, char **argv)
     {
       UI.set_request(5);
 
+      std::cout << "========= Log inquire service =========" << std::endl;
       std::string LogMonitorReply = client.client_log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
       std::cout << LogMonitorReply << std::endl;
     }
     else if (number == 6)
     {
       UI.set_request(6);
+
+      std::cout << "========= log delete service =========" << std::endl;
       std::string LogDeleteReply = client.client_log_delete_method(UI.get_request()[0]);
       std::cout << LogDeleteReply << std::endl;
     }
