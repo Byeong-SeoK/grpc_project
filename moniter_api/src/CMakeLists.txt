@@ -20,7 +20,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 
 project(Moniter C CXX)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 #find_package (glog 0.3.5)
 
 include(../../cmake/common.cmake)
@@ -32,6 +32,8 @@ pkg_check_modules(glog0.3.5 REQUIRED libglog)
 
 find_package(GFLAGS REQUIRED)
 
+#아래 코드를 통해서 filesystem library를 linking 할 수 있다.
+link_libraries(stdc++fs)
 
 # Monitering API Proto file
 get_filename_component(mm_proto "../../protos/moniter.proto" ABSOLUTE)
@@ -112,6 +114,7 @@ add_library(system_monitering_client_API #외부 사용자 정의 class의 metho
     "./process/all_process_client.cc"
     "./process/selected_process_client.cc"
     "./log/log_read_client.cc"
+    "./log/log_write_client.cc"
     "./log/log_delete_client.cc"
 )
 #process_client.h에 class가 2개라 해서 add_library를 2개를 사용하면 안된다. Compile, build, linking할 때는

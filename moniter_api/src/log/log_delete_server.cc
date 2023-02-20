@@ -36,12 +36,12 @@ Status MoniterServiceImpl::server_log_delete_method(ServerContext *context, cons
 
     if (!result)
     {
-        // std::cout << request->log_delete_request() + ".txt" + " deleted!!!" << std::endl;
         reply->set_log_delete_reply(request->log_delete_request() + ".txt" + " deleted!!!");
     }
     else
     {
-        // std::cerr << "Error: " << strerror(errno) << std::endl;
+        LOG(ERROR) << "log file opened failed!";
+        std::cerr << "Error: " << strerror(errno) << std::endl; // 어떤 에러가 발생하였는지 확인
         return grpc::Status(grpc::StatusCode::NOT_FOUND, "Cannot find the directory");
     }
 

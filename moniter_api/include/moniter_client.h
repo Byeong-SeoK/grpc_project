@@ -61,6 +61,9 @@ public:
 
     std::string client_log_delete_method(const std::string &filename);
 
+    std::string client_log_write_method(const std::string &LogDate, const std::string &comType,
+                                        const std::string &LogType, std::string received_log_data);
+
 private:
     std::unique_ptr<MoniterService::Stub> stub_;
 };

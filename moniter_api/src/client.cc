@@ -50,7 +50,6 @@ int main(int argc, char **argv)
   std::string logDir = dir.setDir();
   mkdir(logDir.c_str(), 0755); // 날짜별 로그 폴더 생성, 폴더 접근 권한은 0755가 가장 기본적인 값이다.
   FLAGS_log_dir = logDir;      // client log가 저장될 파일 경로 지정 및 날짜별 폴더 생성
-  // google::SetLogFilenameExtension(".txt");
 
   // Instantiate the client. It requires a channel, out of which the actual RPCs
   // are created. This channel models a connection to an endpoint specified by

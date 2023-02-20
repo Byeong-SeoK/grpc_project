@@ -45,8 +45,10 @@ std::string MoniterClient::client_log_monitor_method(const std::string &LogDate,
     // Act upon its status.
     if (status.ok())
     {
+        std::string reply_message = client_log_write_method(LogDate, comType, LogType, reply.log_reply());
+
         LOG(INFO) << "Log monitoring service API Success";
-        return reply.log_reply();
+        return reply_message;
     }
     else
     {
