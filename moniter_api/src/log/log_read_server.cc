@@ -33,12 +33,14 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
                                                      const LogRequest *request,
                                                      LogReply *reply)
 {
+    LOG(INFO) << "Log monitoring service API start .";
+
     std::string LogDate = request->log_date_request();
     std::string comType = request->log_com_request();
     std::string LogType = request->log_type_request();
 
-    std::string lines;
-    std::string line;
+    std::string lines; // 로그 파일 데이터 전체를 받는 변수
+    std::string line;  // 로그 파일 한 줄씩 읽어올 때 받는 변수
 
     fs::path p(("../../../../file/" + LogDate).c_str());
     for (auto &path : fs::recursive_directory_iterator(p.c_str()))
@@ -57,6 +59,7 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
             ifs.open(path.path().c_str());
             if (path.path().string().size() < 40) //.symlink 확장자 파일은 건너뛰게 만든다.
             {
+                LOG(INFO) << ".symlink extension file do not have to open";
                 continue;
             }
 
@@ -75,6 +78,7 @@ Status MoniterServiceImpl::server_log_monitor_method(ServerContext *context,
         }
     }
 
+    LOG(INFO) << "Log monitoring service API end .";
     reply->set_log_reply(lines);
     return Status::OK;
 }

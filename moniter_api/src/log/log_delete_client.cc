@@ -43,7 +43,7 @@ std::string MoniterClient::client_log_delete_method(const std::string &filename)
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "Log delete service API Success";
+        LOG(INFO) << "Log delete service API Success . ";
         return reply.log_delete_reply();
     }
     else

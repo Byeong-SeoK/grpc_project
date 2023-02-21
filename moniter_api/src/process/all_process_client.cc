@@ -47,7 +47,7 @@ std::string MoniterClient::current_process_moniter_method(const std::string &pro
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "Total process monitoring service API Success";
+        LOG(INFO) << "Total process monitoring service API Success . ";
         google::FlushLogFiles(google::GLOG_INFO);
         return reply.process_info_reply();
     }

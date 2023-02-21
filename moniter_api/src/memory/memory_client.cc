@@ -55,7 +55,7 @@ std::string MoniterClient::current_memory_moniter_method(const std::string virtu
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "Memory monitoring service API Success";
+        LOG(INFO) << "Memory monitoring service API Success . ";
         google::FlushLogFiles(google::GLOG_INFO);
         return reply.memory_info_reply();
     }

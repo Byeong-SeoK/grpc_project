@@ -28,6 +28,8 @@ using moniter::MoniterService;
 
 Status MoniterServiceImpl::server_log_delete_method(ServerContext *context, const LogDeleteRequest *request, LogDeleteReply *reply)
 {
+    LOG(INFO) << "Log delete service API start .";
+
     std::string dirPath = "/mnt/c/Users/INNO-C-535/grpc_project/log_data/";
     std::string delete_file_path = dirPath + request->log_delete_request() + ".txt";
     delete_file_path.erase(std::remove_if(delete_file_path.begin(), delete_file_path.end(), isspace), delete_file_path.end());
@@ -45,5 +47,6 @@ Status MoniterServiceImpl::server_log_delete_method(ServerContext *context, cons
         return grpc::Status(grpc::StatusCode::NOT_FOUND, "Cannot find the directory");
     }
 
+    LOG(INFO) << "Log delete service API end .";
     return Status::OK;
 }

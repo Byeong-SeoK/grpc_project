@@ -51,6 +51,11 @@ std::string MoniterClient::client_log_write_method(const std::string &LogDate, c
         {
             ofs << std::endl;
         }
+        else if (received_log_data[i] == '.' && received_log_data[i + 1] == '\n')
+        {
+            ofs << received_log_data[i] << '\n'
+                << std::endl;
+        }
         else
         {
             ofs << received_log_data[i];
@@ -60,6 +65,7 @@ std::string MoniterClient::client_log_write_method(const std::string &LogDate, c
 
     ofs.close();
 
+    LOG(INFO) << "Log monitoring service API Success .";
     std::string reply_message = "You can access log data by this file: " + filename;
     return reply_message;
 }

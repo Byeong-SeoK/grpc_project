@@ -49,7 +49,7 @@ std::string MoniterClient::current_cpu_usage_moniter_method(const std::string &s
     // Act upon its status.
     if (status.ok())
     {
-        LOG(INFO) << "CPU monitoring service API success";
+        LOG(INFO) << "CPU monitoring service API Success . ";
         google::FlushLogFiles(google::GLOG_INFO);
         return reply.cpu_reply();
     }
