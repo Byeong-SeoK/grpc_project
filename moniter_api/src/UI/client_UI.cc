@@ -4,6 +4,7 @@
 
 void Client_UI::show_menu()
 {
+    std::cout << "\033[0;37m";
     std::cout << "========= Choose monitoring service that you want =========" << std::endl;
     std::cout << "1. Memory usage monitoring service" << std::endl;
     std::cout << "2. CPU usage monitoring service" << std::endl;

@@ -42,7 +42,7 @@ int main(int argc, char **argv)
   fLB::FLAGS_logtostderr = 0;
   FLAGS_log_dir = "../../../../file/";
 
-  google::InitGoogleLogging(argv[0]); //./client에 대한 것들에 대해 log를 기록
+  google::InitGoogleLogging(argv[0]); // ./client에 대한 것들에 대해 log를 기록
 
   Client_UI UI; // client UI를 다루는 객체 생성
 
@@ -93,92 +93,98 @@ int main(int argc, char **argv)
 
   while (true)
   {
-    UI.show_menu();
+    // UI.show_menu();
 
-    int number = -1;
-    std::cout << "Input service number: ";
-    std::cin >> number;
-    std::cout << std::endl;
+    // int number = -1;
+    // std::cout << "Input service number: ";
+    // std::cin >> number;
+    // std::cout << std::endl;
 
-    // below two lines of code is for test
-    // int number = rand() % 5 + 1;
-    // std::cout << "This is for test: ";
-
-    if (number == 0)
+    for (int j = 1; j < 5; j++)
     {
-      std::cout << "Exit" << std::endl;
-      break;
-    }
-    else if (number == 1)
-    {
-      UI.set_request(1);
-
-      std::cout << "========= The current usage of memory system =========" << std::endl;
-      std::string memory_reply = client.current_memory_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2], UI.get_request()[3]);
-      std::cout << memory_reply << std::endl;
-    }
-    else if (number == 2)
-    {
-      UI.set_request(2);
-
-      int repeat = 0; // cpu API 실행 반복 횟수
-      while (repeat < 4)
-      {
-        std::string cpu_reply = client.current_cpu_usage_moniter_method(UI.get_request()[0]);
-        std::cout << cpu_reply << std::endl;
-        repeat = repeat + 1;
-      }
-    }
-    else if (number == 3)
-    {
-      UI.set_request(3);
-
-      std::cout << "========= The current information of disk =========" << std::endl;
-      std::string DiskMoniterReply = client.current_disk_usage_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
-      std::cout << DiskMoniterReply << std::endl;
-    }
-    else if (number == 4)
-    {
-      UI.set_request(4);
-
-      std::cout << "========= The current information of process =========" << std::endl;
-      std::string ProcessMoniterReply = client.current_process_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
-      std::cout << ProcessMoniterReply << std::endl;
-
-      std::cout << "Input Process name that you want to monitor: ";
-      std::string selected_process_name;
-      std::cin >> selected_process_name;
+      std::cout << "\033[0;37m";
+      UI.show_menu();
       std::cout << std::endl;
 
-      std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, UI.get_request()[3]);
-      std::cout << SelectedProcessMoniterReply << std::endl;
-    }
-    else if (number == 5)
-    {
-      UI.set_request(5);
+      int number = j;
+      if (number == 0)
+      {
+        std::cout << "Exit" << std::endl;
+        break;
+      }
+      else if (number == 1)
+      {
+        UI.set_request(1);
 
-      std::cout << "========= Log inquire service =========" << std::endl;
-      std::string LogMonitorReply = client.client_log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
-      std::cout << LogMonitorReply << std::endl;
-    }
-    else if (number == 6)
-    {
-      UI.set_request(6);
+        std::cout << "========= The current usage of memory system =========" << std::endl;
+        std::string memory_reply = client.current_memory_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2], UI.get_request()[3]);
+        std::cout << memory_reply << std::endl;
+      }
+      else if (number == 2)
+      {
+        UI.set_request(2);
 
-      std::cout << "========= log delete service =========" << std::endl;
-      std::string LogDeleteReply = client.client_log_delete_method(UI.get_request()[0]);
-      std::cout << LogDeleteReply << std::endl;
-    }
-    else
-    {
-      std::cout << "Wrong input" << std::endl;
-      LOG(WARNING) << "Wrong input service number";
-      google::FlushLogFiles(google::GLOG_WARNING);
-    }
+        int repeat = 0; // cpu API 실행 반복 횟수
+        while (repeat < 6)
+        {
+          std::string cpu_reply = client.current_cpu_usage_moniter_method(UI.get_request()[0]);
+          std::cout << cpu_reply << std::endl;
+          repeat = repeat + 1;
+        }
+      }
+      else if (number == 3)
+      {
+        UI.set_request(3);
 
-    UI.clear_request_vector();
-    std::cout << "\n"
-              << std::endl;
+        std::cout << "========= The current information of disk =========" << std::endl;
+        std::string DiskMoniterReply = client.current_disk_usage_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
+        std::cout << DiskMoniterReply << std::endl;
+      }
+      else if (number == 4)
+      {
+        UI.set_request(4);
+
+        std::cout << "========= The current information of process =========" << std::endl;
+        std::string ProcessMoniterReply = client.current_process_moniter_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
+        std::cout << ProcessMoniterReply << std::endl;
+
+        // std::cout << "Input Process name that you want to monitor: ";
+        // std::string selected_process_name;
+        // std::cin >> selected_process_name;
+        // std::cout << std::endl;
+
+        // std::string SelectedProcessMoniterReply = client.selected_process_moniter_method(selected_process_name, UI.get_request()[3]);
+        // std::cout << SelectedProcessMoniterReply << std::endl;
+      }
+      else if (number == 5)
+      {
+        UI.set_request(5);
+
+        std::cout << "========= Log inquire service =========" << std::endl;
+        std::string LogMonitorReply = client.client_log_monitor_method(UI.get_request()[0], UI.get_request()[1], UI.get_request()[2]);
+        std::cout << LogMonitorReply << std::endl;
+      }
+      else if (number == 6)
+      {
+        UI.set_request(6);
+
+        std::cout << "========= log delete service =========" << std::endl;
+        std::string LogDeleteReply = client.client_log_delete_method(UI.get_request()[0]);
+        std::cout << LogDeleteReply << std::endl;
+      }
+      else
+      {
+        std::cout << "Wrong input" << std::endl;
+        LOG(WARNING) << "Wrong input service number";
+        google::FlushLogFiles(google::GLOG_WARNING);
+      }
+
+      UI.clear_request_vector();
+      std::cout << "\n"
+                << std::endl;
+
+      sleep(3);
+    }
   }
 
   LOG(INFO) << "Client terminated .";

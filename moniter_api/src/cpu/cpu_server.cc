@@ -4,6 +4,7 @@
 #include <grpcpp/grpcpp.h>
 
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <string>
 #include <typeinfo>
@@ -78,7 +79,20 @@ Status MoniterServiceImpl::current_cpu_usage_moniter_method(ServerContext *conte
     fclose(pStat);
     sleep(1);
 
-    reply->set_cpu_reply(request->cpu_request() + std::to_string(diffJiffies.usage) + '%');
+    // diffJiffies.usage = 95.0;
+    if (diffJiffies.usage > 90)
+    {
+        reply->set_cpu_reply("\033[0;37m" + request->cpu_request() + "\033[0;31m" + std::to_string(diffJiffies.usage) + '%');
+
+        std::string path = "../../../../alarm/cpu_issue.txt";
+        std::ofstream ofs;
+        ofs.open(path, std::ios::app);
+        ofs << request->cpu_request() + std::to_string(diffJiffies.usage) + '%' << std::endl;
+    }
+    else
+    {
+        reply->set_cpu_reply("\033[0;37m" + request->cpu_request() + std::to_string(diffJiffies.usage) + '%');
+    }
 
     LOG(INFO) << "cpu monitoring API end .";
 

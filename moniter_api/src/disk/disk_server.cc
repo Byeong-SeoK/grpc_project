@@ -2,6 +2,7 @@
 #include "../../include/set_log_dir.h"
 
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <string>
 #include <typeinfo>
@@ -54,8 +55,21 @@ Status MoniterServiceImpl::current_disk_usage_moniter_method(ServerContext *cont
     std::string usedDisk_suffix(std::to_string(used));       // used disk volume을 받는 변수
     std::string availDisk_suffix(std::to_string(available)); // available disk volume을 받는 변수
 
-    reply->set_disk_info_reply(request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() +
-                               usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
+    if (available < 20)
+    {
+        reply->set_disk_info_reply("\033[0;37m" + request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() +
+                                   usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + "\033[0;31m" + availDisk_suffix + "GB");
+
+        std::string path = "../../../../alarm/disk_issue.txt";
+        std::ofstream ofs;
+        ofs.open(path, std::ios::app);
+        ofs << request->avail_disk_volume_request() + availDisk_suffix + "GB" << std::endl;
+    }
+    else
+    {
+        reply->set_disk_info_reply("\033[0;37m" + request->total_disk_volume_request() + totalDisk_suffix + "GB\n" + request->disk_usage_request() +
+                                   usedDisk_suffix + "GB\n" + request->avail_disk_volume_request() + availDisk_suffix + "GB");
+    }
 
     LOG(INFO) << "Disk monitoring API end .";
 
